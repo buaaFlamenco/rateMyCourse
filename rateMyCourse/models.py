@@ -35,100 +35,100 @@ from django.db import models
 # Create your models here.
 
 class School(models.Model):
-	# attributes
-	name = models.CharField(max_length=50)
+    # attributes
+    name = models.CharField(max_length=50)
 
 class Department(models.Model):
-	# attributes
-	name = models.CharField(max_length=50)
-	website = models.URLField(null=True)
+    # attributes
+    name = models.CharField(max_length=50)
+    website = models.URLField(null=True)
 
-	# connections
-	school = models.ForeignKey(
-		School,
-		on_delete=models.SET_NULL,
-		null=True,
-	)
+    # connections
+    school = models.ForeignKey(
+        School,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
 class Teacher(models.Model):
-	# attributes
-	name = models.CharField(max_length=50)
-	website = models.URLField(null=True)
-	
-	# connections
-	department = models.ForeignKey(
-		Department,
-		on_delete=models.SET_NULL,
-		null=True,
-	)
+    # attributes
+    name = models.CharField(max_length=50)
+    website = models.URLField(null=True)
+    
+    # connections
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
 class User(models.Model):
-	# attributes
+    # attributes
     username = models.CharField(max_length=50, unique=True) # 用户名不可重复
-	mail = models.EmailField(null=True)
-	password = models.CharField(max_length=50)
-	grade = models.CharField(max_length=50)
-	reported = models.BooleanField()
-	# connections
-	school = models.ForeignKey(
-		School,
-		on_delete=models.SET_NULL,
-		null=True,
-	)
-	department = models.ForeignKey(
-		Department,
-		on_delete=models.SET_NULL,
-		null=True,
-	)
+    mail = models.EmailField(null=True)
+    password = models.CharField(max_length=50)
+    grade = models.CharField(max_length=50)
+    reported = models.BooleanField()
+    # connections
+    school = models.ForeignKey(
+        School,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
 class Course(models.Model):
-	# attributes
-	name = models.CharField(max_length=50)
-	website = models.URLField(),
+    # attributes
+    name = models.CharField(max_length=50)
+    website = models.URLField(),
     description = models.CharField(max_length=2000)
 
-	# connections
-	department = models.ForeignKey(
-		Department,
-		on_delete=models.SET_NULL,
+    # connections
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
         null=True,
-	)
+    )
     teachers = models.ManyToManyField(
         Teacher,
     )
 
 class Comment(models.Model):
-	# attributes
-	conent = models.CharField(max_length=2000)
-	time = models.DateTimeField()
-	# connections
-	fathercomment = models.ForeignKey(
-		'self',
-		on_delete=models.SET_NULL,
-		null=True,
-	)
-	user = models.ForeignKey(
-		User,
-		on_delete=models.SET_NULL,
-		null=True,
-	)
-	course = models.ForeignKey(
-		Course,
-		on_delete=models.CASCADE,
-	)
+    # attributes
+    conent = models.CharField(max_length=2000)
+    time = models.DateTimeField()
+    # connections
+    fathercomment = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+    )
 
 class Rate(models.Model):
-	# attributes
-	overallrate = models.BooleanField()
-	A_score = models.FloatField()
-	B_score = models.FloatField()
-	C_scroe = models.FloatField()
-	# connections
-	user = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-	)
-	course = models.ForeignKey(
-		Course,
-		on_delete=models.CASCADE,
-	)
+    # attributes
+    overallrate = models.BooleanField()
+    A_score = models.FloatField()
+    B_score = models.FloatField()
+    C_scroe = models.FloatField()
+    # connections
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+    )
