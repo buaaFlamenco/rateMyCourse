@@ -1,47 +1,18 @@
 from django.db import models
 
-
-'''
-网站功能
-1. 课程信息
-    1. Get & Set
-        1. 课程名
-        2. 课程内容简介
-        3. 所属学校
-        4. 所属专业
-        5. 课程网站
-2. 用户信息
-    1. Get & Set
-        1. 基本信息（学校、专业、年级）
-        2. 评价列表
-3. 总体评分
-    1. Get & Set
-        1. 所有评分表
-        2. 各项评分
-4. 具体评价
-    1. Get & Set
-        1. 评价日期
-        2. 学期
-        3. Tags
-        4. 老师（和谐）
-        5. 评价内容
-        6. 各项评分
-        7. 总共评分
-        8. 评价下支持
-        9. 评论下反对
-        10. 评价下讨论
-'''
-
 # Create your models here.
 
 class School(models.Model):
     # attributes
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+    	return self.name
+
 class Department(models.Model):
     # attributes
     name = models.CharField(max_length=50)
-    website = models.URLField(null=True)
+    website = models.URLField(blank=True)
 
     # connections
     school = models.ForeignKey(
@@ -49,11 +20,13 @@ class Department(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
+    def __str__(self):
+    	return self.name
 
 class Teacher(models.Model):
     # attributes
     name = models.CharField(max_length=50)
-    website = models.URLField(null=True)
+    website = models.URLField(blank=True)
     
     # connections
     department = models.ForeignKey(
@@ -61,11 +34,13 @@ class Teacher(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
+    def __str__(self):
+    	return self.name
 
 class User(models.Model):
     # attributes
     username = models.CharField(max_length=50, unique=True) # 用户名不可重复
-    mail = models.EmailField(null=True)
+    mail = models.EmailField()
     password = models.CharField(max_length=50)
     grade = models.CharField(max_length=50)
     reported = models.BooleanField()
@@ -80,12 +55,14 @@ class User(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
+    def __str__(self):
+    	return self.username
 
 class Course(models.Model):
     # attributes
     name = models.CharField(max_length=50)
     website = models.URLField(),
-    description = models.CharField(max_length=2000)
+    description = models.CharField(max_length=2000, blank=True)
 
     # connections
     department = models.ForeignKey(
@@ -93,16 +70,18 @@ class Course(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
-    teachers = models.ManyToManyField(
+    teacher_set = models.ManyToManyField(
         Teacher,
     )
+    def __str__(self):
+    	return self.name
 
 class Comment(models.Model):
     # attributes
-    conent = models.CharField(max_length=2000)
+    content = models.CharField(max_length=2000)
     time = models.DateTimeField()
     # connections
-    fathercomment = models.ForeignKey(
+    parentcomment = models.ForeignKey(
         'self',
         on_delete=models.SET_NULL,
         null=True,
@@ -116,6 +95,8 @@ class Comment(models.Model):
         Course,
         on_delete=models.CASCADE,
     )
+    def __str__(self):
+    	return self.content
 
 class Rate(models.Model):
     # attributes
@@ -132,3 +113,5 @@ class Rate(models.Model):
         Course,
         on_delete=models.CASCADE,
     )
+    def __str__(self):
+    	return "rate from %s"%self.user
