@@ -7,6 +7,10 @@ from django.http import HttpResponse
 def index(request):
     return render(request, "rateMyCourse/index.html")
 
+def signIn1(request):
+    textBox = request.GET.get('textBox');
+    return HttpResponse("textBox: "+textBox)
+
 #GET
 def searchSchool(request):
     school = request.GET.get('school');
@@ -15,7 +19,7 @@ def searchSchool(request):
 
 #GET
 def getIndex(request):
-    return HttpResponse("getIndex")
+    return render(request, "rateMyCourse/index.html")
 
 #GET
 def getCourse(request, course_id):
