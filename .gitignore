@@ -4,3 +4,5 @@ db.sqlite3
 
 .DS_Store
 .idea
+rateMyCourse/templates/rateMyCourse/index.scss
+rateMyCourse/templates/rateMyCourse/index.css
