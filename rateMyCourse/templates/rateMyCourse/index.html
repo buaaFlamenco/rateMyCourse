@@ -8,30 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="{% static 'ratemycourse/index.css' %}" type="text/css">
-  <!--<link rel="stylesheet" href="index.css" type="text/css"-->
-  <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+  <link rel="stylesheet" href="index.css" type="text/css">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
       <a class="navbar-brand" href="#">弗评</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!--<ul class="navbar-nav mr-auto"> 
-          <div class="btn-group" style="margin-left:300px; margin-right:40px;">
-          	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width:100px"> 学校</button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-        	</div>
-          <form class="form-inline m-0">
-          <input class="form-control mr-2" type="text" placeholder="搜索课程" style="float:right"> </form>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa d-inline fa-lg fa-envelope-o"></i> 联系我们</a>
+          </li>
         </ul>
-				-->
-        <ul class="navbar-nav mr-auto"></ul>
-        <form action="signIn" method="GET">
-          <input type="text" name="textBox" value="text">
-          <button href="" id="register" class="btn btn-primary" data-toggle="modal" data-target="#myModal">登录/注册</button>
-        </form>
+        <a class="btn navbar-btn ml-2 text-white btn-primary"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
       </div>
     </div>
   </nav>
@@ -45,17 +33,59 @@
       </div>
     </div>
   </div>
-  <div class="py-5">
+  <div class="py-5 text-center bg-light">
     <div class="container">
       <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
-          <button class="btn btn-lg btn-primary mx-1" style="float:right">选择学校</button>
+        <div class="col-md-6 p-4">
+          <img class="img-fluid d-block rounded-circle mx-auto" src="https://pingendo.github.io/templates/sections/assets/test_fish.jpg">
+          <p class="my-4"><i>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec. </i></p>
+          <button class="btn btn-light btn-lg"> 选择学校 </button>
         </div>
-        <div class="col-md-4">
-          <button class="btn btn-lg mx-1 btn-secondary">搜索课程</button>
+        <div class="col-md-6 p-4">
+          <img class="img-fluid d-block rounded-circle mx-auto" src="https://pingendo.github.io/templates/sections/assets/test_carlito.jpg">
+          <p class="my-4"><i>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Cum sociis natoque penatibus et magnis dis parturient montes.</i></p>
+          <button class="btn btn-light btn-lg"> 搜索课程 </button>
         </div>
-        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="text-white bg-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="p-4 col-md-4">
+          <h2 class="mb-4">Flamenco
+            <br> </h2>
+          <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
+        </div>
+        <div class="p-4 col-md-4">
+          <h2 class="mb-4">Mapsite</h2>
+          <ul class="list-unstyled">
+            <a href="#" class="text-white">Home</a>
+            <br>
+            <a href="#" class="text-white">About us</a>
+            <br>
+            <a href="#" class="text-white">Our services</a>
+            <br>
+            <a href="#" class="text-white">Stories</a>
+          </ul>
+        </div>
+        <div class="p-4 col-md-4">
+          <h2 class="mb-4">联系方式</h2>
+          <p>
+            <a href="tel:+246 - 542 550 5462" class="text-white"><i class="fa d-inline mr-3 text fa-phone"></i>+246 - 542 550 5462</a>
+          </p>
+          <p>
+            <a href="mailto:info@pingendo.com" class="text-white"><i class="fa d-inline mr-3 text fa-envelope-o"></i>info@pingendo.com</a>
+          </p>
+          <p>
+            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank"><i class="fa d-inline mr-3 fa-map-marker text"></i>365 Park Street, NY</a>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <p class="text-center text-white">© Copyright 2017 Flamenco - All rights reserved. </p>
+        </div>
       </div>
     </div>
   </div>
