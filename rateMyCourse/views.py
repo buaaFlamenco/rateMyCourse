@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from rateMyCourse.models import Course
+import json
 # Create your views here.
 
 from django.http import HttpResponse
@@ -23,7 +24,17 @@ def getIndex(request):
 
 #GET
 def getCourse(request, course_id):
-    return HttpResponse("getCourse course_id:"+course_id)
+    try:
+        course = Course.objects.get(name=course_id)
+    except Course.DoesNotExist:
+        return HttpResponse("ERROR:No Such Course In Databases")
+    result={
+        'name': course.name,
+        'department': course.department.name,
+        'description': course.description
+    }
+ #   return HttpResponse("getCourse course_id:"+course_id)
+    return HttpResponse(json.dumps(result))
 
 #POST
 def signIn(request):
