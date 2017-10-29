@@ -64,6 +64,7 @@ class Course(models.Model):
     name = models.CharField(max_length=50)
     website = models.URLField(),
     description = models.CharField(max_length=2000, blank=True)
+    credit = models.IntegerField()
 
     # connections
     department = models.ForeignKey(
