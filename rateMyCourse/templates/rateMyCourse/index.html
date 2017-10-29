@@ -4,10 +4,9 @@
 <head>
   <meta charset="utf-8"> </head>
 
-<body>{% load static %}
+<body>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="{% static 'ratemycourse/bootstrap.min.css' %}" type="text/css">
   <link rel="stylesheet" href="../../static/rateMyCourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
   <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
@@ -57,23 +56,39 @@
   <div class="py-5 text-center bg-light">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 p-4">
+        <div class="col-md-4 p-4">
           <div class="row">
             <div class="col-md-12"> <i class="fa fa-university" style="font-size:93pt"></i></div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="dropdown open" id="buttonSelectSchool">
-                <a class="btn btn-light btn-lg dropdown-toggle" href="#" data-toggle="dropdown">选择学校</a>
+              <div class="dropdown open">
+                <a class="btn btn-light btn-lg dropdown-toggle my-1" href="#" data-toggle="dropdown" id="buttonSelectSchool">选择学校</a>
                 <div class="dropdown-menu">
                   <!--Action needed-->
-                  <a class="dropdown-item">北京航空航天大学</a>
+                  <a class="dropdown-item btn btn-primary" id="optionBeihang">北京航空航天大学</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6 p-4">
+        <div class="col-md-4 p-4">
+          <div class="row">
+            <div class="col-md-12"> <i class="fa fa-paint-brush" style="font-size:93pt"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="dropdown open" id="buttonSelectSchool">
+                <a class="btn btn-light btn-lg dropdown-toggle my-1" href="#" data-toggle="dropdown">选择专业</a>
+                <div class="dropdown-menu">
+                  <!--Action needed-->
+                  <a class="dropdown-item btn btn-primary">计算机科学与技术</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 p-4">
           <div class="row">
             <div class="col-md-12"> <i class="fa fa-search" style="font-size:93pt;"></i> </div>
           </div>
@@ -81,7 +96,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="dropdown open" id="buttonSelectSchool">
-                <a class="btn btn-light btn-lg" href="#" data-toggle="dropdown">搜索课程</a>
+                <a class="btn btn-light btn-lg my-1" href="#" data-toggle="dropdown">搜索课程</a>
                 <div class="dropdown-menu">
                   <!--Action needed-->
                   <div class="input-group">
@@ -108,7 +123,6 @@
           <div class="p-4 col-md-4">
             <h2 class="mb-4">关于我们</h2>
             <ul class="list-unstyled">
-              <br>
               <a href="#" class="text-white">弗朗明戈舞步团队</a>
               <br>
               <br> </ul>
@@ -135,6 +149,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../../static/rateMyCourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
     <script src="../../static/rateMyCourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
+    <script src="../../static/rateMyCourse/javascript/index.js"></script>
   </div>
 </body>
 
