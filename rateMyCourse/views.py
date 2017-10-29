@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rateMyCourse.models import Course
+from rateMyCourse.models import *
 import json
 # Create your views here.
 
@@ -64,3 +64,21 @@ def courseAddRate(request):
     rate = request.POST['rate']
     courseId = request.POST['courseId']
     return HttpResponse("courseAddRate: "+username+rate+courseId)
+
+#POST TMP IN INDEX
+def getSchool(request):
+    result = {
+        'school': [s.name for s in School.objects.all()],
+    }
+    return HttpResponse(json.dumps(result))
+
+def getDepartment(request):
+    try:
+        school = School.objects.get(name=request.POST['school'])
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'error': 'school not found'
+            }))
+    return HttpResponse(json.dumps({
+        'department': [d.name for d in school.course_set.all()]
+        }))
