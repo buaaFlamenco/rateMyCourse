@@ -7,9 +7,9 @@ $(document).ready(function(){
     $(".dropdown-item.school").click(function(){
       $(this).parent().prev().text($(this).text())
       $.ajax('/getDepartment',{
-        dataType:'jason',
+        dataType:'json',
         data:{'school':$(this).text()}
-      }).done(function(){
+      }).done(function(data){
         var departmentList = $("#departmentList")
         departmentList.children().remove()
         for (var i = 0; i < data.department.length; i++) {
