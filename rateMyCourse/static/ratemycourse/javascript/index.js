@@ -12,6 +12,7 @@ $(document).ready(function(){
       }).done(function(data){
         var departmentList = $("#departmentList")
         departmentList.children().remove()
+        departmentList.prev().text("选择专业")
         for (var i = 0; i < data.department.length; i++) {
           departmentList.append("<a class='dropdown-item btn btn-primary department'>" +
            data.department[i] + "</a>")
