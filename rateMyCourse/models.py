@@ -62,9 +62,11 @@ class User(models.Model):
 class Course(models.Model):
     # attributes
     name = models.CharField(max_length=50)
-    website = models.URLField(),
+    number = models.CharField(max_length=50)
+    website = models.URLField()
     description = models.CharField(max_length=2000, blank=True)
     credit = models.IntegerField()
+    coursetype = models.CharField(max_length=50)
 
     # connections
     department = models.ForeignKey(

@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'^course_addComment/$', views.courseAddComment, name='courseAddComment'),
     url(r'^course_addRate/$', views.courseAddRate, name='courseAddRate'),
 
-    #TMP POST IN INDEX
+    #TMP GET IN INDEX
     url(r'^getSchool/$', views.getSchool, name='getSchool'),
     url(r'^getDepartment/$', views.getDepartment, name='getDepartment'),
+    url(r'^getCourse/$', views.getCourse, name='getCourse'),
 ]

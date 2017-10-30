@@ -65,7 +65,7 @@ def courseAddRate(request):
     courseId = request.POST['courseId']
     return HttpResponse("courseAddRate: "+username+rate+courseId)
 
-#POST TMP IN INDEX
+#GET TMP IN INDEX
 def getSchool(request):
     result = {
         'school': [s.name for s in School.objects.all()],
@@ -74,11 +74,23 @@ def getSchool(request):
 
 def getDepartment(request):
     try:
-        school = School.objects.get(name=request.POST['school'])
+        school = School.objects.get(name=request.GET['school'])
     except Exception as err:
         return HttpResponse(json.dumps({
             'error': 'school not found'
             }))
     return HttpResponse(json.dumps({
-        'department': [d.name for d in school.course_set.all()]
+        'department': [d.name for d in school.department_set.all()]
+        }))
+
+def getCourse(request):
+    try:
+        school = School.objects.get(name=request.GET['school'])
+        department = school.department_set.get(name=request.GET['department'])
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'error': 'school or department not found'
+            }))
+    return HttpResponse(json.dumps({
+        'course': [c.name for c in department.course_set.all()]
         }))
