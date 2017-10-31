@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rateMyCourse.models import *
 import json
+from django.http import HttpResponse,Http404
+fromdjango import template
 # Create your views here.
 
 from django.http import HttpResponse
@@ -94,3 +96,13 @@ def getCourse(request):
     return HttpResponse(json.dumps({
         'course': [c.name for c in department.course_set.all()]
         }))
+
+
+
+def openRatePage(request):
+    fp=open('templates/rateMyCourse/ratePage.html')
+    t=template.Template(fp.read())
+    fp.close()
+    html=t.render(template.Context({'course.name':'软件工程'，'course.school':'北航'，'course.department':'计算机'}))
+    return HttpResponse(html)
+    
