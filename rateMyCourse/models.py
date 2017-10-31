@@ -41,11 +41,14 @@ class Teacher(models.Model):
 class User(models.Model):
     # attributes
     username = models.CharField(max_length=50, unique=True) # 用户名不可重复
-    mail = models.EmailField()
+    mail = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
+    '''
     grade = models.CharField(max_length=50)
     reported = models.BooleanField()
+    '''
     # connections
+    '''
     school = models.ForeignKey(
         School,
         on_delete=models.SET_NULL,
@@ -56,6 +59,7 @@ class User(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
+    '''
     def __str__(self):
     	return self.username
 
