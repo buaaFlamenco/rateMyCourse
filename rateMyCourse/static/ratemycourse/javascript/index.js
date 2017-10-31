@@ -6,8 +6,7 @@ $(document).ready(function(){
     }
     $(".dropdown-item.school").click(function(){
       $(this).parent().prev().text($(this).text())
-      $(".dropdown-toggle.selectDepartment").removeClass("btn-lg")
-      $(".dropdown-toggle.selectDepartment").addClass("btn-sm")
+      $(".selectDepartment").removeClass("disabled")
       $.ajax('/getDepartment',{
         dataType:'json',
         data:{'school':$(this).text()}
