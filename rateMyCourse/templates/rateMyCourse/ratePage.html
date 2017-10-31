@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
+  <script>
+    function chooseScore(id){
+      		var c0="B";
+      		var c1=id.charAt(1);
+      		var c2=id.charAt(2);
+      		var i=2;
+      		//var j=parseInt(c2)+5;
+      		//var s=c0.concat(c1.concat(i.toString()));
+      		//document.getElementById(s).style.background="#ffc107";
+      		for(i=1;i<=parseInt(c2);i++)
+          {
+            	var s=c0.concat(c1.concat(i.toString()));
+            	
+            	document.getElementById(s).style.background="#ffc107";
+          }
+      		for(i=5;i>parseInt(c2);i--)
+          {
+            	var s=c0.concat(c1.concat(i.toString()));
+            	
+            	document.getElementById(s).style.background="#00fbff";
+          }
+      		//id.innerHTML=j;
+    			//id.style.background="#ffc107";
+    		}
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary h- h-25">
+    <div class="container m-3">
+      <a class="navbar-brand" href="#">弗评</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <form class="form-inline m-0">
+            <input class="form-control mr-2" type="text" placeholder="搜索课程" style="float:right"> </form>
+        </ul>
+        <ul class="navbar-nav mr-auto"></ul>
+        <form action="signIn" method="GET">
+          <button href="" id="register" class="btn btn-primary" data-toggle="modal" data-target="#myModal">登录/注册</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5 text-center opaque-overlay bg-secondary">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-12 text-white">
+          <h1 class="display-3 mb-4" id="courseName">{{course.name}}</h1>
+          <p class="lead mb-5">{{course.school}}-&gt;{{course.department}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-2 bg-primary">
+        <p class="lead my-2 text-white">评分</p>
+      </div>
+      <div class="col-md-10">
+        <div class="btn-group text-dark my-1">
+          <a href="#" class="btn btn-lg btn-block btn-info" data-toggle="" id="B11" onclick="chooseScore(this.id)">1</a>
+          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B12" onclick="chooseScore(this.id)">2</a>
+          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B13" onclick="chooseScore(this.id)">3</a>
+          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B14" onclick="chooseScore(this.id)">4</a>
+          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B15" onclick="chooseScore(this.id)">5</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-2 bg-primary">
+        <p class="lead my-2 text-white">难度级别</p>
+      </div>
+      <div class="col-md-10">
+        <div class="btn-group text-dark my-1">
+          <a href="#" class="btn btn-lg btn-block btn-info" data-toggle="" id="B21" onclick="chooseScore(this.id)">1</a>
+          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B22" onclick="chooseScore(this.id)">2</a>
+          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B23" onclick="chooseScore(this.id)">3</a>
+          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B24" onclick="chooseScore(this.id)">4</a>
+          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B25" onclick="chooseScore(this.id)">5</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-2 bg-primary">
+        <p class="lead my-2 text-white">课程负担</p>
+      </div>
+      <div class="col-md-10">
+        <div class="btn-group text-dark my-1">
+          <a href="#" class="btn btn-lg btn-block btn-info" data-toggle="" id="B31" onclick="chooseScore(this.id)">1</a>
+          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B32" onclick="chooseScore(this.id)">2</a>
+          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B33" onclick="chooseScore(this.id)">3</a>
+          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B34" onclick="chooseScore(this.id)">4</a>
+          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B35" onclick="chooseScore(this.id)">5</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-2 bg-primary">
+        <p class="lead my-2 text-white">授课教师</p>
+      </div>
+      <div class="col-md-10"> <textarea class="w-50 my-2" rows="1">  </textarea> </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-2 bg-primary">
+        <p class="lead my-2 text-white">考核方式和分数组成</p>
+      </div>
+      <div class="col-md-10"> <textarea class="w-50" rows="3">  </textarea> </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-2 bg-primary">
+        <p class="lead my-2 text-white">添加标签</p>
+      </div>
+      <div class="col-md-10">
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary mx-2">Tag 1</a>
+          <a href="#" class="btn btn-primary mx-2">Tag 2</a>
+          <a href="#" class="btn btn-primary mx-2">Tag 3</a>
+          <a href="#" class="btn btn-primary mx-2">Tag 4</a>
+          <a href="#" class="btn btn-primary mx-2">Tag 5</a>
+          <a href="#" class="btn btn-primary mx-2">Tag 6</a>
+          <a href="#" class="btn btn-primary mx-2">Tag 7</a>
+          <a href="#" class="btn btn-primary mx-2">Tag 8</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-2 bg-primary">
+        <p class="lead my-2 text-white">写评价</p>
+      </div>
+      <div class="col-md-10"> <textarea class="w-50 form-control-sm h-100" rows="15">  </textarea> </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row w-100 my-1">
+      <div class="col-md-12">
+        <a id="c_button-outline" href="#" class="btn pi-draggable btn-outline-dark mx-5 px-5">提交</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+
+</html>

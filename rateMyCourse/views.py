@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rateMyCourse.models import *
 import json
 import re
+from django.http import HttpResponse,Http404
 # Create your views here.
 
 from django.http import HttpResponse
