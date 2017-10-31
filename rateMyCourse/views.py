@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rateMyCourse.models import *
 import json
+import re
+from django.http import HttpResponse,Http404
 # Create your views here.
 
 from django.http import HttpResponse
@@ -9,8 +11,42 @@ def index(request):
     return render(request, "rateMyCourse/index.html")
 
 def signIn1(request):
+    try:
+        username = request.POST.get['username']
+        mail = request.POST.get['mail']
+        password = request.POST.get['password']
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'can not get username or mail or password',
+            }))
+    try:
+        User(username=username, mail=mail, password=password)
+    except Exception as err:
+        errmsg = str(err)
+        if("mail" in errmsg):
+            return HttpResponse(json.dumps({
+                'statCode': -2,
+                'errormessage': 'mail repeated',
+                }))
+        elif("username" in errmsg):
+            return HttpResponse(json.dumps({
+                'statCode': -3,
+                'errormessage': 'username repeated',
+                }))
+        else:
+            return HttpResponse(json.dumps({
+                'statCode': -4,
+                'errormessage': 'other error, maybe out of length',
+                }))
+    return HttpResponse(json.dumps({
+            'statCode': 0,
+            }))
+
+    '''
     textBox = request.GET.get('textBox');
     return HttpResponse("textBox: "+textBox)
+    '''
 
 #GET
 def searchSchool(request):
