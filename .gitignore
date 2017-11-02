@@ -9,3 +9,4 @@ rateMyCourse/templates/rateMyCourse/index.css
 
 *.pyc
 __pycache__/
+*.pyc
