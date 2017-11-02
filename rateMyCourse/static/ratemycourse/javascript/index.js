@@ -1,4 +1,16 @@
+function Func_search() {
+    $.ajax('/search',{
+      dataType:'json',
+      data:{
+        'school':$("#buttonSelectSchool").val(),
+        'department':$("#buttonSelectDepartment").val(),
+        'keywords':$("#searchboxSearchCourse").val()
+      }
+    })
+}
+
 $(document).ready(function(){
+  $("#menuUser").hide()
   $.ajax('/getSchool', {dataType:'json'}).done(function(data){
     var schoolList = $("#schoolList")
     for (var i = 0; i < data.school.length; i++) {
@@ -22,6 +34,11 @@ $(document).ready(function(){
           $(this).parent().prev().text($(this).text())
         })
       })
+      $("#searchboxSearchCourse").keyup(function(event) {
+        if (event.keyCode == 13) {
+            Func_search()
+        }
+      })
     })
   })
 })
@@ -39,7 +56,9 @@ function Func_signUp(){
     if (data.statCode != 0) {
       alert(data.errormessage)
     } else {
-      $("#navLogin").text("你好！" + data.username)
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
     }
   })
   return false
@@ -48,7 +67,7 @@ function Func_signUp(){
 function Func_signIn(){
   $.ajax("/signIn/", {
     dataType: 'json',
-    type: 'POST', 
+    type: 'POST',
     data: {
       "username": $("#username").val(),
       "password": $("#password").val()
@@ -57,8 +76,16 @@ function Func_signIn(){
     if(data.statCode != 0) {
       alert(data.errormessage)
     } else {
-      $("#navLogin").text("你好！" + data.username)
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
     }
   })
+  return false
+}
+
+function Func_signOut(){
+  $("#menuUser").hide()
+  $("#menuLogin").show()
   return false
 }
