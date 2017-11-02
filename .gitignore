@@ -6,3 +6,6 @@ db.sqlite3
 .idea
 rateMyCourse/templates/rateMyCourse/index.scss
 rateMyCourse/templates/rateMyCourse/index.css
+
+*.pyc
+__pycache__/

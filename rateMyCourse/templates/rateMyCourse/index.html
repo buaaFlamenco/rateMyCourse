@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css"> </head>
+  <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/index.css" type="text/css"> </head>
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary">
@@ -21,23 +22,25 @@
         <div class="dropdown open" id="menuLogin">
           <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
           <div class="dropdown-menu" style="padding:17px;">
-            <form id="formLogin" action="login" method="post"> <label>登录</label>
-              <input name="_csrf" id="token" type="hidden" value="j36UbzJj-9xfMaHD4vGY5JGtcK5foqJznYpo">
-              <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" equired="" class="form-control" name="username">
-              <input id="password" type="password" placeholder="密码" required="" class="form-control" name="password">
-              <br>
+            <form id="formLogin" onsubmit="return Func_signIn()"> <label>登录</label>
+              <div class="form-group">
+                <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" equired="" class="form-control" name="username"> </div>
+              <div class="form-group">
+                <input id="password" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
               <input type="submit" id="btnLogin" class="btn btn-primary" value="登录"> </form>
             <form action="signUpTrigger" method="post">
               <a href="#" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
             </form>
-            <form id="formRegister" class="form in collapse" style="height: auto;" action="signUp" method="post">
-              <input name="_csrf" id="token" type="hidden" value="j36UbzJj-9xfMaHD4vGY5JGtcK5foqJznYpo">
-              <input id="inputEmail" type="email" placeholder="Email" required="" class="form-control" name="email">
-              <input name="username" id="inputUsername" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" required="" class="form-control">
-              <input id="inputpassword" type="password" placeholder="密码" required="" class="form-control" name="password">
-              <input name="verify" id="inputVerify" type="password" placeholder="确认密码" required="" class="form-control">
-              <br>
-              <input type="submit" id="btnRegister" class="btn btn-primary" value="注册"> </form>
+            <form id="formRegister" class="form in collapse" style="height: auto;" onsubmit="return Func_signUp()">
+              <div class="form-group">
+                <input id="inputEmail" type="email" placeholder="Email" required="" class="form-control" name="email"> </div>
+              <div class="form-group">
+                <input name="username" id="inputUsername" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" required="" class="form-control"> </div>
+              <div class="form-group">
+                <input id="inputPassword" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
+              <div class="form-group">
+                <input name="verify" id="inputVerify" type="password" placeholder="确认密码" required="" class="form-control"> </div>
+              <input type="submit" class="btn btn-primary" value="注册"> </form>
           </div>
         </div>
       </div>
@@ -81,6 +84,10 @@
                 <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" id="selectDepartment" href="#" data-toggle="dropdown">选择专业</a>
                 <div class="dropdown-menu" id="departmentList">
                   <!--Action needed-->
+              <div class="btn-group">
+                <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" id="selectDepartment" href="#">选择专业</a>
+                <div class="dropdown-menu scrollable-menu" id="departmentList" role="menu">
+                  <!--Added by index.js-->
                 </div>
               </div>
             </div>
