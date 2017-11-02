@@ -25,3 +25,40 @@ $(document).ready(function(){
     })
   })
 })
+
+function Func_signUp(){
+  $.ajax("/signUp/", {
+    dataType: 'json',
+    type: 'POST',
+    data: {
+      "username": $("#inputUsername").val(),
+      "mail": $("#inputEmail").val(),
+      "password": $("#inputPassword").val(),
+    }
+  }).done(function(data){
+    if (data.statCode != 0) {
+      alert(data.errormessage)
+    } else {
+      $("#navLogin").text("你好！" + data.username)
+    }
+  })
+  return false
+}
+
+function Func_signIn(){
+  $.ajax("/signIn/", {
+    dataType: 'json',
+    type: 'POST', 
+    data: {
+      "username": $("#username").val(),
+      "password": $("#password").val()
+    }
+  }).done(function(data){
+    if(data.statCode != 0) {
+      alert(data.errormessage)
+    } else {
+      $("#navLogin").text("你好！" + data.username)
+    }
+  })
+  return false
+}

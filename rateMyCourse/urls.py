@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^course/(?P<course_id>[0-9A-Z]+)/$', views.getCourse, name='getCourse'),
 
     #POST
-    url(r'^signIn/$', views.signIn1, name='signIn1'),
+    url(r'^signIn/$', views.signIn, name='signIn'),
     url(r'^signUp/$', views.signUp, name='signUp'),
     url(r'^course_addComment/$', views.courseAddComment, name='courseAddComment'),
     url(r'^course_addRate/$', views.courseAddRate, name='courseAddRate'),

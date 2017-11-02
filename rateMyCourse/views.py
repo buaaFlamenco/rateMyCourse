@@ -9,18 +9,18 @@ from django.http import HttpResponse
 def index(request):
     return render(request, "rateMyCourse/index.html")
 
-def signIn1(request):
+def signUp(request):
     try:
-        username = request.POST.get['username']
-        mail = request.POST.get['mail']
-        password = request.POST.get['password']
+        username = request.POST['username']
+        mail = request.POST['mail']
+        password = request.POST['password']
     except Exception:
         return HttpResponse(json.dumps({
             'statCode': -1,
             'errormessage': 'can not get username or mail or password',
             }))
     try:
-        User(username=username, mail=mail, password=password)
+        User(username=username, mail=mail, password=password).save()
     except Exception as err:
         errmsg = str(err)
         if("mail" in errmsg):
@@ -38,8 +38,10 @@ def signIn1(request):
                 'statCode': -4,
                 'errormessage': 'other error, maybe out of length',
                 }))
-    return HttpResponse(json.dumps({
+    else:
+        return HttpResponse(json.dumps({
             'statCode': 0,
+            'username': username,
             }))
 
     '''
@@ -73,16 +75,34 @@ def getCourse(request, course_id):
 
 #POST
 def signIn(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    return HttpResponse("signIn username: "+username+" password:"+password)
-
-#POST
-def signUp(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    mail = request.POST['mail']
-    return HttpResponse("signUp username: "+username+" password:"+password+" mail:"+mail)
+    try:
+        username = request.POST['username']
+        password = request.POST['password']
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'can not get username or mail or password',
+            }))
+    try:
+        u = User.objects.get(username=username)
+    except Exception:
+        try:
+            u = User.objects.get(mail=username)
+        except Exception:
+            return HttpResponse(json.dumps({
+            'statCode': -2,
+            'errormessage': 'username or mail mot exists',
+            }))
+    if(password != u.password):
+        return HttpResponse(json.dumps({
+            'statCode': -3,
+            'errormessage': 'wrong password',
+            }))
+    else:
+        return HttpResponse(json.dumps({
+            'statCode': 0,
+            'username': username,
+            }))
 
 #POST
 def courseAddComment(request):

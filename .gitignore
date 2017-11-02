@@ -8,4 +8,8 @@ rateMyCourse/templates/rateMyCourse/index.scss
 rateMyCourse/templates/rateMyCourse/index.css
 
 *.pyc
+<<<<<<< HEAD
 rateMyCourse/static/ratemycourse/javascript/index的副本.js
+=======
+__pycache__/
+>>>>>>> 7a25156e65a850f231e6c6f9569e160228167af4
