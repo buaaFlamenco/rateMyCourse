@@ -5,9 +5,9 @@ var sNum = 6;
 function setScores(scores) {
     var tables = document.getElementsByClassName("rating");
     for (var i = 0; i < sNum; i++) {
-        var imgs = tables[i].getElementsByTagName("img");
+        var lis = tables[i].getElementsByTagName("i");
         for (var j = 0; j < scores[i]; j++) {
-            imgs[j].src = "imgs/s.png";
+            lis[j].setAttribute("class", "fa fa-star");
         }
     }
 }
@@ -51,9 +51,9 @@ function generateGrid(imageUrls, text, headline) {
         textTag[0].appendChild(node);
         textTag[0].setAttribute("class", "lead mb-5 text-dark");
         // insert icons
-        imageTag[1].src = "imgs/store.png";
-        imageTag[2].src = "imgs/feedback.png";
-        imageTag[3].src = "imgs/more.png";
+        imageTag[1].src = "../../static/ratemycourse/images/store.png";
+        imageTag[2].src = "../../static/ratemycourse/images/feedback.png";
+        imageTag[3].src = "../../static/ratemycourse/images/more.png";
 
         var trTags = commentGrid.getElementsByTagName("tr");
         trTags[0].setAttribute("class", "commentTr");
@@ -69,7 +69,7 @@ function generateGrid(imageUrls, text, headline) {
 }
 
 function setComments(){//get comments list from service
-    var imgurl = "imgs/user.png";
+    var imgurl = "../../static/ratemycourse/images/user.png";
     var headLine = "Image and gradient intro";
     var text = "Get a fluid web page working on all devices with the Bootstrap 4 grid system.";
     var parents = document.getElementById("commentDiv");
@@ -87,10 +87,15 @@ function setComments(){//get comments list from service
     }
 }
 
+//var scores = {{score_list|safe}};
 var scores=[];
 for (var i = 0; i < sNum; i++) {
     scores[i] = i%6;
 }
+//var userimg = {{userimg_list}};
+//var text = {{text_list}};
+//var headLine = {{headLine_list}};
+
 setScores(scores);
 setComments();
 document.getElementById("toComment").onclick = function () { console.log("cliked");; }// turn to the page of grading

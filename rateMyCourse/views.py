@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rateMyCourse.models import *
 import json
 from django.http import HttpResponse,Http404
@@ -6,8 +6,6 @@ from django.http import HttpResponse,Http404
 
 from django.http import HttpResponse
 
-def index(request):
-    return render(request, "rateMyCourse/index.html")
 
 def signUp(request):
     try:
@@ -60,18 +58,16 @@ def getIndex(request):
     return render(request, "rateMyCourse/index.html")
 
 #GET
-def getCourse(request, course_id):
-    try:
-        course = Course.objects.get(name=course_id)
-    except Course.DoesNotExist:
-        return HttpResponse("ERROR:No Such Course In Databases")
-    result={
-        'name': course.name,
-        'department': course.department.name,
-        'description': course.description
-    }
- #   return HttpResponse("getCourse course_id:"+course_id)
-    return HttpResponse(json.dumps(result))
+def coursePage(request, course_number):
+    course = get_object_or_404(Course, number=course_number)
+    return render(request, "rateMyCourse/coursePage.html", {
+            'course_number': course.number,
+            'course_name': course.name,
+            'course_description': course.description if course.description != '' else 'we have no description',
+            'course_website': course.website if course.website != '' else 'we have no website',
+            'course_credit': course.credit,
+        })
+    pass
 
 #POST
 def signIn(request):

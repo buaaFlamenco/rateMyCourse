@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
-<head></head>
-
-<body class="text-white" style="background:#Eff; color:#FFF">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../../static/ratemycourse/css/coursePage.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/coursePage.css" type="text/css"> </head>
+
+<body class="text-white" style="background:#Eff; color:#FFF">
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="#">首页</a>
@@ -29,137 +29,103 @@
     <div class="container py-5">
       <div class="row">
         <div class="col-md-3 text-dark">
-          <h1 class="my-3"> CorseName</h1>
-          <h1>课程名称 </h1>
-          <button class="btn btn-lg " id="toComment">评价</button>
+          <h1 class="my-3"> {{course_name}}</h1>
+          <h1>课程编号：{{course_number}} </h1>
+          <p><b>课程描述：{{course_description}}</b></p>
+          <p><b>课程网址：{{course_website}}</b></p>
         </div>
-        <div class="col-md-9 text-white align-self-center">
-          <h1 class="mb-4 text-dark display-5 my-3">总分：98</h1>
+        <div class="col-md-9">
+            <div class="row">
+                <h1 class="mb-4 text-dark display-5 my-3">学分：{{course_credit}}</h1>
+                <button class="btn btn-lg " id="toComment">评价</button>
+            </div>
           <div class="row">
             <div class="col-md-4 py-4">
               <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-              <table class="rating">
-                <tbody>
-                  <tr style="color:gray">
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="rating">
+                    <tr style="color:gray">
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                    </tr>
+                </table>
             </div>
             <div class="col-md-4 py-4">
               <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-              <table class="rating">
-                <tbody>
-                  <tr style="color:gray">
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="rating">
+                    <tr style="color:gray">
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                    </tr>
+                </table>
             </div>
             <div class="col-md-4 py-4">
               <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-              <table class="rating">
-                <tbody>
-                  <tr style="color:gray">
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="rating">
+                    <tr style="color:gray">
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                    </tr>
+                </table>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-4 py-4">
               <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-              <table class="rating">
-                <tbody>
-                  <tr style="color:gray">
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="rating">
+                    <tr style="color:gray">
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                    </tr>
+                </table>
             </div>
             <div class="col-md-4 py-4">
               <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-              <table class="rating">
-                <tbody>
-                  <tr style="color:gray">
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="rating">
+                    <tr style="color:gray">
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                    </tr>
+                </table>
             </div>
             <div class="col-md-4 py-4">
               <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-              <table class="rating">
-                <tbody>
-                  <tr style="color:gray">
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                    <td>
-                      <img src=" ../../static/ratemycourse/images/Estar.png"> </td>
-                  </tr>
-                </tbody>
-              </table>
+                <table class="rating">
+                    <tr style="color:gray">
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
+                    </tr>
+                </table>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
-  <br>
-  <div id="commentDiv"> </div>
-  <script src="coursePage.js"></script>
+    <br />
+  <div id="commentDiv">
+    
+  </div>
+  <script src="../../static/ratemycourse/javascript/coursePage.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
