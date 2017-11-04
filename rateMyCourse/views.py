@@ -7,6 +7,11 @@ from django.http import HttpResponse,Http404
 from django.http import HttpResponse
 
 
+#GET
+def getIndex(request):
+    return render(request, "rateMyCourse/index.html")
+
+
 def signUp(request):
     try:
         username = request.POST['username']
@@ -48,14 +53,8 @@ def signUp(request):
     '''
 
 #GET
-def searchSchool(request):
-    school = request.GET.get('school');
-    keyword = request.GET.get('keyword');
-    return HttpResponse("searchSchool school:"+school+" keyword:"+keyword)
-
-#GET
-def getIndex(request):
-    return render(request, "rateMyCourse/index.html")
+def search(request):
+    pass
 
 #GET
 def coursePage(request, course_number):
@@ -68,8 +67,21 @@ def coursePage(request, course_number):
             'course_website': courses[0].website if courses[0].website != '' else 'we have no website',
             'course_credit': courses[0].credit,
             'course_teachers': [(t.name for t in c.teacher_set.all()) for c in courses],
+            'aspect1': '课程难度',
+            'aspect2': '课程质量',
+            'aspect3': '考核方式',
         })
-    pass
+
+def ratePage(request, course_number):
+    c = get_object_or_404(Course, number=course_number)
+    return render(request, "rateMyCourse/ratePage.html", {
+            'course_name': c.name,
+            'course_school': c.department.school.name,
+            'course_department': c.department.name,
+            'aspect1': '课程难度',
+            'aspect2': '课程质量',
+            'aspect3': '考核方式',
+        })
 
 #POST
 def signIn(request):
@@ -168,4 +180,33 @@ def getComment(request):
     return HttpResponse(json.dumps({
         'statCode': 0,
         'comments': cmtList,
+        }))
+
+def getOverAllRate(request):
+    try:
+        courses = Course.objects.filter(number=request.GET['course_number'])
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'can not get course_number or course_number not exists',
+            }))
+    r = [0] * 3
+    count = 0
+    for c in courses:
+        try:
+            overallrateEntry = c.rate_set.get(overallrate=True)
+        except Exception:
+            Rate(overallrate=True, course=c, A_score=0, B_score=0, C_score=0, user=User.objects.get(username='overallrate')).save()
+            overallrateEntry = c.rate_set.get(overallrate=True)
+        cnt = c.rate_set.count() - 1
+        r[0] += overallrateEntry.A_score * cnt
+        r[1] += overallrateEntry.B_score * cnt
+        r[2] += overallrateEntry.C_score * cnt
+        count += cnt
+    if(count > 0):
+        for i in range(len(r)):
+            r[i] /= count
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        'rate': r,
         }))

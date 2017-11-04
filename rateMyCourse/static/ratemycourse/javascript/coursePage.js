@@ -1,6 +1,6 @@
 'use strict'
 
-var sNum = 6;
+var sNum = 3;
 
 function setScores(scores) {
     var tables = document.getElementsByClassName("rating");
@@ -95,14 +95,12 @@ function setComments(){//get comments list from service
 
 $(document).ready(function(){
 	//var scores = {{score_list|safe}};
-	var scores=[];
-	for (var i = 0; i < sNum; i++) {
-	    scores[i] = i%6;
-	}
+	$.ajax('/getOverAllRate', {dataType: 'json', data: {'course_number': $('#courseNumber').text()}, }).done(function(data){
+		setScores(data.rate)
+	})
 	//var userimg = {{userimg_list}};
 	//var text = {{text_list}};
 	//var headLine = {{headLine_list}};
-	setScores(scores);
 	setComments();
 	document.getElementById("toComment").onclick = function () { console.log("cliked");; }// turn to the page of grading
 })

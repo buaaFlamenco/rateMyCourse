@@ -54,8 +54,8 @@
     <div class="container py-5">
       <div class="row">
         <div class="col-md-12 text-white">
-          <h1 class="display-3 mb-4" id="courseName">{{course.name}}</h1>
-          <p class="lead mb-5">{{course.school}}-&gt;{{course.department}}</p>
+          <h1 class="display-3 mb-4" id="courseName">{{course_name}}</h1>
+          <p class="lead mb-5">{{course_school}}-&gt;{{course_department}}</p>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
   <div class="container">
     <div class="row w-100 my-1">
       <div class="col-md-2 bg-primary">
-        <p class="lead my-2 text-white">评分</p>
+        <p class="lead my-2 text-white">{{aspect1}}</p>
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
@@ -79,7 +79,7 @@
   <div class="container">
     <div class="row w-100 my-1">
       <div class="col-md-2 bg-primary">
-        <p class="lead my-2 text-white">难度级别</p>
+        <p class="lead my-2 text-white">{{aspect2}}</p>
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
@@ -95,7 +95,7 @@
   <div class="container">
     <div class="row w-100 my-1">
       <div class="col-md-2 bg-primary">
-        <p class="lead my-2 text-white">课程负担</p>
+        <p class="lead my-2 text-white">{{aspect3}}</p>
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
@@ -164,9 +164,9 @@
   <br>
   <br>
   <br>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 </body>
 
 </html>

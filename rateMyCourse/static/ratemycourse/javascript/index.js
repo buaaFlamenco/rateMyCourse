@@ -68,7 +68,6 @@ function Func_signUp(){
       $("#menuUser").show()
       $("#navUser").text(data.username)
       $.cookie('username', data.username)
-
     }
   })
   return false
