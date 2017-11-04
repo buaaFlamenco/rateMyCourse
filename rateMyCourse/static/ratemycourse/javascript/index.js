@@ -10,7 +10,15 @@ function Func_search() {
 }
 
 $(document).ready(function(){
-  $("#menuUser").hide()
+  if($.cookie('username') == undefined){
+    $("#menuUser").hide()
+    $("#menuLogin").show()
+  }
+  else{
+    $("#menuLogin").hide()
+    $("#menuUser").show()
+    $("#navUser").text($.cookie('username'))
+  }
   $.ajax('/getSchool', {dataType:'json'}).done(function(data){
     var schoolList = $("#schoolList")
     for (var i = 0; i < data.school.length; i++) {
@@ -59,6 +67,8 @@ function Func_signUp(){
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
+      $.cookie('username', data.username)
+
     }
   })
   return false
@@ -79,6 +89,7 @@ function Func_signIn(){
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
+      $.cookie('username', data.username)
     }
   })
   return false

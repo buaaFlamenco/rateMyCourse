@@ -59,13 +59,15 @@ def getIndex(request):
 
 #GET
 def coursePage(request, course_number):
-    course = get_object_or_404(Course, number=course_number)
+    get_object_or_404(Course, number=course_number)
+    courses = Course.objects.filter(number=course_number)
     return render(request, "rateMyCourse/coursePage.html", {
-            'course_number': course.number,
-            'course_name': course.name,
-            'course_description': course.description if course.description != '' else 'we have no description',
-            'course_website': course.website if course.website != '' else 'we have no website',
-            'course_credit': course.credit,
+            'course_number': courses[0].number,
+            'course_name': courses[0].name,
+            'course_description': courses[0].description if courses[0].description != '' else 'we have no description',
+            'course_website': courses[0].website if courses[0].website != '' else 'we have no website',
+            'course_credit': courses[0].credit,
+            'course_teachers': [(t.name for t in c.teacher_set.all()) for c in courses],
         })
     pass
 
@@ -144,4 +146,26 @@ def getCourse(request):
             }))
     return HttpResponse(json.dumps({
         'course': [c.name for c in department.course_set.all()]
+        }))
+
+def getComment(request):
+    try:
+        courses = Course.objects.filter(number=request.GET['course_number'])
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'can not get course_number or course_number not exists',
+            }))
+    cmtList = []
+    for c in courses:
+        for cmt in c.comment_set.all():
+            cmtList.append({
+                'username': cmt.user.username,
+                'content': cmt.content,
+                'time': cmt.time.__str__(),
+                'teachers': [t.name for t in cmt.course.teacher_set.all()],
+                })
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        'comments': cmtList,
         }))

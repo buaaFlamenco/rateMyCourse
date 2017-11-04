@@ -69,33 +69,40 @@ function generateGrid(imageUrls, text, headline) {
 }
 
 function setComments(){//get comments list from service
-    var imgurl = "../../static/ratemycourse/images/user.png";
-    var headLine = "Image and gradient intro";
-    var text = "Get a fluid web page working on all devices with the Bootstrap 4 grid system.";
-    var parents = document.getElementById("commentDiv");
-    var comment = document.getElementById("commentGrid");
-    if (comment) {
-        parents.removeChild(comment);
-    }
-    for(var i=0; i<4; i++){
-        //generate a new row
-        var Grid=generateGrid(imgurl, text, headLine);
-        //insert this new row
-        parents.appendChild(Grid);
-        var br = document.createElement("br");
-        parents.appendChild(br);
-    }
+	$.ajax('/getComment', {
+		dataType: 'json',
+		data: {'course_number': $('#courseNumber').text()},
+	}).done(function(data){
+    	var imgurl = "../../static/ratemycourse/images/user.png";
+    	var headLine = "Image and gradient intro";
+    	var text = "Get a fluid web page working on all devices with the Bootstrap 4 grid system.";
+    	var parents = document.getElementById("commentDiv");
+    	var comment = document.getElementById("commentGrid");
+    	if (comment) {
+    	    parents.removeChild(comment);
+    	}
+    	for(var i = 0; i < data.comments.length; i++){
+    	    //generate a new row
+    	    var Grid=generateGrid(imgurl, data.comments[i].content, data.comments[i].username);
+    	    //insert this new row
+    	    parents.appendChild(Grid);
+    	    var br = document.createElement("br");
+    	    parents.appendChild(br);
+    	}
+	})
 }
 
-//var scores = {{score_list|safe}};
-var scores=[];
-for (var i = 0; i < sNum; i++) {
-    scores[i] = i%6;
-}
-//var userimg = {{userimg_list}};
-//var text = {{text_list}};
-//var headLine = {{headLine_list}};
 
-setScores(scores);
-setComments();
-document.getElementById("toComment").onclick = function () { console.log("cliked");; }// turn to the page of grading
+$(document).ready(function(){
+	//var scores = {{score_list|safe}};
+	var scores=[];
+	for (var i = 0; i < sNum; i++) {
+	    scores[i] = i%6;
+	}
+	//var userimg = {{userimg_list}};
+	//var text = {{text_list}};
+	//var headLine = {{headLine_list}};
+	setScores(scores);
+	setComments();
+	document.getElementById("toComment").onclick = function () { console.log("cliked");; }// turn to the page of grading
+})
