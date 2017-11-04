@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 # delete all
-for m in [School, Teacher, Course, User, Comment, Rate, Department]:
+for m in [School, Teacher, Course, Rate, Department]:
 	m.objects.all().delete()
 
 rootPath = "rateMyCourse/static/courseInfo/"
@@ -56,13 +56,14 @@ for df in dfs:
 		name = entry['课程名']
 		coursetype = entry['类型'] + ',' + entry['分类']
 		credit = entry['学分']
+		department = entry['开课学院']
 		teacher = entry['老师'].split('|')
 		for i, t in enumerate(teacher):
 			if(len(t) == 3 and t[1] == ' '):
 				teacher[i] = t[0] + t[2]
 			if(t == '暂无信息'):
 				teacher.remove(t)
-		c = Course(number=number, name=name, coursetype=coursetype, credit=credit)
+		c = Course(number=number, name=name, coursetype=coursetype, credit=credit, department=Department.objects.get(name=department))
 		c.save()
 		for t in teacher:
 			c.teacher_set.add(Teacher.objects.get(name=t))

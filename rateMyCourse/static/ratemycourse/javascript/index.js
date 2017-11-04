@@ -1,16 +1,36 @@
-$(document).ready(function(){
-  $.ajax('/getSchool', {dataType:'json'}).done(function(data){
+function Func_search() {
+    $.ajax('/search',{
+      dataType:'json',
+      data:{
+        'school':$("#buttonSelectSchool").val(),
+        'department':$("#buttonSelectDepartment").val(),
+        'keywords':$("#searchboxSearchCourse").val()
+      }
+    })
+}
+
+$(document).ready(function() {
+  if($.cookie('username') == undefined) {
+    $("#menuUser").hide()
+    $("#menuLogin").show()
+  }
+  else{
+    $("#menuLogin").hide()
+    $("#menuUser").show()
+    $("#navUser").text($.cookie('username'))
+  }
+  $.ajax('/getSchool', {dataType:'json'}).done(function(data) {
     var schoolList = $("#schoolList")
     for (var i = 0; i < data.school.length; i++) {
       schoolList.append("<a class='dropdown-item btn btn-primary school' href='#'>" + data.school[i] + "</a>")
     }
-    $(".dropdown-item.school").click(function(){
+    $(".dropdown-item.school").click(function() {
       $(this).parent().prev().text($(this).text())
       $("#selectDepartment").removeClass("disabled")
       $.ajax('/getDepartment',{
         dataType:'json',
         data:{'school':$(this).text()}
-      }).done(function(data){
+      }).done(function(data) {
         var departmentList = $("#departmentList")
         departmentList.children().remove()
         departmentList.prev().text("选择专业")
@@ -18,15 +38,20 @@ $(document).ready(function(){
           departmentList.append("<a class='dropdown-item btn btn-primary department' href='#'>" +
            data.department[i] + "</a>")
         }
-        $(".dropdown-item.department").click(function(){
+        $(".dropdown-item.department").click(function() {
           $(this).parent().prev().text($(this).text())
         })
+      })
+      $("#searchboxSearchCourse").keyup(function(event) {
+        if (event.keyCode == 13) {
+            Func_search()
+        }
       })
     })
   })
 })
 
-function Func_signUp(){
+function Func_signUp() {
   $.ajax("/signUp/", {
     dataType: 'json',
     type: 'POST',
@@ -35,30 +60,42 @@ function Func_signUp(){
       "mail": $("#inputEmail").val(),
       "password": $("#inputPassword").val(),
     }
-  }).done(function(data){
+  }).done(function(data) {
     if (data.statCode != 0) {
       alert(data.errormessage)
     } else {
-      $("#navLogin").text("你好！" + data.username)
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
+      $.cookie('username', data.username)
     }
   })
   return false
 }
 
-function Func_signIn(){
+function Func_signIn() {
   $.ajax("/signIn/", {
     dataType: 'json',
-    type: 'POST', 
+    type: 'POST',
     data: {
       "username": $("#username").val(),
       "password": $("#password").val()
     }
-  }).done(function(data){
+  }).done(function(data) {
     if(data.statCode != 0) {
       alert(data.errormessage)
     } else {
-      $("#navLogin").text("你好！" + data.username)
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
+      $.cookie('username', data.username)
     }
   })
+  return false
+}
+
+function Func_signOut() {
+  $("#menuUser").hide()
+  $("#menuLogin").show()
   return false
 }

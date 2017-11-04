@@ -5583,6 +5583,8 @@ body > * {
   width: 100%; }
 
 #toComment {
+  width: 150px;
+  height: 48px;
   margin-top: 16px;
   margin-left: 20px;
   background-color: #AFEEEE;

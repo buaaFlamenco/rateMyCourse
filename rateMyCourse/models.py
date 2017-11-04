@@ -111,7 +111,7 @@ class Rate(models.Model):
     overallrate = models.BooleanField()
     A_score = models.FloatField()
     B_score = models.FloatField()
-    C_scroe = models.FloatField()
+    C_score = models.FloatField()
     # connections
     user = models.ForeignKey(
         User,
