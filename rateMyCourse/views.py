@@ -110,9 +110,11 @@ def coursePage(request, course_number):
 def ratePage(request, course_number):
     c = get_object_or_404(Course, number=course_number)
     return render(request, "rateMyCourse/ratePage.html", {
-            'course_name': c.name,
-            'course_school': c.department.school.name,
-            'course_department': c.department.name,
+            'course': {
+                'name': c.name,
+                'school': c.department.school.name,
+                'department': c.department.name,
+            },
             'aspect1': '课程难度',
             'aspect2': '课程质量',
             'aspect3': '考核方式',
