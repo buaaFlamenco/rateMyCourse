@@ -55,7 +55,35 @@ def signUp(request):
 #GET
 def search(request):
     pass
+    '''
+    keywords = request.GET['keywords']
+    if('school' in request.GET):
+        school = request.GET['school']
+    else:
+        school = None
+    if('department' in request.GET):
+        department = request.GET['department']
+    else:
+        department = None
+    ## here for searching algrithm
 
+    ### this is for test
+    courselist = Course.objects.all()[0:100]
+    ###
+    courses = []
+    for c in courselist:
+        courses.append({
+            'name': c.name,
+            'ID': c.number,
+            'type': c.coursetype,
+            'credit': c.credit,
+            'school': c.department.school.name,
+            'department': c.department.name,
+            # 'rateScore': c.rate_set.get(overallrate=True)
+            })
+    return render(request, "rateMyCourse/searchResult.html", {})
+    pass
+    '''
 #GET
 def coursePage(request, course_number):
     get_object_or_404(Course, number=course_number)
