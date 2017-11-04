@@ -58,13 +58,13 @@ function generateGrid(imageUrls, text, headline) {
         var trTags = commentGrid.getElementsByTagName("tr");
         trTags[0].setAttribute("class", "commentTr");
         trTags[0].setAttribute("style", "background:#FFF; color:#FFF");
-       
+
         var tdTags = commentGrid.getElementsByTagName("div");
        // tdTags[2].align = "right";
         //tdTags[3].align = "right";
     //tdTags[4].align = "right";
         tdTags[0].setAttribute("style", "float:right");
-        
+
         return commentGrid;
 }
 
@@ -93,7 +93,17 @@ function setComments(){//get comments list from service
 }
 
 
-$(document).ready(function(){
+$(document).ready(function() {
+  // Login widget set according to cookie
+  if($.cookie('username') == undefined) {
+    $("#menuUser").hide()
+    $("#menuLogin").show()
+  }
+  else{
+    $("#menuLogin").hide()
+    $("#menuUser").show()
+    $("#navUser").text($.cookie('username'))
+  }
 	//var scores = {{score_list|safe}};
 	$.ajax('/getOverAllRate', {dataType: 'json', data: {'course_number': $('#courseNumber').text()}, }).done(function(data){
 		setScores(data.rate)
@@ -104,3 +114,53 @@ $(document).ready(function(){
 	setComments();
 	document.getElementById("toComment").onclick = function () { console.log("cliked");; }// turn to the page of grading
 })
+
+function Func_signUp() {
+  $.ajax("/signUp/", {
+    dataType: 'json',
+    type: 'POST',
+    data: {
+      "username": $("#inputUsername").val(),
+      "mail": $("#inputEmail").val(),
+      "password": $("#inputPassword").val(),
+    }
+  }).done(function(data) {
+    if (data.statCode != 0) {
+      alert(data.errormessage)
+    } else {
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
+      $.cookie('username', data.username)
+
+    }
+  })
+  return false
+}
+
+function Func_signIn() {
+  $.ajax("/signIn/", {
+    dataType: 'json',
+    type: 'POST',
+    data: {
+      "username": $("#username").val(),
+      "password": $("#password").val()
+    }
+  }).done(function(data) {
+    if(data.statCode != 0) {
+      alert(data.errormessage)
+    } else {
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
+      $.cookie('username', data.username)
+    }
+  })
+  return false
+}
+
+function Func_signOut() {
+  $("#menuUser").hide()
+  $("#menuLogin").show()
+  return false
+}
