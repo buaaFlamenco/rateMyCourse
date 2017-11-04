@@ -7,15 +7,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
   <script>
+    var score1=0;
+    var score2=0;
+    var score3=0;
+   
     function chooseScore(id){
       		var c0="B";
       		var c1=id.charAt(1);
       		var c2=id.charAt(2);
       		var i=2;
-      		 
-      		//var j=parseInt(c2)+5;
-      		//var s=c0.concat(c1.concat(i.toString()));
-      		//document.getElementById(s).style.background="#ffc107";
+      		switch(c1)
+          {
+            case "1":
+              score1=parseInt(c2);
+              break;
+            case "2":
+              score2=parseInt(c2);
+              break;
+            case "3":
+              score3=parseInt(c2);
+              break;
+          }
+      		
       		for(i=1;i<=parseInt(c2);i++)
           {
             var s=c0.concat(c1.concat(i.toString()));
@@ -30,8 +43,7 @@
            	$(s).addClass("fa fa-star-o text-dark");
             	
           }
-      		//id.innerHTML=j;
-    			//id.style.background="#ffc107";
+      		
     		}
   </script>
 </head>
@@ -142,7 +154,7 @@
   <div class="container">
     <div class="row w-100 my-1">
       <div class="col-md-2 bg-primary">
-        <p class="lead my-2 text-white">授课教师</p>
+        <p class="lead my-2 text-white" id="teacher">授课教师</p>
       </div>
       <div class="col-md-10"> <textarea class="w-50 my-2" rows="1">  </textarea> </div>
     </div>
@@ -177,7 +189,7 @@
   <div class="container">
     <div class="row w-100 my-1">
       <div class="col-md-2 bg-primary">
-        <p class="lead my-2 text-white">写评价</p>
+        <p class="lead my-2 text-white" id="rate">写评价</p>
       </div>
       <div class="col-md-10"> <textarea class="w-50 form-control-sm" rows="15">  </textarea> </div>
     </div>
@@ -190,7 +202,7 @@
         <a id="c_button-outline" href="#" class="btn pi-draggable btn-outline-dark mx-4 px-5">提交</a>
       </div>
       <div class="col-md-2"> 是否匿名
-        <input name="anonymous" type="radio" value="" class="mx-2"> </div>
+        <input name="anonymous" type="radio" value="" class="mx-2" id="anonymous"> </div>
     </div>
   </div>
   <br>
