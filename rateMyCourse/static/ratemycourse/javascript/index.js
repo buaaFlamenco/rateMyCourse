@@ -9,8 +9,8 @@ function Func_search() {
     })
 }
 
-$(document).ready(function(){
-  if($.cookie('username') == undefined){
+$(document).ready(function() {
+  if($.cookie('username') == undefined) {
     $("#menuUser").hide()
     $("#menuLogin").show()
   }
@@ -19,18 +19,18 @@ $(document).ready(function(){
     $("#menuUser").show()
     $("#navUser").text($.cookie('username'))
   }
-  $.ajax('/getSchool', {dataType:'json'}).done(function(data){
+  $.ajax('/getSchool', {dataType:'json'}).done(function(data) {
     var schoolList = $("#schoolList")
     for (var i = 0; i < data.school.length; i++) {
       schoolList.append("<a class='dropdown-item btn btn-primary school' href='#'>" + data.school[i] + "</a>")
     }
-    $(".dropdown-item.school").click(function(){
+    $(".dropdown-item.school").click(function() {
       $(this).parent().prev().text($(this).text())
       $("#selectDepartment").removeClass("disabled")
       $.ajax('/getDepartment',{
         dataType:'json',
         data:{'school':$(this).text()}
-      }).done(function(data){
+      }).done(function(data) {
         var departmentList = $("#departmentList")
         departmentList.children().remove()
         departmentList.prev().text("选择专业")
@@ -38,7 +38,7 @@ $(document).ready(function(){
           departmentList.append("<a class='dropdown-item btn btn-primary department' href='#'>" +
            data.department[i] + "</a>")
         }
-        $(".dropdown-item.department").click(function(){
+        $(".dropdown-item.department").click(function() {
           $(this).parent().prev().text($(this).text())
         })
       })
@@ -51,7 +51,7 @@ $(document).ready(function(){
   })
 })
 
-function Func_signUp(){
+function Func_signUp() {
   $.ajax("/signUp/", {
     dataType: 'json',
     type: 'POST',
@@ -60,7 +60,7 @@ function Func_signUp(){
       "mail": $("#inputEmail").val(),
       "password": $("#inputPassword").val(),
     }
-  }).done(function(data){
+  }).done(function(data) {
     if (data.statCode != 0) {
       alert(data.errormessage)
     } else {
@@ -74,7 +74,7 @@ function Func_signUp(){
   return false
 }
 
-function Func_signIn(){
+function Func_signIn() {
   $.ajax("/signIn/", {
     dataType: 'json',
     type: 'POST',
@@ -82,7 +82,7 @@ function Func_signIn(){
       "username": $("#username").val(),
       "password": $("#password").val()
     }
-  }).done(function(data){
+  }).done(function(data) {
     if(data.statCode != 0) {
       alert(data.errormessage)
     } else {
@@ -95,7 +95,7 @@ function Func_signIn(){
   return false
 }
 
-function Func_signOut(){
+function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
   return false

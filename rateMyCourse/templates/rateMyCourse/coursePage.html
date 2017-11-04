@@ -12,17 +12,40 @@
     <div class="container">
       <a class="navbar-brand" href="#">首页</a>
       <div class="btn-group">
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Dropdown </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
-        </div>
         <form class="form-inline m-0">
-          <input class="form-control mr-2 text-center" type="text" placeholder="Search"> </form>
+          <input class="form-control input-lg" type="text" placeholder="搜索学校/专业/课程"> </form>
       </div>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <button class="btn btn-primary" type="submit">登陆/注册</button>
+      <div class="dropdown open" id="menuLogin">
+          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
+          <div class="dropdown-menu" style="padding:17px;">
+            <form id="formLogin" onsubmit="return Func_signIn()"> <label>登录</label>
+              <div class="form-group">
+                <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" equired="" class="form-control" name="username"> </div>
+              <div class="form-group">
+                <input id="password" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
+              <input type="submit" id="btnLogin" class="btn btn-primary" value="登录"> </form>
+            <form action="signUpTrigger" method="post">
+              <a href="#" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
+            </form>
+            <form id="formRegister" class="form in collapse" style="height: auto;" onsubmit="return Func_signUp()">
+              <div class="form-group">
+                <input id="inputEmail" type="email" placeholder="Email" required="" class="form-control" name="email"> </div>
+              <div class="form-group">
+                <input name="username" id="inputUsername" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" required="" class="form-control"> </div>
+              <div class="form-group">
+                <input id="inputPassword" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
+              <div class="form-group">
+                <input name="verify" id="inputVerify" type="password" placeholder="确认密码" required="" class="form-control"> </div>
+              <input type="submit" class="btn btn-primary" value="注册"> </form>
+          </div>
+        </div>
+        <div class="dropdown" id="menuUser">
+          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navUser"></a>
+          <div class="dropdown-menu" style="padding:17px;">
+            <a href="#" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
+          </div>
+        </div>
     </div>
   </nav>
   <div class="py-5 gradient-overlay">
@@ -123,12 +146,15 @@
   </div>
     <br />
   <div id="commentDiv">
-    
+
   </div>
-  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="../../static/ratemycourse/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>
+  <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
+  <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
   <script src="../../static/ratemycourse/javascript/coursePage.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </body>
 
 </html>
