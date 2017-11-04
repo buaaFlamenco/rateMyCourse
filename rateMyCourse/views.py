@@ -54,8 +54,6 @@ def signUp(request):
 
 #GET
 def search(request):
-    pass
-    '''
     keywords = request.GET['keywords']
     if('school' in request.GET):
         school = request.GET['school']
@@ -71,7 +69,16 @@ def search(request):
     courselist = Course.objects.all()[0:100]
     ###
     courses = []
+    n_list = set()
     for c in courselist:
+        if c.number in n_list:
+            continue
+        n_list.add(c.number)
+        try:
+            overallrate = c.rate_set.get(overallrate=True)
+        except Exception:
+            Rate(overallrate=True, course=c, A_score=0, B_score=0, C_score=0, user=User.objects.get(username='overallrate')).save()
+            overallrate = c.rate_set.get(overallrate=True)
         courses.append({
             'name': c.name,
             'ID': c.number,
@@ -79,11 +86,11 @@ def search(request):
             'credit': c.credit,
             'school': c.department.school.name,
             'department': c.department.name,
-            # 'rateScore': c.rate_set.get(overallrate=True)
+            'rateScore': sum([overallrate.A_score, overallrate.B_score, overallrate.C_score]) / 3,
+            'ratenumber': sum([i.rate_set.count() - 1 for i in Course.objects.filter(number=c.number)])
             })
-    return render(request, "rateMyCourse/searchResult.html", {})
-    pass
-    '''
+    return render(request, "rateMyCourse/searchResult.html", {'courses': courses})
+    
 #GET
 def coursePage(request, course_number):
     get_object_or_404(Course, number=course_number)
