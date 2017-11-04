@@ -40,13 +40,13 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
         <ul class="navbar-nav">
-          <li><form class="form-inline m-0">
-            <input class="form-control input-lg" type="text" placeholder="搜索学校/专业/课程" style="float:right"> </form>
+          <li>
+            <form class="form-inline m-0">
+              <input class="form-control input-lg" type="text" placeholder="搜索学校/专业/课程" style="float:right"> </form>
           </li>
         </ul>
         <div class="dropdown open" id="menuLogin">
-          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown"
-          id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
+          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
           <div class="dropdown-menu" style="padding:17px;">
             <form id="formLogin" onsubmit="return Func_signIn()"> <label>登录</label>
               <div class="form-group">
@@ -183,9 +183,11 @@
   <br>
   <div class="container">
     <div class="row w-100 my-1">
-      <div class="col-md-12">
-        <a id="c_button-outline" href="#" class="btn pi-draggable btn-outline-dark mx-5 px-5">提交</a>
+      <div class="col-md-2">
+        <a id="c_button-outline" href="#" class="btn pi-draggable btn-outline-dark mx-4 px-5">提交</a>
       </div>
+      <div class="col-md-2"> 是否匿名
+        <input name="anonymous" type="radio" value="" class="mx-2"> </div>
     </div>
   </div>
   <br>
