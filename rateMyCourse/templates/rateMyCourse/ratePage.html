@@ -12,20 +12,23 @@
       		var c1=id.charAt(1);
       		var c2=id.charAt(2);
       		var i=2;
+      		 
       		//var j=parseInt(c2)+5;
       		//var s=c0.concat(c1.concat(i.toString()));
       		//document.getElementById(s).style.background="#ffc107";
       		for(i=1;i<=parseInt(c2);i++)
           {
-            	var s=c0.concat(c1.concat(i.toString()));
-
-            	document.getElementById(s).style.background="#ffc107";
+            var s=c0.concat(c1.concat(i.toString()));
+            $(s).removeClass("fa fa-star-o text-dark");
+            $(s).addClass("fa fa-star text-warning");
+           
           }
       		for(i=5;i>parseInt(c2);i--)
           {
-            	var s=c0.concat(c1.concat(i.toString()));
-
-            	document.getElementById(s).style.background="#00fbff";
+            var s=c0.concat(c1.concat(i.toString()));
+						$(s).removeClass("fa fa-star text-warning");
+           	$(s).addClass("fa fa-star-o text-dark");
+            	
           }
       		//id.innerHTML=j;
     			//id.style.background="#ffc107";
@@ -82,8 +85,8 @@
     <div class="container py-5">
       <div class="row">
         <div class="col-md-12 text-white">
-          <h1 class="display-3 mb-4" id="courseName">{{course_name}}</h1>
-          <p class="lead mb-5">{{course_school}}-&gt;{{course_department}}</p>
+          <h1 class="display-3 mb-4" id="courseName">{{course.name}}</h1>
+          <p class="lead mb-5">{{course.school}}-&gt;{{course.department}}</p>
         </div>
       </div>
     </div>
@@ -95,11 +98,11 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
-          <a href="#" class="btn btn-lg btn-block btn-info" data-toggle="" id="B11" onclick="chooseScore(this.id)">1</a>
-          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B12" onclick="chooseScore(this.id)">2</a>
-          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B13" onclick="chooseScore(this.id)">3</a>
-          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B14" onclick="chooseScore(this.id)">4</a>
-          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B15" onclick="chooseScore(this.id)">5</a>
+          <b11 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B11" onclick="chooseScore(this.id)"></b11>
+          <b12 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B12" onclick="chooseScore(this.id)"></b12>
+          <b13 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B13" onclick="chooseScore(this.id)"></b13>
+          <b14 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B14" onclick="chooseScore(this.id)"></b14>
+          <b15 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B15" onclick="chooseScore(this.id)"></b15>
         </div>
       </div>
     </div>
@@ -111,11 +114,11 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
-          <a href="#" class="btn btn-lg btn-block btn-info" data-toggle="" id="B21" onclick="chooseScore(this.id)">1</a>
-          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B22" onclick="chooseScore(this.id)">2</a>
-          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B23" onclick="chooseScore(this.id)">3</a>
-          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B24" onclick="chooseScore(this.id)">4</a>
-          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B25" onclick="chooseScore(this.id)">5</a>
+          <b21 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B21" onclick="chooseScore(this.id)"></b21>
+          <b22 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B22" onclick="chooseScore(this.id)"></b22>
+          <b23 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B23" onclick="chooseScore(this.id)"></b23>
+          <b24 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B24" onclick="chooseScore(this.id)"></b24>
+          <b25 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B25" onclick="chooseScore(this.id)"></b25>
         </div>
       </div>
     </div>
@@ -127,11 +130,11 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
-          <a href="#" class="btn btn-lg btn-block btn-info" data-toggle="" id="B31" onclick="chooseScore(this.id)">1</a>
-          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B32" onclick="chooseScore(this.id)">2</a>
-          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B33" onclick="chooseScore(this.id)">3</a>
-          <a href="#" class="btn btn-lg btn-info mx-1" data-toggle="" id="B34" onclick="chooseScore(this.id)">4</a>
-          <a href="#" class="btn btn-lg btn-info" data-toggle="" id="B35" onclick="chooseScore(this.id)">5</a>
+          <b31 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B31" onclick="chooseScore(this.id)"></b31>
+          <b32 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B32" onclick="chooseScore(this.id)"></b32>
+          <b33 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B33" onclick="chooseScore(this.id)"></b33>
+          <b34 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B34" onclick="chooseScore(this.id)"></b34>
+          <b35 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B35" onclick="chooseScore(this.id)"></b35>
         </div>
       </div>
     </div>
@@ -176,7 +179,7 @@
       <div class="col-md-2 bg-primary">
         <p class="lead my-2 text-white">写评价</p>
       </div>
-      <div class="col-md-10"> <textarea class="w-50 form-control-sm h-100" rows="15">  </textarea> </div>
+      <div class="col-md-10"> <textarea class="w-50 form-control-sm" rows="15">  </textarea> </div>
     </div>
   </div>
   <br>
@@ -194,7 +197,9 @@
   <br>
   <br>
   <br>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="../../static/ratemycourse/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
