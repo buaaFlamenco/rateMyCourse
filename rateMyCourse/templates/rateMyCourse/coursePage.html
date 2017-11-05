@@ -7,146 +7,143 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/css/coursePage.css" type="text/css"> </head>
 
-<body class="text-white" style="background:#Eff; color:#FFF">
-  <nav class="navbar navbar-expand-md bg-secondary navbar-dark">
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">首页</a>
-      <div class="btn-group">
-        <form class="form-inline m-0">
-          <input class="form-control input-lg" type="text" placeholder="搜索学校/专业/课程"> </form>
+      <a class="navbar-brand" href="#/">首页</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <form class="form-inline m-0" action="/search">
+          <input id="search" class="form-control" type="text" placeholder="搜索学校/专业/课程" name="keywords"> </form>
+          <div class="dropdown open" id="menuLogin">
+              <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
+              <div class="dropdown-menu" style="padding:17px;">
+                  <form id="formLogin" onsubmit="return Func_signIn()">
+                      <label>登录</label>
+                      <div class="form-group">
+                          <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" equired="" class="form-control" name="username">
+                      </div>
+                      <div class="form-group">
+                          <input id="password" type="password" placeholder="密码" required="" class="form-control" name="password">
+                      </div>
+                      <input type="submit" id="btnLogin" class="btn btn-primary" value="登录">
+                  </form>
+                  <form action="signUpTrigger" method="post">
+                      <a href="#/" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
+                  </form>
+                  <form id="formRegister" class="form in collapse" style="height: auto;" onsubmit="return Func_signUp()">
+                      <div class="form-group">
+                          <input id="inputEmail" type="email" placeholder="Email" required="" class="form-control" name="email">
+                      </div>
+                      <div class="form-group">
+                          <input name="username" id="inputUsername" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" required="" class="form-control">
+                      </div>
+                      <div class="form-group">
+                          <input id="inputPassword" type="password" placeholder="密码" required="" class="form-control" name="password">
+                      </div>
+                      <div class="form-group">
+                          <input name="verify" id="inputVerify" type="password" placeholder="确认密码" required="" class="form-control">
+                      </div>
+                      <input type="submit" class="btn btn-primary" value="注册">
+                  </form>
+              </div>
+          </div>
+          <div class="dropdown" id="menuUser">
+              <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navUser"></a>
+              <div class="dropdown-menu" style="padding:17px;">
+                  <a href="#/" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
+              </div>
+          </div>
       </div>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <div class="dropdown open" id="menuLogin">
-          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
-          <div class="dropdown-menu" style="padding:17px;">
-            <form id="formLogin" onsubmit="return Func_signIn()"> <label>登录</label>
-              <div class="form-group">
-                <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" equired="" class="form-control" name="username"> </div>
-              <div class="form-group">
-                <input id="password" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
-              <input type="submit" id="btnLogin" class="btn btn-primary" value="登录"> </form>
-            <form action="signUpTrigger" method="post">
-              <a href="#" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
-            </form>
-            <form id="formRegister" class="form in collapse" style="height: auto;" onsubmit="return Func_signUp()">
-              <div class="form-group">
-                <input id="inputEmail" type="email" placeholder="Email" required="" class="form-control" name="email"> </div>
-              <div class="form-group">
-                <input name="username" id="inputUsername" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" required="" class="form-control"> </div>
-              <div class="form-group">
-                <input id="inputPassword" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
-              <div class="form-group">
-                <input name="verify" id="inputVerify" type="password" placeholder="确认密码" required="" class="form-control"> </div>
-              <input type="submit" class="btn btn-primary" value="注册"> </form>
-          </div>
-        </div>
-        <div class="dropdown" id="menuUser">
-          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navUser"></a>
-          <div class="dropdown-menu" style="padding:17px;">
-            <a href="#" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
-          </div>
-        </div>
     </div>
   </nav>
-  <div class="py-5 gradient-overlay">
+  <div class="py-5">
     <div class="container py-5">
-      <div class="row">
-        <div class="col-md-3 text-dark">
-          <h1 class="my-3"> {{course_name}}</h1>
-          <h1>课程编号：<b id="courseNumber">{{course_number}}</b> </h1>
-          <p><b>课程描述：{{course_description}}</b></p>
-          <p><b>课程网址：{{course_website}}</b></p>
+      <div class="text-center text-dark">
+        <h1 class="lead display-4">{{course_name}}</h1>
+      </div>
+      <div style="width:100%; margin-top:86px">
+        <table style="width:100%; margin:auto">
+          <tbody>
+            <tr>
+              <td style="width:33%">
+                <p class="text-dark text-center">学分</p>
+              </td>
+              <td style="width:33%">
+                <p class="text-dark text-center">开课专业</p>
+              </td>
+              <td style="width:33%">
+                <p class="text-dark text-center">课程类别</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="text-dark text-center" style="margin-top:8px">{{course_credit}}</p>
+              </td>
+              <td>
+                <p class="text-dark text-center" style="margin-top:8px">{{course_profession}}</p>
+              </td>
+              <td>
+                <p class="text-dark text-center" style="margin-top:8px">{{course_type}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container py-5">
+    <div class="row" style="width:100%;">
+      <div style="width:76%">
+        <div class="row" style="width:100%;margin-left:16px">
+          <h3 class="text-dark"> 总分：{{course_scores}}</h3>
+          <a class="btn btn-lg btn-default" id="toComment" href="rate">撰写评价</a>
         </div>
-        <div class="col-md-9">
-            <div class="row">
-                <h1 class="mb-4 text-dark display-5 my-3">学分：{{course_credit}}</h1>
-                <button class="btn btn-lg " id="toComment">评价</button>
-            </div>
-          <div class="row">
-            <div class="col-md-4 py-4">
-              <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">{{aspect1}}</span></b></p>
-                <table class="rating">
-                    <tr style="color:gray">
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-4 py-4">
-              <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">{{aspect2}}</span></b></p>
-                <table class="rating">
-                    <tr style="color:gray">
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-4 py-4">
-              <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">{{aspect3}}</span></b></p>
-                <table class="rating">
-                    <tr style="color:gray">
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                    </tr>
-                </table>
-            </div>
-          </div>
-
-          <!-- <div class="row">
-            <div class="col-md-4 py-4">
-              <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-                <table class="rating">
-                    <tr style="color:gray">
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-4 py-4">
-              <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-                <table class="rating">
-                    <tr style="color:gray">
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-4 py-4">
-              <p class="text-dark text-left"><b><span style="font-weight: normal;font-size: 25px">细则1</span></b></p>
-                <table class="rating">
-                    <tr style="color:gray">
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                        <td><i class="fa fa-star-o" aria-hidden="true" style="font-size:32px"></i></td>
-                    </tr>
-                </table>
-            </div>
-          </div> -->
-
+        <table style="width:80%; margin-top:16px; margin-left:16px">
+          <tbody>
+            <tr>
+              <td>
+                <p>细则：{{detail1}}</p>
+              </td>
+              <td>
+                <p>细则：{{detail2}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>细则：{{detail3}}</p>
+              </td>
+              <td>
+                <p>细则：{{detail4}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>细则：{{detail5}}</p>
+              </td>
+              <td>
+                <p>细则：{{detail6}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center" style="border-left:1px #e4e4e4 solid; width:23%;">
+        <div class="text-dark text-center" style="margin-top:54px">
+          <a href="{{course_website}}">
+            <p class="text-dark">课程网站</p>
+          </a>
+          <a href="{{profession_website}}">
+            <p style="margin-top:32px;" class="text-dark">学院官网</p>
+          </a>
         </div>
       </div>
     </div>
   </div>
-    <br />
-  <div id="commentDiv">
-
+  <hr>
+  <div class="container py-5">
+    <div id="commentDiv" style="margin-left:16px"></div>
   </div>
   <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -155,6 +152,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
   <script src="../../static/ratemycourse/javascript/coursePage.js"></script>
+  
 </body>
 
 </html>

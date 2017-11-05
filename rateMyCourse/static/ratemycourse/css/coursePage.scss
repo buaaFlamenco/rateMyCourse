@@ -9,10 +9,10 @@ $theme-colors: (
   warning: #ffc107,
   danger: #dc3545,
   light: #f8f9fa,
+  dark: #343a40
 );
-$blue: #AFEEEE;
 
-// Options 
+// Options
 //
 // Quickly modify global styling by enabling or disabling optional features.
  
@@ -72,8 +72,7 @@ body > * {
     left: 0px;
     top: 0px; 
     pointer-events:none;
-   // background: rgba(map-get($theme-colors, 'primary'), 0.25);
-    background:  rgba($blue, 0.25);
+    background: rgba(map-get($theme-colors, 'dark'), 0.25);
   }
 }
 
@@ -90,23 +89,30 @@ body > * {
     left: 0px;
     top: 0px; 
     pointer-events:none;
-  //  background: linear-gradient(to top , map-get($theme-colors, 'primary') 0%, transparent 100%);
-    background: linear-gradient(to top , $blue 0%, transparent 100%);
+    background: linear-gradient(to top , map-get($theme-colors, 'dark') 0%, transparent 100%);
 
   }
 }
 
+#toComment {
+    width: 150px;
+    height: 48px;
+    margin-left: 500px;
+    background-color: white;
+    border-color: #bfbfbf;
+    border-radius: 20px;
+}
 
 
-#commentGrid {
-  width:100%;
+#search{
+    border-radius: 20px;   
+    margin-right: 16px;
 }
 
 
 
-#toComment{
-	margin-top:16px;
-  margin-left: 20px;
-  background-color:$blue;
-  border-color:#bfbfbf;
+.userName{
+  text-align:center;
+  margin-left: 32px;
+  margin-top: 48px;
 }
