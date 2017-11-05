@@ -5563,7 +5563,7 @@ body > * {
     left: 0px;
     top: 0px;
     pointer-events: none;
-    background: rgba(175, 238, 238, 0.25); }
+    background: rgba(52, 58, 64, 0.25); }
 
 .gradient-overlay {
   overflow: hidden;
@@ -5577,15 +5577,21 @@ body > * {
     left: 0px;
     top: 0px;
     pointer-events: none;
-    background: linear-gradient(to top, #AFEEEE 0%, transparent 100%); }
-
-#commentGrid {
-  width: 100%; }
+    background: linear-gradient(to top, #343a40 0%, transparent 100%); }
 
 #toComment {
   width: 150px;
   height: 48px;
-  margin-top: 16px;
-  margin-left: 20px;
-  background-color: #AFEEEE;
-  border-color: #bfbfbf; }
+  margin-left: 500px;
+  background-color: white;
+  border-color: #bfbfbf;
+  border-radius: 20px; }
+
+#search {
+  border-radius: 20px;
+  margin-right: 16px; }
+
+.userName {
+  text-align: center;
+  margin-left: 32px;
+  margin-top: 48px; }
