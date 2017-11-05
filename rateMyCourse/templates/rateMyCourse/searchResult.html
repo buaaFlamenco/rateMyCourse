@@ -54,7 +54,7 @@
   </nav>
   <div class="container"> {% for course in courses %}
     <div class="row" style="background:#eeeeee">
-      <h1 style="font-size:55px;color:#000000"><b>{{course.name}}</b></h1>
+      <a href="/course/{{course.ID}}" class="btn" style="font-size:55px;color:#000000"><b>{{course.name}}</b></a>
     </div>
     <div class="row" style="background:#eeeeee">
       <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学校
