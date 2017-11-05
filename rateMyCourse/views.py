@@ -223,7 +223,7 @@ def getComment(request):
     for c in courses:
         for cmt in c.comment_set.all():
             cmtList.append({
-                'userName': cmt.user.username,
+                'userName': cmt.user.username if cmt.anonymous == False else '匿名用户',
                 'text': cmt.content,
                 'time': cmt.time.strftime('%y/%m/%d'),
                 'iTerm': cmt.term,
