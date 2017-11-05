@@ -70,17 +70,37 @@
         <p>{{course.credit}}</p>
       </div>
     </div>
-    <div class="row" style="background:#eeeeee"> </div>
-    <br> {% endfor %} </div>
+    <div class="row" style="background:#eeeeee">
+      <ic{{forloop.counter}}1 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}1>
+      <ic{{forloop.counter}}2 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}2>
+      <ic{{forloop.counter}}3 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}3>
+      <ic{{forloop.counter}}4 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}4>
+      <ic{{forloop.counter}}5 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}5>
+      <div class="mx-3" style="font-size:15px;color:#CCBBCC"> 评价数：{{course.ratenumber}} </div>
+    </div>
+    <br>
+    {% endfor %}
+  </div>
   <script>
     window.onload=function(){
           		{% for course in courses %}
-            	//$("ic2").removeClass("fa fa-star-o");
-            	//$("ic2").addClass("fa fa-star text-warning");
-          		//$("ic1").removeClass("fa fa-star text-warning");
-            	//$("ic1").addClass("fa fa-star-o");
+              		var i=0;
+               		for(i=1;i<=parseInt({{course.credit}});i++)
+                  {
+                    var s="ic".concat({{forloop.counter}}.concat(i.toString()));
+                    $(s).removeClass("fa fa-star-o text-dark");
+                    $(s).addClass("fa fa-star text-warning");
+
+                  }
+                  for(i=5;i>parseInt({{course.credit}});i--)
+                  {
+                    var s="ic".concat({{forloop.counter}}.concat(i.toString()));
+                    $(s).removeClass("fa fa-star text-warning");
+                    $(s).addClass("fa fa-star-o text-dark");
+
+                  }
             	{% endfor %}
-          }
+     }
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
