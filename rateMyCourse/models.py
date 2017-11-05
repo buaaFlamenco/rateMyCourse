@@ -86,6 +86,7 @@ class Course(models.Model):
 
 class Comment(models.Model):
     # attributes
+    anonymous = models.BooleanField(default=False)
     content = models.CharField(max_length=2000)
     time = models.DateTimeField()
     # connections
