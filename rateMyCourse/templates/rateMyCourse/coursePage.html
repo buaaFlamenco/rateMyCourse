@@ -10,13 +10,13 @@
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">首页</a>
+      <a class="navbar-brand" href="#/">首页</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
         <form class="form-inline m-0" action="/search">
-          <input id="search" class="form-control" type="text" placeholder="搜索学校/专业/课程"> </form>
+          <input id="search" class="form-control" type="text" placeholder="搜索学校/专业/课程" name="keywords"> </form>
           <div class="dropdown open" id="menuLogin">
-              <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
+              <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
               <div class="dropdown-menu" style="padding:17px;">
                   <form id="formLogin" onsubmit="return Func_signIn()">
                       <label>登录</label>
@@ -29,7 +29,7 @@
                       <input type="submit" id="btnLogin" class="btn btn-primary" value="登录">
                   </form>
                   <form action="signUpTrigger" method="post">
-                      <a href="#" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
+                      <a href="#/" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
                   </form>
                   <form id="formRegister" class="form in collapse" style="height: auto;" onsubmit="return Func_signUp()">
                       <div class="form-group">
@@ -49,9 +49,9 @@
               </div>
           </div>
           <div class="dropdown" id="menuUser">
-              <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navUser"></a>
+              <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navUser"></a>
               <div class="dropdown-menu" style="padding:17px;">
-                  <a href="#" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
+                  <a href="#/" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
               </div>
           </div>
       </div>
@@ -98,7 +98,7 @@
       <div style="width:76%">
         <div class="row" style="width:100%;margin-left:16px">
           <h3 class="text-dark"> 总分：{{course_scores}}</h3>
-          <button class="btn btn-lg btn-default" id="toComment" href="#">撰写评价</button>
+          <a class="btn btn-lg btn-default" id="toComment" href="rate">撰写评价</a>
         </div>
         <table style="width:80%; margin-top:16px; margin-left:16px">
           <tbody>
@@ -151,7 +151,7 @@
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
-  <script src="../../static/ratemycourse/javascript/coursePage.js" charset="gbk"></script>
+  <script src="../../static/ratemycourse/javascript/coursePage.js"></script>
   
 </body>
 

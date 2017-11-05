@@ -103,15 +103,18 @@ class Comment(models.Model):
         Course,
         on_delete=models.CASCADE,
     )
+    term = models.CharField(max_length=50)
+    total_score = models.FloatField()
+    
     def __str__(self):
     	return self.content
 
 class Rate(models.Model):
     # attributes
-    overallrate = models.BooleanField()
-    A_score = models.FloatField()
-    B_score = models.FloatField()
-    C_score = models.FloatField()
+    A_score = models.FloatField(default=0) # 有趣程度
+    B_score = models.FloatField(default=0) # 充实程度
+    C_score = models.FloatField(default=0) # 课程难度
+    D_score = models.FloatField(default=0) # 课程收货
     # connections
     user = models.ForeignKey(
         User,

@@ -1,6 +1,6 @@
 'use strict'
 
-function generateGrid(imageUrls,userName, iTerm, iTeacher, iToal, text, time) {
+function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
     var ScreenGridHtml = `
         <div>
             <img>
@@ -46,9 +46,9 @@ function generateGrid(imageUrls,userName, iTerm, iTeacher, iToal, text, time) {
         pTags[0].setAttribute("class", "userName");
   
         // insert information
-        var term = document.createTextNode("¿ª¿ÎÑ§ÆÚ");
-        var teacher = document.createTextNode("ÊÚ¿Î½ÌÊ¦");
-        var total = document.createTextNode("×ÜÆÀ");
+        var term = document.createTextNode("å­¦æœŸ");
+        var teacher = document.createTextNode("ä¸Šè¯¾è€å¸ˆ");
+        var total = document.createTextNode("æ€»è¯„");
         var vTerm = document.createTextNode(iTerm);
         var vTeacher = document.createTextNode(iTeacher);
         var vTotal = document.createTextNode(iToal);
@@ -83,23 +83,28 @@ function generateGrid(imageUrls,userName, iTerm, iTeacher, iToal, text, time) {
 function setComments() {//get comments list from service
     $.ajax('/getComment', {
         dataType: 'json',
-        data: {'course_number': $('#courseNumber').text()},
+        data: {'course_number': window.location.pathname.split('/')[2]},
     }).done(function(data){
-        var imgurl = "imgs/user.png";
-        var text = "Get a fluid web page working on all devices with the Bootstrap 4 grid system.Get a fluid web page working on all devices with the Bootstrap 4 grid system.Get a fluid web page working on all devices with the Bootstrap 4 grid system.";
-        var userName = "unkown";
-        var iTerm = "2017 Çï¼¾";
-        var iTeacher = "ÂŞ½Ü";
-        var iToal = "5.0";
-        var time = "2017/11/13";
+        var imgurl = "../../static/ratemycourse/images/user.png";
+        // var text = "Get a fluid web page working on all devices \
+        // with the Bootstrap 4 grid system.Get a fluid web page wo\
+        // rking on all devices with the Bootstrap 4 grid system.Ge\
+        // t a fluid web page working on all devices with the Boots\
+        // trap 4 grid system.";
+        // var userName = "unkown";
+        // var iTerm = "2017 ???";
+        // var iTeacher = "???";
+        // var iToal = "5.0";
+        // var time = "2017/11/13";
         var parents = document.getElementById("commentDiv");
         var comment = document.getElementById("commentGrid");
         if (comment) {
             parents.removeChild(comment);
         }
-        for(var i=0; i<10; i++){
+        for(var i=0; i<data.comments.length; i++){
             //generate a new row
-            var Grid = generateGrid(imgurl, userName, iTerm, iTeacher, iToal, text, time);
+            var cmt = data.comments[i]
+            var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time);
             //insert this new row
             parents.appendChild(Grid);
         }
@@ -124,7 +129,12 @@ $(document).ready(function () {
         $("#menuUser").show()
         $("#navUser").text($.cookie('username'))
     }
-    $.ajax('/getOverAllRate', { dataType: 'json', data: { 'course_number': $('#courseNumber').text() }, }).done(function (data) {
+    $.ajax('/getOverAllRate', { 
+    	dataType: 'json', 
+    	data: { 
+    		'course_number': $('#courseNumber').text()
+    		 },
+    	}).done(function (data) {
         setScores(data.rate)
     })
     setComments();
@@ -181,5 +191,6 @@ function Func_signIn() {
 function Func_signOut() {
     $("#menuUser").hide()
     $("#menuLogin").show()
+    $.removeCookie('username')
     return false
 }

@@ -1,12 +1,21 @@
 function Func_search() {
-    $.ajax('/search',{
-      dataType:'json',
-      data:{
-        'school':$("#buttonSelectSchool").val(),
-        'department':$("#buttonSelectDepartment").val(),
-        'keywords':$("#searchboxSearchCourse").val()
-      }
-    })
+    // $.ajax('/search',{
+    //   dataType:'json',
+    //   data:{
+    //     'school':$("#buttonSelectSchool").val(),
+    //     'department':$("#buttonSelectDepartment").val(),
+    //     'keywords':$("#searchboxSearchCourse").val()
+    //   }
+    // }
+    url = '/search/?'
+    if($("#buttonSelectSchool").text() != "选择学校"){
+      url += "school=" + $("#buttonSelectSchool").text() + "&"
+    }
+    if($("#buttonSelectDepartment").text() != "选择专业"){
+      url += "department=" + $("buttonSelectDepartment").text() + "&"
+    }
+    url += "keywords=" + $("#searchboxCourse").val()
+    window.location.href = url
 }
 
 $(document).ready(function() {
@@ -22,11 +31,11 @@ $(document).ready(function() {
   $.ajax('/getSchool', {dataType:'json'}).done(function(data) {
     var schoolList = $("#schoolList")
     for (var i = 0; i < data.school.length; i++) {
-      schoolList.append("<a class='dropdown-item btn btn-primary school' href='#'>" + data.school[i] + "</a>")
+      schoolList.append("<a class='dropdown-item btn btn-primary school' href='#/'>" + data.school[i] + "</a>")
     }
     $(".dropdown-item.school").click(function() {
       $(this).parent().prev().text($(this).text())
-      $("#selectDepartment").removeClass("disabled")
+      $("#buttonSelectDepartment").removeClass("disabled")
       $.ajax('/getDepartment',{
         dataType:'json',
         data:{'school':$(this).text()}
@@ -35,19 +44,19 @@ $(document).ready(function() {
         departmentList.children().remove()
         departmentList.prev().text("选择专业")
         for (var i = 0; i < data.department.length; i++) {
-          departmentList.append("<a class='dropdown-item btn btn-primary department' href='#'>" +
+          departmentList.append("<a class='dropdown-item btn btn-primary department' href='#/'>" +
            data.department[i] + "</a>")
         }
         $(".dropdown-item.department").click(function() {
           $(this).parent().prev().text($(this).text())
         })
       })
-      $("#searchboxSearchCourse").keyup(function(event) {
+    })
+    $("#searchboxCourse").keyup(function(event) {
         if (event.keyCode == 13) {
             Func_search()
         }
       })
-    })
   })
 })
 
@@ -97,5 +106,6 @@ function Func_signIn() {
 function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
+  $.removeCookie('username')
   return false
 }
