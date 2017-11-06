@@ -8,31 +8,31 @@
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
   <script>
     function chooseScore(id){
-      		var c0="B";
-      		var c1=id.charAt(1);
-      		var c2=id.charAt(2);
-      		var i=2;
-      		 
-      		//var j=parseInt(c2)+5;
-      		//var s=c0.concat(c1.concat(i.toString()));
-      		//document.getElementById(s).style.background="#ffc107";
-      		for(i=1;i<=parseInt(c2);i++)
-          {
-            var s=c0.concat(c1.concat(i.toString()));
-            $(s).removeClass("fa fa-star-o text-dark");
-            $(s).addClass("fa fa-star text-warning");
-           
+        		var c0="B";
+        		var c1=id.charAt(1);
+        		var c2=id.charAt(2);
+        		var i=2;
+        		for(i=1;i<=parseInt(c2);i++)
+            {
+              var s=c0.concat(c1.concat(i.toString()));
+              $(s).removeClass("fa fa-star-o text-dark");
+              $(s).addClass("fa fa-star text-warning");
+  
+            }
+        		for(i=5;i>parseInt(c2);i--)
+            {
+              var s=c0.concat(c1.concat(i.toString()));
+  						$(s).removeClass("fa fa-star text-warning");
+             	$(s).addClass("fa fa-star-o text-dark");
+            }	
+      }
+      
+      		function choose_term(text){
+              //$(this).parent().prev().text($(this).text());
+            	var termList = $("#termList")
+            	termList.prev().text(text);
+  
           }
-      		for(i=5;i>parseInt(c2);i--)
-          {
-            var s=c0.concat(c1.concat(i.toString()));
-						$(s).removeClass("fa fa-star text-warning");
-           	$(s).addClass("fa fa-star-o text-dark");
-            	
-          }
-      		//id.innerHTML=j;
-    			//id.style.background="#ffc107";
-    		}
   </script>
 </head>
 
@@ -96,11 +96,13 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group">
-          <button class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown"> 选择学期</button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+          <button class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown" id="buttonSelectTerm"> 选择学期</button>
+          <div class="dropdown-menu" id="termList">
+            <a class="dropdown-item btn btn-primary " href="#/" onclick="choose_term(this.text)">2015年秋季</a>
+            <a class="dropdown-item btn btn-primary " href="#/" onclick="choose_term(this.text)">2016年春季</a>
+            <a class="dropdown-item btn btn-primary " href="#/" onclick="choose_term(this.text)">2016年秋季</a>
+            <a class="dropdown-item btn btn-primary " href="#/" onclick="choose_term(this.text)">2017年春季</a>
+            <a class="dropdown-item btn btn-primary " href="#/" onclick="choose_term(this.text)">2017年秋季</a>
           </div>
         </div>
       </div>

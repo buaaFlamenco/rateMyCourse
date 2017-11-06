@@ -1,3 +1,8 @@
+
+
+
+
+
 $(document).ready(function() {
   if($.cookie('username') == undefined) {
     $("#menuUser").hide()
@@ -23,6 +28,9 @@ $.ajax('/getTeachers', {dataType:'json'}).done(function(data) {
 }
 
 )
+
+
+
 
 function Func_signUp() {
   $.ajax("/signUp/", {
