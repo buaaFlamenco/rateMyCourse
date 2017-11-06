@@ -12,7 +12,7 @@ $(document).ready(function() {
 $.ajax('/getTeachers', {dataType:'json'}).done(function(data) {
   var teacherList = $("#teacherList")
   for (var i = 0; i < data.teachers.length; i++) {
-    schoolList.append("<a class='dropdown-item btn btn-primary ' href='#/'>" + data.teachers[i] + "</a>")
+    teacherList.append("<a class='dropdown-item btn btn-primary ' href='#/'>" + data.teachers[i] + "</a>")
   }
   $(".dropdown-item.teacher").click(function() {
     $(this).parent().prev().text($(this).text())
