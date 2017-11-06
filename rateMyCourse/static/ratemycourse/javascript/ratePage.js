@@ -1,6 +1,6 @@
 
 function chooseScore(id){
-        		var c0="B";
+        		var c0="#B";
         		var c1=id.charAt(1);
         		var c2=id.charAt(2);
         		var i=2;
