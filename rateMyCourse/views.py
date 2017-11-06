@@ -64,7 +64,10 @@ def solrSearch(keywords, school, department):
         '+' + key + ':\"' + keys[key] + '\"' for key in keys
     ])
     print(url%parse.quote(s))
-    t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
+    try:
+        t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
+    except Exception:
+        return [Course.objects.all()[0].number]
     t = json.loads(t)
     return [i['course_number'] for i in t['response']['docs']]
 
@@ -156,9 +159,10 @@ def ratePage(request, course_number):
                 'school': c.department.school.name,
                 'department': c.department.name,
             },
-            'aspect1': '课程难度',
-            'aspect2': '课程质量',
-            'aspect3': '考核方式',
+            'aspect1': '有趣程度',
+            'aspect2': '充实程度',
+            'aspect3': '课程难度',
+            'aspect4': '课程收获',
         })
 
 #POST
