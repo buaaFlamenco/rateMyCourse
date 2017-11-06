@@ -28,7 +28,7 @@ function choose_term(text){
 
 
 $(document).ready(function() {
-  
+
   if($.cookie('username') == undefined) {
     $("#menuUser").hide()
     $("#menuLogin").show()
@@ -38,7 +38,7 @@ $(document).ready(function() {
     $("#menuUser").show()
     $("#navUser").text($.cookie('username'))
   }
-  $.ajax('/getTeachers', {dataType:'json'}).done(function(data) {
+  $.ajax('/getTeachers', {dataType:'json'},data:{'course_number':window.location.pathname.split('/')[2]}).done(function(data) {
     var teacherList = $("#teacherList")
     for (var i = 0; i < data.teachers.length; i++) {
       teacherList.append("<a class='dropdown-item btn btn-primary ' href='#/'>" + data.teachers[i] + "</a>")
