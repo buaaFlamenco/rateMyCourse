@@ -53,7 +53,7 @@ def signUp(request):
     '''
 
 def solrSearch(keywords, school, department):
-    url = "http://127.0.0.1:8080/solr/collection1/select?q=%s&wt=json&indent=true"
+    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&wt=json&indent=true"
     keys = dict()
     if(school != None):
         keys['school_name'] = school

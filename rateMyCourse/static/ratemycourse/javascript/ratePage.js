@@ -100,5 +100,6 @@ function Func_signIn() {
 function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
+  $.removeCookie('username')
   return false
 }
