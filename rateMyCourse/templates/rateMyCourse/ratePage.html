@@ -11,19 +11,15 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark h- h-25 bg-primary">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" href="#">弗评</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <a class="navbar-brand" href="index.html/">首页</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
-        <ul class="navbar-nav">
-          <li>
-            <form class="form-inline m-0">
-              <input class="form-control input-lg" type="text" placeholder="搜索学校/专业/课程" style="float:right"> </form>
-          </li>
-        </ul>
+        <form class="form-inline m-0" action="/search">
+          <input id="search" class="form-control" type="text" placeholder="搜索学校/专业/课程" name="keywords"> </form>
         <div class="dropdown open" id="menuLogin">
-          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
+          <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
           <div class="dropdown-menu" style="padding:17px;">
             <form id="formLogin" onsubmit="return Func_signIn()"> <label>登录</label>
               <div class="form-group">
@@ -32,7 +28,7 @@
                 <input id="password" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
               <input type="submit" id="btnLogin" class="btn btn-primary" value="登录"> </form>
             <form action="signUpTrigger" method="post">
-              <a href="#" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
+              <a href="#/" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
             </form>
             <form id="formRegister" class="form in collapse" style="height: auto;" onsubmit="return Func_signUp()">
               <div class="form-group">
@@ -47,9 +43,9 @@
           </div>
         </div>
         <div class="dropdown" id="menuUser">
-          <a class="btn text-white btn-primary" href="#" data-toggle="dropdown" id="navUser"></a>
+          <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navUser"></a>
           <div class="dropdown-menu" style="padding:17px;">
-            <a href="#" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
+            <a href="#/" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
           </div>
         </div>
       </div>
@@ -70,7 +66,7 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group">
-          <button class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown" id="buttonSelectTerm"> 选择学期</button>
+          <a class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown" href="#/" id="buttonSelectTerm"> 选择学期</a>
           <div class="dropdown-menu" id="termList">
             <a class="dropdown-item btn btn-primary " href="#/" onclick="choose_term(this.text)">2015年秋季</a>
             <a class="dropdown-item btn btn-primary " href="#/" onclick="choose_term(this.text)">2016年春季</a>
@@ -89,7 +85,7 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group">
-          <button class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown" id="buttonSelectTeacher"> 选择教师 </button>
+          <a class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown" id="buttonSelectTeacher" href="#/"> 选择教师 </a>
           <div class="dropdown-menu" id="teacherList"> </div>
         </div>
       </div>
@@ -102,11 +98,11 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
-          <b11 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B11" onclick="chooseScore(this.id)"></b11>
-          <b12 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B12" onclick="chooseScore(this.id)"></b12>
-          <b13 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B13" onclick="chooseScore(this.id)"></b13>
-          <b14 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B14" onclick="chooseScore(this.id)"></b14>
-          <b15 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B15" onclick="chooseScore(this.id)"></b15>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" href="#/" id="B11" onclick="chooseScore(this.id)"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B12" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B13" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B14" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B15" onclick="chooseScore(this.id)" href="#/"></a>
         </div>
       </div>
     </div>
@@ -118,11 +114,11 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
-          <b21 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B21" onclick="chooseScore(this.id)"></b21>
-          <b22 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B22" onclick="chooseScore(this.id)"></b22>
-          <b23 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B23" onclick="chooseScore(this.id)"></b23>
-          <b24 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B24" onclick="chooseScore(this.id)"></b24>
-          <b25 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B25" onclick="chooseScore(this.id)"></b25>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B21" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B22" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B23" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B24" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B25" onclick="chooseScore(this.id)" href="#/"></a>
         </div>
       </div>
     </div>
@@ -134,11 +130,11 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
-          <b31 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B31" onclick="chooseScore(this.id)"></b31>
-          <b32 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B32" onclick="chooseScore(this.id)"></b32>
-          <b33 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B33" onclick="chooseScore(this.id)"></b33>
-          <b34 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B34" onclick="chooseScore(this.id)"></b34>
-          <b35 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B35" onclick="chooseScore(this.id)"></b35>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B31" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B32" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B33" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B34" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B35" onclick="chooseScore(this.id)" href="#/"></a>
         </div>
       </div>
     </div>
@@ -148,11 +144,11 @@
       </div>
       <div class="col-md-10">
         <div class="btn-group text-dark my-1">
-          <b41 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B41" onclick="chooseScore(this.id)"></b41>
-          <b42 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B42" onclick="chooseScore(this.id)"></b42>
-          <b43 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B43" onclick="chooseScore(this.id)"></b43>
-          <b44 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B44" onclick="chooseScore(this.id)"></b44>
-          <b45 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px" id="B45" onclick="chooseScore(this.id)"></b45>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B41" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B42" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B43" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B44" onclick="chooseScore(this.id)" href="#/"></a>
+          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B45" onclick="chooseScore(this.id)" href="#/"></a>
         </div>
       </div>
     </div>
