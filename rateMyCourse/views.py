@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from rateMyCourse.models import *
 import json
-from django.http import HttpResponse,Http404
+from urllib import request, parse
 # Create your views here.
 
 from django.http import HttpResponse
@@ -52,6 +52,22 @@ def signUp(request):
     return HttpResponse("textBox: "+textBox)
     '''
 
+def solrSearch(keywords, school, department):
+    url = "http://127.0.0.1:8080/solr/collection1/select?q=%s&wt=json&indent=true"
+    keys = dict()
+    if(school != None):
+        keys['school_name'] = school
+    if(department != None):
+        keys['department_name'] = department
+    keys['course_name'] = keywords
+    s = ' '.join([
+        '+' + key + ':\"' + keys[key] + '\"' for key in keys
+    ])
+    print(url%parse.quote(s))
+    t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
+    t = json.loads(t)
+    return [i['course_number'] for i in t['response']['docs']]
+
 #GET
 def search(request):
     keywords = request.GET['keywords']
@@ -63,28 +79,39 @@ def search(request):
         department = request.GET['department']
     else:
         department = None
-    ## here for searching algrithm
-
-    ### this is for test
-    courselist = Course.objects.all()[0:100]
-    ###
+    courselist = solrSearch(keywords, school, department)
     courses = []
-    n_list = set()
-    for c in courselist:
-        if c.number in n_list:
-            continue
-        n_list.add(c.number)
-        x = getAvgScore([c])
+    for c_number in courselist:
+        cs = Course.objects.filter(number=c_number)
+        x = getAvgScore(cs)
         courses.append({
-            'name': c.name,
-            'ID': c.number,
-            'type': c.coursetype,
-            'credit': c.credit,
-            'school': c.department.school.name,
-            'department': c.department.name,
+            'name': cs[0].name,
+            'ID': cs[0].number,
+            'type': cs[0].coursetype,
+            'credit': cs[0].credit,
+            'school': cs[0].department.school.name,
+            'department': cs[0].department.name,
             'rateScore': sum(x) / 4,
-            'ratenumber': sum([i.rate_set.count() for i in Course.objects.filter(number=c.number)])
+            'ratenumber': sum([i.rate_set.count() for i in cs])
             })
+
+    #courses = []
+    #n_list = set()
+    #for c in courselist:
+    #    if c.number in n_list:
+    #        continue
+    #    n_list.add(c.number)
+    #    x = getAvgScore([c])
+    #    courses.append({
+    #        'name': c.name,
+    #        'ID': c.number,
+    #        'type': c.coursetype,
+    #        'credit': c.credit,
+    #        'school': c.department.school.name,
+    #        'department': c.department.name,
+    #        'rateScore': sum(x) / 4,
+    #        'ratenumber': sum([i.rate_set.count() for i in Course.objects.filter(number=c.number)])
+    #        })
     return render(request, "rateMyCourse/searchResult.html", {'courses': courses})
     
 #GET
