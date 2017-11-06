@@ -12,7 +12,7 @@ function Func_search() {
       url += "school=" + $("#buttonSelectSchool").text() + "&"
     }
     if($("#buttonSelectDepartment").text() != "选择专业"){
-      url += "department=" + $("buttonSelectDepartment").text() + "&"
+      url += "department=" + $("#buttonSelectDepartment").text() + "&"
     }
     url += "keywords=" + $("#searchboxCourse").val()
     window.location.href = url
