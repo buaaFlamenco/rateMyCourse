@@ -28,7 +28,7 @@ function choose_term(text){
 
 
 $(document).ready(function() {
-  alert('!!!')
+  
   if($.cookie('username') == undefined) {
     $("#menuUser").hide()
     $("#menuLogin").show()
