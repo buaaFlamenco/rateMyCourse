@@ -135,12 +135,12 @@ def coursePage(request, course_number):
         })
 
 def ratePage(request, course_number):
-    c = get_object_or_404(Course, number=course_number)
+    courses = get_list_or_404(Course, number=course_number)
     return render(request, "rateMyCourse/ratePage.html", {
             'course': {
-                'name': c.name,
-                'school': c.department.school.name,
-                'department': c.department.name,
+                'name': courses[0].name,
+                'school': courses[0].department.school.name,
+                'department': courses[0].department.name,
             },
             'aspect1': '有趣程度',
             'aspect2': '充实程度',
