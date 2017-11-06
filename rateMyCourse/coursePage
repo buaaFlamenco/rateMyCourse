@@ -66,7 +66,7 @@ def solrSearch(keywords, school, department):
     print(url%parse.quote(s))
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
-    return {i['course_number'] for i in t['response']['docs']}
+    return [i['course_number'] for i in t['response']['docs']]
 
 #GET
 def search(request):
@@ -95,6 +95,23 @@ def search(request):
             'ratenumber': sum([i.rate_set.count() for i in cs])
             })
 
+    #courses = []
+    #n_list = set()
+    #for c in courselist:
+    #    if c.number in n_list:
+    #        continue
+    #    n_list.add(c.number)
+    #    x = getAvgScore([c])
+    #    courses.append({
+    #        'name': c.name,
+    #        'ID': c.number,
+    #        'type': c.coursetype,
+    #        'credit': c.credit,
+    #        'school': c.department.school.name,
+    #        'department': c.department.name,
+    #        'rateScore': sum(x) / 4,
+    #        'ratenumber': sum([i.rate_set.count() for i in Course.objects.filter(number=c.number)])
+    #        })
     return render(request, "rateMyCourse/searchResult.html", {'courses': courses})
     
 #GET
