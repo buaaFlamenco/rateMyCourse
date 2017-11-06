@@ -7,32 +7,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
   <script>
-    function chooseScore(id){
-        		var c0="B";
-        		var c1=id.charAt(1);
-        		var c2=id.charAt(2);
-        		var i=2;
-        		for(i=1;i<=parseInt(c2);i++)
-            {
-              var s=c0.concat(c1.concat(i.toString()));
-              $(s).removeClass("fa fa-star-o text-dark");
-              $(s).addClass("fa fa-star text-warning");
-  
-            }
-        		for(i=5;i>parseInt(c2);i--)
-            {
-              var s=c0.concat(c1.concat(i.toString()));
-  						$(s).removeClass("fa fa-star text-warning");
-             	$(s).addClass("fa fa-star-o text-dark");
-            }	
-      }
-      
-      		function choose_term(text){
-              //$(this).parent().prev().text($(this).text());
-            	var termList = $("#termList")
-            	termList.prev().text(text);
-  
-          }
   </script>
 </head>
 
