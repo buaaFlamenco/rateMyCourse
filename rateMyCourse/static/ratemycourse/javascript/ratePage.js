@@ -61,16 +61,20 @@ function Func_submit() {
 
   if($.cookie('username') == undefined){
     alert("please log in first!")
+    return false
   }
   if($('#buttonSelectTerm').text() == '选择学期'){
     alert("please choose your term!")
+  	return false
   }
   if($('#buttonSelectTeacher').text() == '选择教师'){
     alert('please choose your teacher(s)!')
+  	return false
   }
 
   if($('#writeCommentText').val().length < 30){
     alert('please write more for your course!(more than 30 characters)')
+	return false  
   }
   $.ajax("/submitComment/", {
     dataType: 'json',

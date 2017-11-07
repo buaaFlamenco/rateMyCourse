@@ -12,8 +12,8 @@ for file in os.listdir(rootPath):
 	path = os.path.join(rootPath, file)
 	dfs.append(pd.read_csv(open(path,encoding="gbk")))
 
-for df in dfs:
-	df = df.drop_duplicates()
+for i, df in enumerate(dfs):
+	dfs[i] = df.drop_duplicates()
 
 # school
 buaa = School(name="北京航空航天大学")

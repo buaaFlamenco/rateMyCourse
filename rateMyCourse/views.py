@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_list_or_404
 from rateMyCourse.models import *
 import json
 from urllib import request, parse
@@ -64,7 +64,7 @@ def solrSearch(keywords, school, department):
     print(url%parse.quote(s))
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
-    return [i['course_number'] for i in t['response']['docs']]
+    return {i['course_number'] for i in t['response']['docs']}
 
 def search(request):
     keywords = request.GET['keywords']
@@ -88,7 +88,7 @@ def search(request):
             'credit': cs[0].credit,
             'school': cs[0].department.school.name,
             'department': cs[0].department.name,
-            'rateScore': sum(x) / 4,
+            'rateScore': sum(x) / len(x),
             'ratenumber': sum([i.rate_set.count() for i in cs])
             })
 
@@ -110,8 +110,8 @@ def getAvgScore(courses):
     return x
 
 def coursePage(request, course_number):
-    get_object_or_404(Course, number=course_number)
-    courses = Course.objects.filter(number=course_number)
+    courses = get_list_or_404(Course, number=course_number)
+    # courses = Course.objects.filter(number=course_number)
     x = getAvgScore(courses)
     return render(request, "rateMyCourse/coursePage.html", {
         'course_name': courses[0].name,
@@ -128,12 +128,12 @@ def coursePage(request, course_number):
         })
 
 def ratePage(request, course_number):
-    c = get_object_or_404(Course, number=course_number)
+    cs = get_list_or_404(Course, number=course_number)
     return render(request, "rateMyCourse/ratePage.html", {
             'course': {
-                'name': c.name,
-                'school': c.department.school.name,
-                'department': c.department.name,
+                'name': cs[0].name,
+                'school': cs[0].department.school.name,
+                'department': cs[0].department.name,
             },
             'aspect1': '有趣程度',
             'aspect2': '充实程度',
@@ -216,7 +216,7 @@ def getComment(request):
                 'text': cmt.content,
                 'time': cmt.time.strftime('%y/%m/%d'),
                 'iTerm': cmt.term,
-                'iTeacher': '，'.join([t.name for t in cmt.course.teacher_set.all()]),
+                'iTeacher': ','.join([t.name for t in cmt.course.teacher_set.all()]),
                 'iTotal': cmt.total_score,
                 })
     return HttpResponse(json.dumps({
@@ -273,13 +273,13 @@ def submitComment(request):
             'errormessage': 'post information not complete! ',
             }))
     cset = Course.objects.filter(number=course_number)
-    print(rate, teacher)
+    # print(rate, teacher)
     for t in teacher:
         cset = cset.filter(teacher_set__name=t)
     # print(cset)
-    assert(len(cset) == 1)
+    # assert(len(cset) == 1)
     crs = cset[0]
-    print(anonymous)
+    # print(anonymous)
     Comment(
         anonymous=True if anonymous == 'true' else False, 
         content=comment, 
