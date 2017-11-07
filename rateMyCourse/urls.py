@@ -13,8 +13,7 @@ urlpatterns = [
     #POST
     url(r'^signIn/$', views.signIn, name='signIn'),
     url(r'^signUp/$', views.signUp, name='signUp'),
-    url(r'^course_addComment/$', views.courseAddComment, name='courseAddComment'),
-    url(r'^course_addRate/$', views.courseAddRate, name='courseAddRate'),
+    url(r'^submitComment/$', views.submitComment, name='submitComment'),
 
     #TMP GET IN INDEX
     url(r'^getSchool/$', views.getSchool, name='getSchool'),

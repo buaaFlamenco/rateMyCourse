@@ -5,6 +5,7 @@ from urllib import request, parse
 # Create your views here.
 
 from django.http import HttpResponse
+from django.utils import timezone
 
 
 #GET
@@ -64,10 +65,7 @@ def solrSearch(keywords, school, department):
         '+' + key + ':\"' + keys[key] + '\"' for key in keys
     ])
     print(url%parse.quote(s))
-    try:
-        t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
-    except Exception:
-        return [Course.objects.all()[0].number]
+    t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
     return [i['course_number'] for i in t['response']['docs']]
 
@@ -295,4 +293,37 @@ def getOverAllRate(request):
     return HttpResponse(json.dumps({
         'statCode': 0,
         'rate': getAvgScore(courses),
+        }))
+
+
+def submitComment(request):
+    try:
+        username = request.POST['username']
+        comment = request.POST['comment']
+        rate = request.POST['rate']
+        course_number = request.POST['course_number']
+        anonymous = request.POST['anonymous']
+        term = request.POST['term']
+        teacher = request.POST['teacher']
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'post information not complete! ',
+            }))
+    cset = Course.objects.filter(number=course_number)
+    for t in teacher:
+        cset = cset.filter(teacher_set__name=t)
+    assert(len(cset) == 1)
+    crs = cset[0]
+    Comment(
+        anonymous=anonymous, 
+        content=comment, 
+        time=timezone.now(), 
+        user=User.objects.get(username=username), 
+        course=crs, 
+        term=term, 
+        total_score = sum(rate) / len(rate)
+        ).save()
+    return HttpResponse(jons.dumps({
+        'statCode': 0,
         }))
