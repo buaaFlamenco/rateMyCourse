@@ -25,8 +25,82 @@ function clickSearchButton() {
   $("#searchboxCourse").select()
 }
 
+function validateSignUp() {
+  $("#formRegister").validate({
+    submitHandler: function() {
+      Func_signUp();
+    },
+    rules: {
+      inputEmail: {
+        required: true,
+	      email: true
+      },
+      inputUsername: {
+        required: true,
+	      minlength: 2
+	    },
+	    inputPassword: {
+	      required: true,
+	      minlength: 5
+	    },
+      inputVerify: {
+        required: true,
+	      minlength: 5,
+	      equalTo: "#inputPassword"
+      }
+    },
+    messages: {
+      inputEmail: "请输入正确的邮箱地址",
+      inputUsername: {
+        required: "请输入用户名",
+        minlength: "用户名长度不能小于2个字符"
+      },
+      inputPassword: {
+        required: "请输入密码",
+        minlength: "密码长度不能小于5个字符"
+      },
+      inputVerify: {
+        required: "请再次输入密码",
+        minlength: "密码长度不能小于5个字符",
+        equalTo: "密码输入不一致"
+      }
+    }
+  })
+}
+
+function validateSignIn() {
+  $("#formLogin").validate({
+    submitHandler: function() {
+      alert("提交事件!");
+      Func_signIn();
+    },
+    rules: {
+      username: {
+        required: true,
+	      minlength: 2
+	    },
+	    password: {
+	      required: true,
+	      minlength: 5
+	    }
+    },
+    messages: {
+      username: {
+        required: "请输入用户名",
+        minlength: "用户名必需由两个字符组成"
+      },
+      password: {
+        required: "请输入密码",
+        minlength: "密码长度不能小于 5 个字符"
+      }
+    }
+  })
+}
+
 $(document).ready(function() {
   //alert("!!!")
+  validateSignUp()
+  validateSignIn()
   originInputStyle = $(".form-control").css(["border-color", "box-shadow"])
   if($.cookie('username') == undefined) {
     $("#menuUser").hide()
@@ -107,16 +181,12 @@ function Func_signIn() {
   }).done(function(data) {
     resetInputStyle()
     if(data.statCode != 0) {
-      var warningStyles = {
-        "border-color":"#FF0000",
-        "box-shadow":"inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6)"
-      }
-
-      if (data.statCode == -2) { // Username doesn't exist
-        // $("#username").css(warningStyles)
-      } else if (data.statCode == -3) { // Password is wrong
-        // $("#password").css(warningStyles)
-      }
+      alert(data.errormessage)
+      // if (data.statCode == -2) { // Username doesn't exist
+      //   // $("#username").css(warningStyles)
+      // } else if (data.statCode == -3) { // Password is wrong
+      //   // $("#password").css(warningStyles)
+      // }
     } else {
       $("#menuLogin").hide()
       $("#menuUser").show()

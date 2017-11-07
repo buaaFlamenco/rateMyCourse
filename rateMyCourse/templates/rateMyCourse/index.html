@@ -7,23 +7,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/css/index.css" type="text/css">
-  <script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-  (function() {
-    'use strict';
-
-    window.addEventListener('load', function() {
-      var form = document.getElementById('formLogin');
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    }, false);
-  })();
-  </script>
 </head>
 
 <body>
@@ -46,16 +29,18 @@
                 <form id="formLogin" novalidate>
                   <label>登录</label>
                   <div class="form-group">
-                    <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" class="form-control" name="username" required>
-                    <div class="invalid-feedback">
-                      用户名有误
-                    </div>
+                    <!--input id="username" type="text" placeholder="用户名"
+                     pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6"
+                     class="form-control" name="username" required-->
+                     <input id="username" type="text" placeholder="用户名"
+                      class="form-control" name="username">
+                     <div class="help-block with-errors"></div>
                   </div>
                   <div class="form-group">
                     <input id="password" type="password" placeholder="密码" class="form-control has-warning" name="password" required>
-                    <div class="invalid-feedback">
-                      密码有误
-                    </div>
+                    <small class="invalid-feedback">
+                      密码不能为空
+                    </small>
                   </div>
                   <input type="submit" id="btnLogin" class="btn btn-primary" value="登录">
                  </form>
@@ -63,16 +48,20 @@
                 <form class="mt-2" action="signUpTrigger" method="post">
                   <a href="#/" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
                 </form>
-                <form id="formRegister" class="form in collapse mt-2" style="height: auto;" onsubmit="return Func_signUp()" novalidate>
+                <form id="formRegister" class="form in collapse mt-2" style="height: auto;" novalidate>
                   <div class="form-group has-success">
-                    <input id="inputEmail" type="email" placeholder="Email" class="form-control form-control-success" name="email" required> </div>
+                    <input id="inputEmail" name="inputEmail" type="email" placeholder="Email" class="form-control form-control-success" name="email" required>
+                  </div>
                   <div class="form-group">
-                    <input name="username" id="inputUsername" type="text" placeholder="用户名"
-                    pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" class="form-control" required> </div>
+                    <input id="inputUsername" name="inputUsername" type="text" placeholder="用户名"
+                    pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" class="form-control" required>
+                  </div>
                   <div class="form-group">
-                    <input id="inputPassword" type="password" placeholder="密码" class="form-control" name="password" required> </div>
+                    <input id="inputPassword" name="inputPassword" type="password" placeholder="密码" class="form-control" name="password" required>
+                  </div>
                   <div class="form-group">
-                    <input name="verify" id="inputVerify" type="password" placeholder="确认密码" class="form-control" required> </div>
+                    <input id="inputVerify" name="inputVerify" type="password" placeholder="确认密码" class="form-control" required>
+                  </div>
                   <input type="submit" class="btn btn-primary" value="注册"> </form>
               </div>
             </div>
@@ -197,6 +186,7 @@
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
+  <script src="../../static/ratemycourse/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
   <script src="../../static/ratemycourse/javascript/index.js"></script>
 </body>
 
