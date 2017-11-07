@@ -7,11 +7,8 @@ from urllib import request, parse
 from django.http import HttpResponse
 from django.utils import timezone
 
-
-#GET
 def getIndex(request):
     return render(request, "rateMyCourse/index.html")
-
 
 def signUp(request):
     try:
@@ -69,7 +66,6 @@ def solrSearch(keywords, school, department):
     t = json.loads(t)
     return [i['course_number'] for i in t['response']['docs']]
 
-#GET
 def search(request):
     keywords = request.GET['keywords']
     if('school' in request.GET):
@@ -96,26 +92,8 @@ def search(request):
             'ratenumber': sum([i.rate_set.count() for i in cs])
             })
 
-    #courses = []
-    #n_list = set()
-    #for c in courselist:
-    #    if c.number in n_list:
-    #        continue
-    #    n_list.add(c.number)
-    #    x = getAvgScore([c])
-    #    courses.append({
-    #        'name': c.name,
-    #        'ID': c.number,
-    #        'type': c.coursetype,
-    #        'credit': c.credit,
-    #        'school': c.department.school.name,
-    #        'department': c.department.name,
-    #        'rateScore': sum(x) / 4,
-    #        'ratenumber': sum([i.rate_set.count() for i in Course.objects.filter(number=c.number)])
-    #        })
     return render(request, "rateMyCourse/searchResult.html", {'courses': courses})
-    
-#GET
+
 def getAvgScore(courses):
     x = [0] * 4
     count = 0
@@ -163,7 +141,6 @@ def ratePage(request, course_number):
             'aspect4': '课程收获',
         })
 
-#POST
 def signIn(request):
     try:
         username = request.POST['username']
@@ -194,23 +171,6 @@ def signIn(request):
             'username': username,
             }))
 
-#POST
-def courseAddComment(request):
-    username = request.POST['username']
-    content = request.POST['content']
-    parentId = request.POST['parentId']
-    courseId = request.POST['courseId']
-
-    return HttpResponse("courseAddComment: "+username+content+parentId+content)
-
-#POST
-def courseAddRate(request):
-    username = request.POST['username']
-    rate = request.POST['rate']
-    courseId = request.POST['courseId']
-    return HttpResponse("courseAddRate: "+username+rate+courseId)
-
-#GET TMP IN INDEX
 def getSchool(request):
     result = {
         'school': [s.name for s in School.objects.all()],
@@ -300,30 +260,43 @@ def submitComment(request):
     try:
         username = request.POST['username']
         comment = request.POST['comment']
-        rate = request.POST['rate']
+        rate = request.POST.getlist('rate')
+        for i, j in enumerate(rate):
+            rate[i] = int(j)
         course_number = request.POST['course_number']
         anonymous = request.POST['anonymous']
         term = request.POST['term']
-        teacher = request.POST['teacher']
-    except Exception:
+        teacher = request.POST.getlist('teacher')
+    except Exception as err:
         return HttpResponse(json.dumps({
             'statCode': -1,
             'errormessage': 'post information not complete! ',
             }))
     cset = Course.objects.filter(number=course_number)
+    print(rate, teacher)
     for t in teacher:
         cset = cset.filter(teacher_set__name=t)
+    # print(cset)
     assert(len(cset) == 1)
     crs = cset[0]
+    print(anonymous)
     Comment(
-        anonymous=anonymous, 
+        anonymous=True if anonymous == 'true' else False, 
         content=comment, 
         time=timezone.now(), 
         user=User.objects.get(username=username), 
         course=crs, 
         term=term, 
-        total_score = sum(rate) / len(rate)
+        total_score = sum(rate) / len(rate),
         ).save()
-    return HttpResponse(jons.dumps({
+    Rate(
+        user=User.objects.get(username=username),
+        course=crs,
+        A_score=rate[0],
+        B_score=rate[1],
+        C_score=rate[2],
+        D_score=rate[3],
+        ).save()
+    return HttpResponse(json.dumps({
         'statCode': 0,
         }))
