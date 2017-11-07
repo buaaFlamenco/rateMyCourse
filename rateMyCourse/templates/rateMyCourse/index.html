@@ -43,7 +43,7 @@
             <div class="dropdown-menu dropdown-menu-right">
               <div class="container px-3 py-2" style="width:260px;">
                 <!--form id="formLogin" onsubmit="return Func_signIn()" novalidate-->
-                <form id="formLogin" novalidate>
+                <form id="formLogin" novalidate method="POST" action="/signIn/">
                   <label>登录</label>
                   <div class="form-group">
                     <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" class="form-control" name="username" required>
