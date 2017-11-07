@@ -1,3 +1,5 @@
+var originInputStyle
+
 function Func_search() {
     // $.ajax('/search',{
     //   dataType:'json',
@@ -19,6 +21,8 @@ function Func_search() {
 }
 
 $(document).ready(function() {
+  //alert("!!!")
+  originInputStyle = $(".form-control").css(["border-color", "box-shadow"])
   if($.cookie('username') == undefined) {
     $("#menuUser").hide()
     $("#menuLogin").show()
@@ -60,6 +64,10 @@ $(document).ready(function() {
   })
 })
 
+function resetInputStyle() {
+  $(".form-control").css(originInputStyle)
+}
+
 function Func_signUp() {
   $.ajax("/signUp/", {
     dataType: 'json',
@@ -91,8 +99,18 @@ function Func_signIn() {
       "password": $("#password").val()
     }
   }).done(function(data) {
+    resetInputStyle()
     if(data.statCode != 0) {
-      alert(data.errormessage)
+      var warningStyles = {
+        "border-color":"#FF0000",
+        "box-shadow":"inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6)"
+      }
+
+      if (data.statCode == -2) { // Username doesn't exist
+        $("#username").css(warningStyles)
+      } else if (data.statCode == -3) { // Password is wrong
+        $("#password").css(warningStyles)
+      }
     } else {
       $("#menuLogin").hide()
       $("#menuUser").show()

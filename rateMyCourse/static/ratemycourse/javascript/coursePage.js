@@ -86,16 +86,6 @@ function setComments() {//get comments list from service
         data: {'course_number': window.location.pathname.split('/')[2]},
     }).done(function(data){
         var imgurl = "../../static/ratemycourse/images/user.png";
-        // var text = "Get a fluid web page working on all devices \
-        // with the Bootstrap 4 grid system.Get a fluid web page wo\
-        // rking on all devices with the Bootstrap 4 grid system.Ge\
-        // t a fluid web page working on all devices with the Boots\
-        // trap 4 grid system.";
-        // var userName = "unkown";
-        // var iTerm = "2017 ???";
-        // var iTeacher = "???";
-        // var iToal = "5.0";
-        // var time = "2017/11/13";
         var parents = document.getElementById("commentDiv");
         var comment = document.getElementById("commentGrid");
         if (comment) {
@@ -129,68 +119,63 @@ $(document).ready(function () {
         $("#menuUser").show()
         $("#navUser").text($.cookie('username'))
     }
-    $.ajax('/getOverAllRate', { 
-    	dataType: 'json', 
-    	data: { 
-    		'course_number': $('#courseNumber').text()
-    		 },
-    	}).done(function (data) {
-        setScores(data.rate)
-    })
+    // $.ajax('/getOverAllRate', { 
+    // 	dataType: 'json', 
+    // 	data: { 
+    // 		'course_number': $('#courseNumber').text()
+    // 		 },
+    // 	}).done(function (data) {
+    //     setScores(data.rate)
+    // })
     setComments();
-    document.getElementById("toComment").onclick = function () {
-        console.log("cliked");
-        // window.location.href = "http://blog.sina.com.cn/mleavs";
-    }// turn to the page of grading
 })
 
 function Func_signUp() {
-    $.ajax("/signUp/", {
-        dataType: 'json',
-        type: 'POST',
-        data: {
-            "username": $("#inputUsername").val(),
-            "mail": $("#inputEmail").val(),
-            "password": $("#inputPassword").val(),
-        }
-    }).done(function (data) {
-        if (data.statCode != 0) {
-            alert(data.errormessage)
-        } else {
-            $("#menuLogin").hide()
-            $("#menuUser").show()
-            $("#navUser").text(data.username)
-            $.cookie('username', data.username)
-
-        }
-    })
-    return false
+  $.ajax("/signUp/", {
+    dataType: 'json',
+    type: 'POST',
+    data: {
+      "username": $("#inputUsername").val(),
+      "mail": $("#inputEmail").val(),
+      "password": $("#inputPassword").val(),
+    }
+  }).done(function(data) {
+    if (data.statCode != 0) {
+      alert(data.errormessage)
+    } else {
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
+      $.cookie('username', data.username)
+    }
+  })
+  return false
 }
 
 function Func_signIn() {
-    $.ajax("/signIn/", {
-        dataType: 'json',
-        type: 'POST',
-        data: {
-            "username": $("#username").val(),
-            "password": $("#password").val()
-        }
-    }).done(function (data) {
-        if (data.statCode != 0) {
-            alert(data.errormessage)
-        } else {
-            $("#menuLogin").hide()
-            $("#menuUser").show()
-            $("#navUser").text(data.username)
-            $.cookie('username', data.username)
-        }
-    })
-    return false
+  $.ajax("/signIn/", {
+    dataType: 'json',
+    type: 'POST',
+    data: {
+      "username": $("#username").val(),
+      "password": $("#password").val()
+    }
+  }).done(function(data) {
+    if(data.statCode != 0) {
+      alert(data.errormessage)
+    } else {
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text(data.username)
+      $.cookie('username', data.username)
+    }
+  })
+  return false
 }
 
 function Func_signOut() {
-    $("#menuUser").hide()
-    $("#menuLogin").show()
-    $.removeCookie('username')
-    return false
+  $("#menuUser").hide()
+  $("#menuLogin").show()
+  $.removeCookie('username')
+  return false
 }
