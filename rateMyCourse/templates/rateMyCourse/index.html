@@ -6,7 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
-  <link rel="stylesheet" href="../../static/ratemycourse/css/index.css" type="text/css"> </head>
+  <link rel="stylesheet" href="../../static/ratemycourse/css/index.css" type="text/css">
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+
+    window.addEventListener('load', function() {
+      var form = document.getElementById('formLogin');
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    }, false);
+  })();
+  </script>
+</head>
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary">
@@ -19,38 +37,53 @@
             <a class="nav-link" href="#/"><i class="fa d-inline fa-lg fa-envelope-o"></i> 联系我们</a>
           </li>
         </ul>
-        <div class="dropdown open" id="menuLogin">
-          <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
-          <div class="dropdown-menu">
-            <div class="container" style="width:260px;">
-              <form id="formLogin" onsubmit="return Func_signIn()"> <label>登录</label>
-                <div class="form-group">
-                  <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" equired="" class="form-control" name="username"> </div>
-                <div class="form-group">
-                  <input id="password" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
-                <input type="submit" id="btnLogin" class="btn btn-primary" value="登录"> </form>
-              <form action="signUpTrigger" method="post">
-                <a href="#/" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
-              </form>
-              <form id="formRegister" class="form in collapse" style="height: auto;" onsubmit="return Func_signUp()">
-                <div class="form-group">
-                  <input id="inputEmail" type="email" placeholder="Email" required="" class="form-control" name="email"> </div>
-                <div class="form-group">
-                  <input name="username" id="inputUsername" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" required="" class="form-control"> </div>
-                <div class="form-group">
-                  <input id="inputPassword" type="password" placeholder="密码" required="" class="form-control" name="password"> </div>
-                <div class="form-group">
-                  <input name="verify" id="inputVerify" type="password" placeholder="确认密码" required="" class="form-control"> </div>
-                <input type="submit" class="btn btn-primary" value="注册"> </form>
+        <ul class="navbar-nav">
+          <div class="dropdown open" id="menuLogin">
+            <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="container px-3 py-2" style="width:260px;">
+                <!--form id="formLogin" onsubmit="return Func_signIn()" novalidate-->
+                <form id="formLogin" novalidate>
+                  <label>登录</label>
+                  <div class="form-group">
+                    <input id="username" type="text" placeholder="用户名" pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" class="form-control" name="username" required>
+                    <div class="invalid-feedback">
+                      用户名有误
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input id="password" type="password" placeholder="密码" class="form-control has-warning" name="password" required>
+                    <div class="invalid-feedback">
+                      密码有误
+                    </div>
+                  </div>
+                  <input type="submit" id="btnLogin" class="btn btn-primary" value="登录">
+                 </form>
+                <div class="dropdown-divider"></div>
+                <form class="mt-2" action="signUpTrigger" method="post">
+                  <a href="#/" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
+                </form>
+                <form id="formRegister" class="form in collapse mt-2" style="height: auto;" onsubmit="return Func_signUp()" novalidate>
+                  <div class="form-group has-success">
+                    <input id="inputEmail" type="email" placeholder="Email" class="form-control form-control-success" name="email" required> </div>
+                  <div class="form-group">
+                    <input name="username" id="inputUsername" type="text" placeholder="用户名"
+                    pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" class="form-control" required> </div>
+                  <div class="form-group">
+                    <input id="inputPassword" type="password" placeholder="密码" class="form-control" name="password" required> </div>
+                  <div class="form-group">
+                    <input name="verify" id="inputVerify" type="password" placeholder="确认密码" class="form-control" required> </div>
+                  <input type="submit" class="btn btn-primary" value="注册"> </form>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="dropdown" id="menuUser">
-          <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navUser"></a>
-          <div class="dropdown-menu" style="padding:17px;">
-            <a href="#/" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
+          <div class="dropdown" id="menuUser">
+            <a class="btn text-white btn-primary" href="#/" data-toggle="dropdown" id="navUser"></a>
+            <div class="dropdown-menu" style="padding:17px;">
+              <a href="#/" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
+            </div>
           </div>
-        </div>
+        </ul>
       </div>
     </div>
   </nav>
@@ -104,14 +137,15 @@
           <!--img class="img-fluid d-block rounded-circle mx-auto" src="https://pingendo.github.io/templates/sections/assets/test_carlito.jpg"-->
           <div class="row">
             <div class="col-md-12">
-              <div class="dropdown open" id="buttonSelectSchool">
-                <a class="btn btn-light btn-lg my-1" href="#/" data-toggle="dropdown">搜索课程</a>
+              <div class="dropdown open">
+                <a class="btn btn-light btn-lg my-1" href="#/" data-toggle="dropdown" id="buttonSearchCourse">搜索课程</a>
                 <div class="dropdown-menu">
                   <!--Action needed-->
                   <div class="input-group">
-                    <input id="searchboxCourse" class="form-control input-lg" placeholder="请输入课程名" autocomplete="off"> <span class="input-group-addon">
-                    	<i class="fa fa-search"></i>
-                    </span> </div>
+                    <input id="searchboxCourse" class="form-control input-lg" type="text" placeholder="请输入课程名" autocomplete="off"> <span class="input-group-addon">
+                      <i class="fa fa-search"></i>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

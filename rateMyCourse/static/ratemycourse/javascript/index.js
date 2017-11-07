@@ -20,6 +20,11 @@ function Func_search() {
     window.location.href = url
 }
 
+function clickSearchButton() {
+  //alert("!!!")
+  $("#searchboxCourse").select()
+}
+
 $(document).ready(function() {
   //alert("!!!")
   originInputStyle = $(".form-control").css(["border-color", "box-shadow"])
@@ -32,6 +37,7 @@ $(document).ready(function() {
     $("#menuUser").show()
     $("#navUser").text($.cookie('username'))
   }
+
   $.ajax('/getSchool', {dataType:'json'}).done(function(data) {
     var schoolList = $("#schoolList")
     for (var i = 0; i < data.school.length; i++) {
@@ -107,9 +113,9 @@ function Func_signIn() {
       }
 
       if (data.statCode == -2) { // Username doesn't exist
-        $("#username").css(warningStyles)
+        // $("#username").css(warningStyles)
       } else if (data.statCode == -3) { // Password is wrong
-        $("#password").css(warningStyles)
+        // $("#password").css(warningStyles)
       }
     } else {
       $("#menuLogin").hide()
