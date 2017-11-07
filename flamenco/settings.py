@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import pymysql
 pymysql.install_as_MySQLdb()
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -85,8 +86,7 @@ DATABASES = {
     #     'NAME': 'ratemycourse',
     #     'USER': 'root',
     #     'PASSWORD': 'flamenco',
-    #     'HOST': '10.2.28.123',
-    #     'PORT': 3306,
+    #     'HOST': '127.0.0.1',
     # }
 }
 
