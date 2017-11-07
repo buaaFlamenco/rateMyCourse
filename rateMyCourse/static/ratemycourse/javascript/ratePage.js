@@ -1,4 +1,4 @@
-score=[0,0,0,0];
+var score=[0,0,0,0];
 
 function chooseScore(id){
   var c0="#B";
