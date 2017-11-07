@@ -1,8 +1,14 @@
+var score=[0,0,0,0];
+
+
+
+
 function chooseScore(id){
   var c0="#B";
   var c1=id.charAt(1);
   var c2=id.charAt(2);
   var i=2;
+  score[parseInt(c1)]=parseInt(c2);
   for(i=1;i<=parseInt(c2);i++)
   {
     var s=c0.concat(c1.concat(i.toString()));
@@ -74,9 +80,11 @@ function Func_submit() {
     data: {
       'username': $.cookie('username'),
       'anonymous': document.getElementById('anonymous').checked,
+      'course_number':window.location.pathname.split('/')[2]
       'term': $('#buttonSelectTerm').text(),
       'teacher': $('#buttonSelectTeacher').text().split(','),
       'comment': $('#writeCommentText').val(),
+      'rate':score,
       // rates
     }
   }).done(function (data) {
