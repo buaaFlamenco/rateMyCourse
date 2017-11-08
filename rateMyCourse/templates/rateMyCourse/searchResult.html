@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="../../static/ratemycourse/css/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
+  <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css"> </head>
 
 <body class="">
   <nav class="navbar navbar-expand-md navbar-dark bg-primary">
@@ -83,7 +83,7 @@
       <br> </div> {% endfor %}
     <ul id="c_pagination" class="pagination"> {% for page in pages %}
       <li class="page-item">
-        <a class="page-link bg-info" id="p{{page.number}}" onclick="toPage({{page.number}})" href="javascript:void(0)">{{page.number}}</a>
+        <a class="page-link " id="p{{page.number}}" onclick="toPage({{page.number}})" href="javascript:void(0)">{{page.number}}</a>
       </li> {% endfor %} </ul>
   </div>
   <div class="row">
@@ -130,9 +130,9 @@
           	var s="#p".concat(i.toString());
           	if(i==parseInt(p)){
 								$(s).removeClass("page-link ");
-              	$(s).addClass("page-link bg-info");
+              	$(s).addClass("page-link bg-info text-dark");
             }else{
-              	$(s).removeClass("page-link bg-info");
+              	$(s).removeClass("page-link bg-info text-dark");
             		$(s).addClass("page-link");
             }
         }
