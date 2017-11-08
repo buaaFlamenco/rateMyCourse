@@ -37,6 +37,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
         var imageTag = commentGrid.getElementsByTagName("img");
         imageTag[0].src = imageUrls;
         imageTag[0].width = "86";
+        imageTag[0].height = "86";
         imageTag[0].setAttribute("class", "img-thumbnail");
         imageTag[0].setAttribute("style", "margin-bottom:16px;margin-top:16px");
 
@@ -60,8 +61,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
         pTags[6].appendChild(vTotal);
 
         //insert text
-        var textnode = document.createTextNode(text);
-        pTags[7].appendChild(textnode);
+        pTags[7].innerHTML = text;
         pTags[7].setAttribute("style", "margin-top:16px;text-align:left; width:70%")
         //inset time
         var timenode = document.createTextNode(time);
@@ -176,6 +176,6 @@ function Func_signIn() {
 function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
-  $.removeCookie('username')
+  $.removeCookie('username', {path: '/'})
   return false
 }

@@ -7,7 +7,19 @@ from urllib import request, parse
 from django.http import HttpResponse
 from django.utils import timezone
 
+
+def addHitCount():
+	try:
+		hit = HitCount.objects.get(name='hit')
+	except Exception:
+		hit = HitCount(name='hit', count=0)
+		hit.save()
+	hit.count += 1
+	hit.save()
+
+
 def getIndex(request):
+    addHitCount()
     return render(request, "rateMyCourse/index.html")
 
 def signUp(request):
@@ -51,7 +63,7 @@ def signUp(request):
     '''
 
 def solrSearch(keywords, school, department):
-    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&wt=json&indent=true"
+    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&wt=json&indent=true"
     keys = dict()
     if(school != None):
         keys['school_name'] = school
@@ -61,12 +73,12 @@ def solrSearch(keywords, school, department):
     s = ' '.join([
         '+' + key + ':\"' + keys[key] + '\"' for key in keys
     ])
-    print(url%parse.quote(s))
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
     return {i['course_number'] for i in t['response']['docs']}
 
 def search(request):
+    addHitCount()
     keywords = request.GET['keywords']
     if('school' in request.GET):
         school = request.GET['school']
@@ -88,7 +100,7 @@ def search(request):
             'credit': cs[0].credit,
             'school': cs[0].department.school.name,
             'department': cs[0].department.name,
-            'rateScore': sum(x) / 4,
+            'rateScore': sum(x) / len(x),
             'ratenumber': sum([i.rate_set.count() for i in cs])
             })
 
@@ -110,6 +122,7 @@ def getAvgScore(courses):
     return x
 
 def coursePage(request, course_number):
+    addHitCount()
     courses = get_list_or_404(Course, number=course_number)
     # courses = Course.objects.filter(number=course_number)
     x = getAvgScore(courses)
@@ -123,17 +136,18 @@ def coursePage(request, course_number):
         'detail2': '充实程度：%d'%(x[1]),
         'detail3': '课程难度：%d'%(x[2]),
         'detail4': '课程收获：%d'%(x[3]),
-        'course_website': courses[0].website if courses[0].website != '' else 'we have no website',
-        'profession_website': couses[0].department.website if courses[0].department.website != '' else 'we have no website',
+        'course_website': courses[0].website if courses[0].website != '' else '.',
+        'profession_website': couses[0].department.website if courses[0].department.website != '' else '.',
         })
 
 def ratePage(request, course_number):
-    courses = get_list_or_404(Course, number=course_number)
+    addHitCount()
+    cs = get_list_or_404(Course, number=course_number)
     return render(request, "rateMyCourse/ratePage.html", {
             'course': {
-                'name': courses[0].name,
-                'school': courses[0].department.school.name,
-                'department': courses[0].department.name,
+                'name': cs[0].name,
+                'school': cs[0].department.school.name,
+                'department': cs[0].department.name,
             },
             'aspect1': '有趣程度',
             'aspect2': '充实程度',
@@ -213,10 +227,10 @@ def getComment(request):
         for cmt in c.comment_set.all():
             cmtList.append({
                 'userName': cmt.user.username if cmt.anonymous == False else '匿名用户',
-                'text': cmt.content,
+                'text': cmt.content.replace("\n", "<br/>"),
                 'time': cmt.time.strftime('%y/%m/%d'),
                 'iTerm': cmt.term,
-                'iTeacher': '，'.join([t.name for t in cmt.course.teacher_set.all()]),
+                'iTeacher': ','.join([t.name for t in cmt.course.teacher_set.all()]),
                 'iTotal': cmt.total_score,
                 })
     return HttpResponse(json.dumps({
@@ -257,6 +271,7 @@ def getOverAllRate(request):
 
 
 def submitComment(request):
+    addHitCount()
     try:
         username = request.POST['username']
         comment = request.POST['comment']
@@ -273,13 +288,13 @@ def submitComment(request):
             'errormessage': 'post information not complete! ',
             }))
     cset = Course.objects.filter(number=course_number)
-    print(rate, teacher)
+    # print(rate, teacher)
     for t in teacher:
         cset = cset.filter(teacher_set__name=t)
     # print(cset)
-    assert(len(cset) == 1)
+    # assert(len(cset) == 1)
     crs = cset[0]
-    print(anonymous)
+    # print(anonymous)
     Comment(
         anonymous=True if anonymous == 'true' else False, 
         content=comment, 

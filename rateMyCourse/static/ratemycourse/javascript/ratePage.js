@@ -48,7 +48,7 @@ $(document).ready(function() {
   }).done(function(data) {
     var teacherList = $("#teacherList")
     for (var i = 0; i < data.teachers.length; i++) {
-      teacherList.append("<a class='dropdown-item btn btn-primary teacher' href='#/'>" + data.teachers[i] + "</a>")
+      teacherList.append("<a class='dropdown-item btn btn-primary teacher' href='javascript:void(0)'>" + data.teachers[i] + "</a>")
     }
     $(".dropdown-item.teacher").click(function() {
       $(this).parent().prev().text($(this).text())
@@ -61,17 +61,27 @@ function Func_submit() {
 
   if($.cookie('username') == undefined){
     alert("please log in first!")
+    return false
   }
   if($('#buttonSelectTerm').text() == '选择学期'){
     alert("please choose your term!")
+  	return false
   }
   if($('#buttonSelectTeacher').text() == '选择教师'){
     alert('please choose your teacher(s)!')
+  	return false
   }
-
   if($('#writeCommentText').val().length < 30){
     alert('please write more for your course!(more than 30 characters)')
+	return false
   }
+  for(i = 0; i　< rate.length; i++){
+    if(rate[i] == 0){
+      alert('please rate for all aspect!')
+      return false
+    }
+  }
+
   $.ajax("/submitComment/", {
     dataType: 'json',
     type: 'POST',
@@ -145,6 +155,6 @@ function Func_signIn() {
 function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
-  $.removeCookie('username')
+  $.removeCookie('username', {path: '/'})
   return false
 }
