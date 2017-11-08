@@ -61,8 +61,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
         pTags[6].appendChild(vTotal);
 
         //insert text
-        var textnode = document.createTextNode(text);
-        pTags[7].appendChild(textnode);
+        pTags[7].innerHTML = text;
         pTags[7].setAttribute("style", "margin-top:16px;text-align:left; width:70%")
         //inset time
         var timenode = document.createTextNode(time);
@@ -177,6 +176,6 @@ function Func_signIn() {
 function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
-  $.removeCookie('username')
+  $.removeCookie('username', {path: '/'})
   return false
 }

@@ -71,7 +71,6 @@ function validateSignUp() {
 function validateSignIn() {
   $("#formLogin").validate({
     submitHandler: function() {
-      alert("提交事件!");
       Func_signIn();
     },
     rules: {
@@ -200,6 +199,6 @@ function Func_signIn() {
 function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
-  $.removeCookie('username')
+  $.removeCookie('username', {path: '/'})
   return false
 }

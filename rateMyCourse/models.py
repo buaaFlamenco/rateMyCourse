@@ -69,7 +69,7 @@ class Course(models.Model):
     number = models.CharField(max_length=50)
     website = models.URLField()
     description = models.CharField(max_length=2000, blank=True)
-    credit = models.IntegerField()
+    credit = models.FloatField()
     coursetype = models.CharField(max_length=50)
 
     # connections

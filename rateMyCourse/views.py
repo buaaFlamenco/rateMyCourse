@@ -51,7 +51,7 @@ def signUp(request):
     '''
 
 def solrSearch(keywords, school, department):
-    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&wt=json&indent=true"
+    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&wt=json&indent=true"
     keys = dict()
     if(school != None):
         keys['school_name'] = school
@@ -76,7 +76,9 @@ def search(request):
         department = request.GET['department']
     else:
         department = None
+    print(keywords, school, department)
     courselist = solrSearch(keywords, school, department)
+    print(courselist)
     courses = []
     for c_number in courselist:
         cs = Course.objects.filter(number=c_number)
@@ -213,7 +215,7 @@ def getComment(request):
         for cmt in c.comment_set.all():
             cmtList.append({
                 'userName': cmt.user.username if cmt.anonymous == False else '匿名用户',
-                'text': cmt.content,
+                'text': cmt.content.replace("\n", "<br/>"),
                 'time': cmt.time.strftime('%y/%m/%d'),
                 'iTerm': cmt.term,
                 'iTeacher': ','.join([t.name for t in cmt.course.teacher_set.all()]),
