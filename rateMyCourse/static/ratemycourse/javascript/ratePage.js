@@ -48,7 +48,7 @@ $(document).ready(function() {
   }).done(function(data) {
     var teacherList = $("#teacherList")
     for (var i = 0; i < data.teachers.length; i++) {
-      teacherList.append("<a class='dropdown-item btn btn-primary teacher' href='#/'>" + data.teachers[i] + "</a>")
+      teacherList.append("<a class='dropdown-item btn btn-primary teacher' href='javascript:void(0)'>" + data.teachers[i] + "</a>")
     }
     $(".dropdown-item.teacher").click(function() {
       $(this).parent().prev().text($(this).text())
@@ -71,11 +71,17 @@ function Func_submit() {
     alert('please choose your teacher(s)!')
   	return false
   }
-
   if($('#writeCommentText').val().length < 30){
     alert('please write more for your course!(more than 30 characters)')
-	return false  
+	return false
   }
+  for(i = 0; i　< rate.length; i++){
+    if(rate[i] == 0){
+      alert('please rate for all aspect!')
+      return false
+    }
+  }
+
   $.ajax("/submitComment/", {
     dataType: 'json',
     type: 'POST',
