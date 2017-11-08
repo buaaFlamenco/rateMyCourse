@@ -75,8 +75,8 @@ function Func_submit() {
     alert('please write more for your course!(more than 30 characters)')
 	return false
   }
-  for(i = 0; i　< rate.length; i++){
-    if(rate[i] == 0){
+  for(i = 0; i　< score.length; i++){
+    if(score[i] == 0){
       alert('please rate for all aspect!')
       return false
     }
