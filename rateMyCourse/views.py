@@ -7,19 +7,7 @@ from urllib import request, parse
 from django.http import HttpResponse
 from django.utils import timezone
 
-
-def addHitCount():
-	try:
-		hit = HitCount.objects.get(name='hit')
-	except Exception:
-		hit = HitCount(name='hit', count=0)
-		hit.save()
-	hit.count += 1
-	hit.save()
-
-
 def getIndex(request):
-    addHitCount()
     return render(request, "rateMyCourse/index.html")
 
 def signUp(request):
@@ -73,12 +61,12 @@ def solrSearch(keywords, school, department):
     s = ' '.join([
         '+' + key + ':\"' + keys[key] + '\"' for key in keys
     ])
+    print(url%parse.quote(s))
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
     return {i['course_number'] for i in t['response']['docs']}
 
 def search(request):
-    addHitCount()
     keywords = request.GET['keywords']
     if('school' in request.GET):
         school = request.GET['school']
@@ -88,7 +76,9 @@ def search(request):
         department = request.GET['department']
     else:
         department = None
+    print(keywords, school, department)
     courselist = solrSearch(keywords, school, department)
+    print(courselist)
     courses = []
     for c_number in courselist:
         cs = Course.objects.filter(number=c_number)
@@ -122,7 +112,6 @@ def getAvgScore(courses):
     return x
 
 def coursePage(request, course_number):
-    addHitCount()
     courses = get_list_or_404(Course, number=course_number)
     # courses = Course.objects.filter(number=course_number)
     x = getAvgScore(courses)
@@ -136,12 +125,11 @@ def coursePage(request, course_number):
         'detail2': '充实程度：%d'%(x[1]),
         'detail3': '课程难度：%d'%(x[2]),
         'detail4': '课程收获：%d'%(x[3]),
-        'course_website': courses[0].website if courses[0].website != '' else '.',
-        'profession_website': couses[0].department.website if courses[0].department.website != '' else '.',
+        'course_website': courses[0].website if courses[0].website != '' else 'we have no website',
+        'profession_website': couses[0].department.website if courses[0].department.website != '' else 'we have no website',
         })
 
 def ratePage(request, course_number):
-    addHitCount()
     cs = get_list_or_404(Course, number=course_number)
     return render(request, "rateMyCourse/ratePage.html", {
             'course': {
@@ -271,7 +259,6 @@ def getOverAllRate(request):
 
 
 def submitComment(request):
-    addHitCount()
     try:
         username = request.POST['username']
         comment = request.POST['comment']

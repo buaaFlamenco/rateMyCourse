@@ -127,7 +127,3 @@ class Rate(models.Model):
     )
     def __str__(self):
     	return "rate from %s"%self.user
-
-class HitCount(models.Model):
-    name = models.CharField(max_length=50)
-    count = models.IntegerField()
