@@ -96,7 +96,8 @@ function validateSignIn() {
   })
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
+
   //alert("!!!")
   validateSignUp()
   validateSignIn()
