@@ -65,6 +65,13 @@ def signUp(request):
 def solrSearch(keywords, school, department):
     url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&wt=json&indent=true"
     keys = dict()
+
+    ######
+    # this is a fool idea to fix bug that if nothing to write in nothing you can search
+    if(school == None and keywords == ''):
+    	school = "北京航空航天大学"
+    ######
+
     if(school != None):
         keys['school_name'] = school
     if(department != None):
