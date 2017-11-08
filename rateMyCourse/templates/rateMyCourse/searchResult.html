@@ -52,7 +52,8 @@
       </div>
     </div>
   </nav>
-  <div class="container"> {% for course in courses %}
+  <div class="container">
+    <p id="count">count</p> {% for course in courses %}
     <div class="row" style="background:#eeeeee">
       <a href="/course/{{course.ID}}" class="btn" style="font-size:55px;color:#000000"><b>{{course.name}}</b></a>
     </div>
@@ -86,8 +87,9 @@
   </div>
   <script>
     window.onload=function(){
-
+							var count=0;
           		{% for course in courses %}
+              		count++;
               		var i=0;
                		for(i=1;i<=parseInt("{{course.rateScore}}");i++)
                   {
@@ -104,6 +106,8 @@
 
                   }
             	{% endfor %}
+              var s="搜索到".concat(count.toString().concat("门课程"));
+              document.getElementById("count").innerHTML=s;
      }
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
