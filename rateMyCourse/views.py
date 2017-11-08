@@ -97,6 +97,7 @@ def search(request):
         department = None
     courselist = solrSearch(keywords, school, department)
     courses = []
+    pages = []
     for c_number in courselist:
         cs = Course.objects.filter(number=c_number)
         x = getAvgScore(cs)
@@ -110,8 +111,10 @@ def search(request):
             'rateScore': sum(x) / len(x),
             'ratenumber': sum([i.rate_set.count() for i in cs])
             })
-
-    return render(request, "rateMyCourse/searchResult.html", {'courses': courses})
+    pn=int(len(courses)/10)+1
+    for i in range(pn):
+        pages.append({'number': i+1})
+    return render(request, "rateMyCourse/searchResult.html", {'courses': courses,'count': len(courses),'pages': pages})
 
 def getAvgScore(courses):
     x = [0] * 4
@@ -139,7 +142,7 @@ def coursePage(request, course_number):
         'course_profession': courses[0].department.name,
         'course_type': courses[0].coursetype,
         'course_scores': sum(x) / 4,
-        'detail1': '有趣程度：%d'%(x[0]), 
+        'detail1': '有趣程度：%d'%(x[0]),
         'detail2': '充实程度：%d'%(x[1]),
         'detail3': '课程难度：%d'%(x[2]),
         'detail4': '课程收获：%d'%(x[3]),
@@ -303,12 +306,12 @@ def submitComment(request):
     crs = cset[0]
     # print(anonymous)
     Comment(
-        anonymous=True if anonymous == 'true' else False, 
-        content=comment, 
-        time=timezone.now(), 
-        user=User.objects.get(username=username), 
-        course=crs, 
-        term=term, 
+        anonymous=True if anonymous == 'true' else False,
+        content=comment,
+        time=timezone.now(),
+        user=User.objects.get(username=username),
+        course=crs,
+        term=term,
         total_score = sum(rate) / len(rate),
         ).save()
     Rate(

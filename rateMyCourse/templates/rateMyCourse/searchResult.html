@@ -53,33 +53,39 @@
     </div>
   </nav>
   <div class="container">
-    <p id="count">count</p> {% for course in courses %}
-    <div class="row" style="background:#eeeeee">
-      <a href="/course/{{course.ID}}" class="btn" style="font-size:55px;color:#000000"><b>{{course.name}}</b></a>
-    </div>
-    <div class="row" style="background:#eeeeee">
-      <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学校
-        <p>{{course.school}}</p>
+    <p id="count">搜索到{{count}}门课程</p> {% for course in courses %}
+    <div class="container" id="course{{forloop.counter}}">
+      <div class="row" style="background:#eeeeee">
+        <a href="/course/{{course.ID}}" style="text-decoration:none;font-size:55px;color:#000000"><b>{{course.name}}</b></a>
       </div>
-      <div class="col-md-3 text-md-left text-center align-self-center my-4"> 专业
-        <p>{{course.department}}</p>
+      <div class="row" style="background:#eeeeee">
+        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学校
+          <p>{{course.school}}</p>
+        </div>
+        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 专业
+          <p>{{course.department}}</p>
+        </div>
+        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 类型
+          <p>{{course.type}}</p>
+        </div>
+        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学分
+          <p>{{course.credit}}</p>
+        </div>
       </div>
-      <div class="col-md-3 text-md-left text-center align-self-center my-4"> 类型
-        <p>{{course.type}}</p>
+      <div class="row" style="background:#eeeeee">
+        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}1" aria-hidden="true" style="font-size:32px;"></ic>
+        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}2" aria-hidden="true" style="font-size:32px;"></ic>
+        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}3" aria-hidden="true" style="font-size:32px;"></ic>
+        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}4" aria-hidden="true" style="font-size:32px;"></ic>
+        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}5" aria-hidden="true" style="font-size:32px;"></ic>
+        <div class="mx-3" style="font-size:15px;color:#CCBBCC"> 评价数：{{course.ratenumber}} </div>
       </div>
-      <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学分
-        <p>{{course.credit}}</p>
-      </div>
-    </div>
-    <div class="row" style="background:#eeeeee">
-      <ic{{forloop.counter}}1 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}1>
-      <ic{{forloop.counter}}2 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}2>
-      <ic{{forloop.counter}}3 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}3>
-      <ic{{forloop.counter}}4 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}4>
-      <ic{{forloop.counter}}5 class="fa fa-star-o text-dark" aria-hidden="true" style="font-size:32px;"></ic{{forloop.counter}}5>
-      <div class="mx-3" style="font-size:15px;color:#CCBBCC"> 评价数：{{course.ratenumber}} </div>
-    </div>
-    <br> {% endfor %} </div>
+      <br> </div> {% endfor %}
+    <ul id="c_pagination" class="pagination"> {% for page in pages %}
+      <li class="page-item">
+        <a class="page-link bg-info" id="p{{page.number}}" onclick="toPage({{page.number}})">{{page.number}}</a>
+      </li> {% endfor %} </ul>
+  </div>
   <div class="row">
     <div class="col-md-12 mt-3">
       <p class="text-center text-dark my-5">© Copyright 2017 Flamenco - All rights reserved. </p>
@@ -88,26 +94,48 @@
   <script>
     window.onload=function(){
 							var count=0;
+      				
           		{% for course in courses %}
               		count++;
               		var i=0;
                		for(i=1;i<=parseInt("{{course.rateScore}}");i++)
                   {
-                    var s="ic".concat("{{forloop.counter}}".concat(i.toString()));
+                    var s="#ic".concat("{{forloop.counter}}".concat(i.toString()));
                     $(s).removeClass("fa fa-star-o text-dark");
                     $(s).addClass("fa fa-star text-warning");
 
                   }
                   for(i=5;i>parseInt("{{course.rateScore}}");i--)
                   {
-                    var s="ic".concat("{{forloop.counter}}".concat(i.toString()));
+                    var s="#ic".concat("{{forloop.counter}}".concat(i.toString()));
                     $(s).removeClass("fa fa-star text-warning");
                     $(s).addClass("fa fa-star-o text-dark");
 
                   }
             	{% endfor %}
-              var s="搜索到".concat(count.toString().concat("门课程"));
-              document.getElementById("count").innerHTML=s;
+              toPage("1");
+              
+     }
+     function toPage(p){
+       
+				for(i=1;i<=parseInt({{count}});i++){
+          	var s="#course".concat(i.toString());
+          	if(i>(parseInt(p)-1)*10&&i<=parseInt(p)*10){
+             		$(s).show()
+            }else{
+              	$(s).hide()
+            }
+        }
+       	for(i=1;i<=parseInt({{count}})/10+1;i++){
+          	var s="#p".concat(i.toString());
+          	if(i==parseInt(p)){
+								$(s).removeClass("page-link ");
+              	$(s).addClass("page-link bg-info");
+            }else{
+              	$(s).removeClass("page-link bg-info");
+            		$(s).addClass("page-link");
+            }
+        }
      }
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
