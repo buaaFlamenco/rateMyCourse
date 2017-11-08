@@ -9,3 +9,15 @@
         -ms-filter: blur(10px);
             filter: blur(10px);
 }
+
+form label.error{
+width: 200px;
+margin-top: 8px; 
+color: Red;
+font-size: 12px;
+
+}
+
+form input.error{
+border:solid 1px red;
+}
