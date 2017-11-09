@@ -1,14 +1,90 @@
-$(document).ready(function () {
-    // Login widget set according to cookie
-    if ($.cookie('username') == undefined) {
-        $("#menuUser").hide()
-        $("#menuLogin").show()
+function validateSignUp() {
+  $("#formRegister").validate({
+    submitHandler: function() {
+      Func_signUp();
+    },
+    rules: {
+      inputEmail: {
+        required: true,
+	      email: true
+      },
+      inputUsername: {
+        required: true,
+	      minlength: 2
+	    },
+	    inputPassword: {
+	      required: true,
+	      minlength: 5
+	    },
+      inputVerify: {
+        required: true,
+	      minlength: 5,
+	      equalTo: "#inputPassword"
+      }
+    },
+    messages: {
+      inputEmail: "请输入正确的邮箱地址",
+      inputUsername: {
+        required: "请输入用户名",
+        minlength: "用户名长度不能小于2个字符"
+      },
+      inputPassword: {
+        required: "请输入密码",
+        minlength: "密码长度不能小于5个字符"
+      },
+      inputVerify: {
+        required: "请再次输入密码",
+        minlength: "密码长度不能小于5个字符",
+        equalTo: "密码输入不一致"
+      }
     }
-    else {
-        $("#menuLogin").hide()
-        $("#menuUser").show()
-        $("#navUser").text($.cookie('username'))
+  })
+}
+
+function validateSignIn() {
+  $("#formLogin").validate({
+    submitHandler: function() {
+      Func_signIn();
+    },
+    rules: {
+      username: {
+        required: true,
+	      minlength: 2
+	    },
+	    password: {
+	      required: true,
+	      minlength: 5
+	    }
+    },
+    messages: {
+      username: {
+        required: "请输入用户名",
+        minlength: "用户名必需由两个字符组成"
+      },
+      password: {
+        required: "请输入密码",
+        minlength: "密码长度不能小于 5 个字符"
+      }
     }
+  })
+}
+
+$(document).ready(function() {
+  alert("!!!")
+  // Form validation for Sign in / Sign up forms
+  validateSignUp()
+  validateSignIn()
+
+  // Login widget set according to cookie
+  if ($.cookie('username') == undefined) {
+      $("#menuUser").hide()
+      $("#menuLogin").show()
+  }
+  else {
+      $("#menuLogin").hide()
+      $("#menuUser").show()
+      $("#navUser").text($.cookie('username'))
+  }
 })
 
 function Func_signUp() {

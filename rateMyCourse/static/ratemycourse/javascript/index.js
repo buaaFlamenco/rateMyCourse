@@ -1,5 +1,3 @@
-var originInputStyle
-
 function Func_search() {
     // $.ajax('/search',{
     //   dataType:'json',
@@ -96,12 +94,13 @@ function validateSignIn() {
   })
 }
 
-$(document).ready(function () {
-
+$(document).ready(function() {
   //alert("!!!")
+  // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()
-  originInputStyle = $(".form-control").css(["border-color", "box-shadow"])
+
+  // Login widget set according to cookie
   if($.cookie('username') == undefined) {
     $("#menuUser").hide()
     $("#menuLogin").show()
@@ -144,10 +143,6 @@ $(document).ready(function () {
   })
 })
 
-function resetInputStyle() {
-  $(".form-control").css(originInputStyle)
-}
-
 function Func_signUp() {
   $.ajax("/signUp/", {
     dataType: 'json',
@@ -182,11 +177,6 @@ function Func_signIn() {
     resetInputStyle()
     if(data.statCode != 0) {
       alert(data.errormessage)
-      // if (data.statCode == -2) { // Username doesn't exist
-      //   // $("#username").css(warningStyles)
-      // } else if (data.statCode == -3) { // Password is wrong
-      //   // $("#password").css(warningStyles)
-      // }
     } else {
       $("#menuLogin").hide()
       $("#menuUser").show()
