@@ -70,7 +70,7 @@ function validateSignIn() {
 }
 
 $(document).ready(function() {
-  alert("!!!")
+  // alert("!!!")
   // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()
