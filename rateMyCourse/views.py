@@ -111,10 +111,14 @@ def search(request):
             'rateScore': sum(x) / len(x),
             'ratenumber': sum([i.rate_set.count() for i in cs])
             })
+
     pn=int(len(courses)/10)+1
     for i in range(pn):
         pages.append({'number': i+1})
-    return render(request, "rateMyCourse/searchResult.html", {'courses': courses,'count': len(courses),'pages': pages})
+    return render(request, "rateMyCourse/searchResult.html", {
+    	'courses': sorted(courses, key=lambda c:-c['ratenumber']),
+    	'count': len(courses),'pages': pages,
+    	})
 
 def getAvgScore(courses):
     x = [0] * 4
