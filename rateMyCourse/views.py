@@ -2,10 +2,10 @@ from django.shortcuts import render, get_list_or_404
 from rateMyCourse.models import *
 import json
 from urllib import request, parse
-# Create your views here.
-
 from django.http import HttpResponse
 from django.utils import timezone
+
+# Create your views here.
 
 
 def addHitCount():
@@ -63,7 +63,7 @@ def signUp(request):
     '''
 
 def solrSearch(keywords, school, department):
-    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&wt=json&indent=true"
+    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=1000&wt=json&indent=true"
     keys = dict()
 
     ######
@@ -117,7 +117,8 @@ def search(request):
         pages.append({'number': i+1})
     return render(request, "rateMyCourse/searchResult.html", {
     	'courses': sorted(courses, key=lambda c:-c['ratenumber']),
-    	'count': len(courses),'pages': pages,
+    	'count': len(courses),
+    	'pages': pages,
     	})
 
 def getAvgScore(courses):
