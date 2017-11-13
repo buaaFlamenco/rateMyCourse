@@ -159,7 +159,7 @@ function Func_signUp() {
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
-      $.cookie('username', data.username)
+      $.cookie('username', data.username, {path: '/'})
     }
   })
   return false
@@ -181,7 +181,7 @@ function Func_signIn() {
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
-      $.cookie('username', data.username)
+      $.cookie('username', data.username, {path: '/'})
     }
   })
   return false

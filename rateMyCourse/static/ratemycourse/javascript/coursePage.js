@@ -122,7 +122,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
         var total = document.createTextNode("总评");
         var vTerm = document.createTextNode(iTerm);
         var vTeacher = document.createTextNode(iTeacher);
-        var vTotal = document.createTextNode(iToal);
+        var vTotal = document.createTextNode(iToal.toFixed(1));
         pTags[1].appendChild(term);
         pTags[2].appendChild(teacher);
         pTags[3].appendChild(total);
@@ -220,7 +220,7 @@ function Func_signUp() {
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
-      $.cookie('username', data.username)
+      $.cookie('username', data.username, {path: '/'})
     }
   })
   return false
@@ -241,7 +241,7 @@ function Func_signIn() {
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
-      $.cookie('username', data.username)
+      $.cookie('username', data.username, {path: '/'})
     }
   })
   return false
