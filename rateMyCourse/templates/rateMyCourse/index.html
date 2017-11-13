@@ -18,15 +18,17 @@
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#contactModal"><i class="fa d-inline fa-lg fa-envelope-o"></i> 联系我们</a>
+            <a class="nav-link mr-1" href="javascript:void(0)" data-toggle="modal"
+            data-target="#contactModal" style="outline:none;">
+              <i class="fa d-inline fa-lg fa-envelope-o mr-1"></i> 联系我们</a>
             <div class="modal fade" id="contactModal" tabindex="-1" role="dialog">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> 公客们 </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <a class="close" href="javascript:void(0)" data-dismiss="modal" aria-label="Close" style="outline:none;">
                       <span aria-hidden="true">&times;</span>
-                    </button>
+                    </a>
                   </div>
                   <div class="modal-body">
                     <img src="../../static/ratemycourse/images/conquerorsQR.png"/>
@@ -39,16 +41,12 @@
         <ul class="navbar-nav">
           <div class="dropdown open" id="menuLogin">
             <a class="btn text-white btn-primary" href="javascript:void(0)"
-            data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 登录/注册</a>
+            data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o mr-1"></i> 登录/注册</a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="container px-3 py-2" style="width:260px;">
-                <!--form id="formLogin" onsubmit="return Func_signIn()" novalidate-->
                 <form id="formLogin" novalidate method="POST" action="/signIn/">
                   <label>登录</label>
                   <div class="form-group">
-                    <!--input id="username" type="text" placeholder="用户名"
-                     pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6"
-                     class="form-control" name="username" required-->
                      <input id="username" type="text" placeholder="用户名"
                       class="form-control" name="username">
                      <div class="help-block with-errors"></div>
@@ -146,11 +144,14 @@
               <div class="dropdown open">
                 <a class="btn btn-light btn-lg my-1" href="javascript:void(0)" data-toggle="dropdown" id="buttonSearchCourse">搜索课程</a>
                 <div class="dropdown-menu">
-                  <!--Action needed-->
-                  <div class="input-group">
-                    <input id="searchboxCourse" class="form-control input-lg" type="text" placeholder="请输入课程名" autocomplete="off"> <span class="input-group-addon">
-                      <i class="fa fa-search"></i>
-                    </span>
+                  <div class="container" style="width=400px">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                      </span>
+                      <input id="searchboxCourse" class="form-control input-lg"
+                      type="text" placeholder="请输入课程名" autocomplete="off">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -181,10 +182,12 @@
           <div class="p-4 col-md-4">
             <h2 class="mb-4">联系方式</h2>
             <p>
-              <a href="javascript:void(0)" class="text-white" data-toggle="modal" data-target="#contactModal"><i class="fa d-inline mr-3 fa-qq text"></i>公客们</a>
+              <a href="javascript:void(0)" class="text-white" data-toggle="modal" data-target="#contactModal">
+                <i class="fa d-inline mr-2 fa-qq text"></i>公客们</a>
             </p>
             <p>
-              <a href="mailto:flamenquer@163.com" class="text-white"><i class="fa d-inline mr-3 text fa-envelope-o"></i>flamenquer@163.com</a>
+              <a href="mailto:flamenquer@163.com" class="text-white">
+                <i class="fa d-inline mr-2 text fa-envelope-o"></i>flamenquer@163.com</a>
             </p>
           </div>
         </div>
