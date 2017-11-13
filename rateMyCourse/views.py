@@ -63,7 +63,7 @@ def signUp(request):
     '''
 
 def solrSearch(keywords, school, department):
-    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&wt=json&indent=true"
+    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&sort=rate_count+desc&wt=json&indent=true"
     keys = dict()
 
     ######
@@ -82,7 +82,7 @@ def solrSearch(keywords, school, department):
     ])
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
-    return {i['course_number'] for i in t['response']['docs']}
+    return [i['course_number'] for i in t['response']['docs']]
 
 def search(request):
     addHitCount()
@@ -98,7 +98,9 @@ def search(request):
     courselist = solrSearch(keywords, school, department)
     courses = []
     pages = []
-    for c_number in courselist:
+    for i, c_number in enumerate(courselist):
+        if(c_number in courselist[:i]):
+            continue
         cs = Course.objects.filter(number=c_number)
         x = getAvgScore(cs)
         courses.append({
@@ -109,14 +111,14 @@ def search(request):
             'school': cs[0].department.school.name,
             'department': cs[0].department.name,
             'rateScore': sum(x) / len(x),
-            'ratenumber': sum([i.rate_set.count() for i in cs])
+            'ratenumber': sum([i.comment_set.count() for i in cs])
             })
 
     pn=int(len(courses)/10)+1
     for i in range(pn):
         pages.append({'number': i+1})
     return render(request, "rateMyCourse/searchResult.html", {
-    	'courses': sorted(courses, key=lambda c:-c['ratenumber']),
+    	'courses': courses,
     	'count': len(courses),
     	'pages': pages,
     	})
@@ -146,7 +148,7 @@ def coursePage(request, course_number):
         'course_credit': courses[0].credit,
         'course_profession': courses[0].department.name,
         'course_type': courses[0].coursetype,
-        'course_scores': '%.1f'%sum(x) / 4,
+        'course_scores': '%.1f'%(sum(x) / 4),
         'detail1': '有趣程度：%.1f'%(x[0]),
         'detail2': '充实程度：%.1f'%(x[1]),
         'detail3': '课程难度：%.1f'%(x[2]),

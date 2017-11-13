@@ -174,7 +174,6 @@ function Func_signIn() {
       "password": $("#password").val()
     }
   }).done(function(data) {
-    resetInputStyle()
     if(data.statCode != 0) {
       alert(data.errormessage)
     } else {
