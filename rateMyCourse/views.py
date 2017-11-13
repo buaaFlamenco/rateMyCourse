@@ -63,7 +63,7 @@ def signUp(request):
     '''
 
 def solrSearch(keywords, school, department):
-    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=1000&wt=json&indent=true"
+    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&wt=json&indent=true"
     keys = dict()
 
     ######
