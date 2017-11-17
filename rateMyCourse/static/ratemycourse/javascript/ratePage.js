@@ -103,6 +103,7 @@ function choose_term(text){
 $(document).ready(function() {
   // alert("!!!")
   // Form validation for Sign in / Sign up forms
+  $("#menuLogin").load("./test.html")
   validateSignUp()
   validateSignIn()
 
