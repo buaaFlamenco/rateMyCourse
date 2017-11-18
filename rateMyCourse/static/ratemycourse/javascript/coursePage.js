@@ -108,7 +108,6 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
         imageTag[0].src = imageUrls;
         imageTag[0].width = "86";
         imageTag[0].height = "86";
-        imageTag[0].setAttribute("class", "img-thumbnail");
         imageTag[0].setAttribute("style", "margin-bottom:16px;margin-top:16px");
 
         var pTags = commentGrid.getElementsByTagName("p");
@@ -180,9 +179,10 @@ function setComments() {//get comments list from service
 
 $(document).ready(function () {
     // Form validation for Sign in / Sign up forms
+    $("#menuLogin").load("test.html")
     validateSignUp()
     validateSignIn()
-    
+
     // Login widget set according to cookie
     if ($.cookie('username') == undefined) {
         $("#menuUser").hide()
