@@ -6,7 +6,8 @@ db.sqlite3
 .idea
 rateMyCourse/templates/rateMyCourse/index.scss
 rateMyCourse/templates/rateMyCourse/index.css
-
+rateMyCourse/static/ratemycourse/javascript/test.html
+rateMyCourse/static/ratemycourse/javascript/temp.html
 *.pyc
 __pycache__/
 *.pyc
