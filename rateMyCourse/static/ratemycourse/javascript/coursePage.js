@@ -179,7 +179,6 @@ function setComments() {//get comments list from service
 
 $(document).ready(function () {
     // Form validation for Sign in / Sign up forms
-    $("#menuLogin").load("test.html")
     validateSignUp()
     validateSignIn()
 
