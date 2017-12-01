@@ -17,7 +17,6 @@ function clickSearchButton() {
 
 $(document).ready(function() {
   //alert("!!!")
-  $("#navbarContainer").load("./components/indexNavbarContainer.html")
 
   // Form validation for Sign in / Sign up forms
   validateSignUp()
