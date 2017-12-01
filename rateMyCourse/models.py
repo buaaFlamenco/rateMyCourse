@@ -43,23 +43,8 @@ class User(models.Model):
     username = models.CharField(max_length=50, unique=True) # 用户名不可重复
     mail = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
-    '''
-    grade = models.CharField(max_length=50)
-    reported = models.BooleanField()
-    '''
-    # connections
-    '''
-    school = models.ForeignKey(
-        School,
-        on_delete=models.SET_NULL,
-        null=True,
-    )
-    department = models.ForeignKey(
-        Department,
-        on_delete=models.SET_NULL,
-        null=True,
-    )
-    '''
+    # validationState = models.BooleanField(default=False)
+    # validationCode = models.CharField(max_length=50)
     def __str__(self):
     	return self.username
 
@@ -90,11 +75,11 @@ class Comment(models.Model):
     content = models.CharField(max_length=2000)
     time = models.DateTimeField()
     # connections
-    parentcomment = models.ForeignKey(
-        'self',
-        on_delete=models.SET_NULL,
-        null=True,
-    )
+    # parentcomment = models.ForeignKey(
+    #     'self',
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    # )
     user = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -127,6 +112,29 @@ class Rate(models.Model):
     )
     def __str__(self):
     	return "rate from %s"%self.user
+
+class Discuss(models.Model):
+	user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+	)
+	comment = models.ForeignKey(
+		Comment,
+		on_delete=models.CASCADE,
+	)
+	content = models.CharField(max_length=2000)
+	newmsg = models.BooleanField(default=False)
+
+class Support(models.Model):
+	user = models.ForeignKey(
+		User,
+		on_delete=models.CASCADE,
+	)
+	comment = models.ForeignKey(
+		Comment,
+		on_delete=models.CASCADE,
+	)
+	newmsg = models.BooleanField(default=False)
 
 class HitCount(models.Model):
     name = models.CharField(max_length=50)
