@@ -5,3 +5,13 @@ color: Red;
 form input.error{
 border:solid 1px red;
 }
+
+hr{
+  margin:0;
+}
+
+hr.float{
+  margin: -1px;
+  border-color: #646464;
+  border-width:2px;
+}

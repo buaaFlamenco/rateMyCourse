@@ -7,10 +7,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/css/allPages.css" type="text/css"> </head>
+  <link rel="stylesheet" href="../../static/ratemycourse/css/userPage.css" type="text/css"> </head>
 
 <body>
   @import "commonNavbar.html"
   <div class="container">
+    <!-- Profile -->
     <div class="row my-4">
       <div class="col col-md-auto">
         <img src={{userImage}} />
@@ -19,18 +21,29 @@
         {{userName}}
       </div>
     </div>
+    <!-- Section options -->
     <div class="row no-gutters">
       <div class="col col-md-auto">
-        <a href="javascript:void(0)" class="btn" style="border: none; background:none">评价</a>
+        <a href="javascript:void(0)" class="btn" id="choiceEvaluations" onclick="viewEvaluations()">评价</a>
       </div>
       <div class="col col-md-auto">
-        <a href="javascript:void(0)" class="btn" style="border: none; background:none">讨论</a>
+        <a href="javascript:void(0)" class="btn" id="choiceDiscussions" onclick="viewDiscussions()">讨论</a>
       </div>
     </div>
-    <hr align="left" width="60%" style="margin:0;">
-    <div class="row">
-
+    <hr id="optionBar" class="float" width="7%">
+    <hr>
+    <!-- Evaluations -->
+    <div id="evaluations" class="row">
+      这是所有评价
+      <hr width="80%">
     </div>
+
+    <!-- Discussions -->
+    <div id="discussions" class="row">
+      这是所有讨论留言
+      <hr width="80%">
+    </div>
+
   </div>
   <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -39,7 +52,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
   <script src="../../static/ratemycourse/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
-  <script src="../../static/ratemycourse/javascript/coursePage.js"></script>
+  <script src="../../static/ratemycourse/javascript/login.js"></script>
+  <script src="../../static/ratemycourse/javascript/userPage.js"></script>
 </body>
 
 </html>
