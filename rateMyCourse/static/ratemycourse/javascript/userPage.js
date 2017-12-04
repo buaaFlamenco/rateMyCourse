@@ -9,21 +9,25 @@ $(document).ready(function() {
   // Option bar settings
   $("#choiceDiscussions").hover(
     optionMoveRight, optionMoveLeft
-  ).click(function(){
+  ).click(
+    function(){
     $("#choiceDiscussions").unbind("mouseleave")
     $("#choiceEvaluations").on("mouseleave", optionMoveRight)
     optionMoveRight()
     viewDiscussions()
-  })
+    }
+  )
 
   $("#choiceEvaluations").hover(
     optionMoveLeft, optionMoveRight
-  ).click(function(){
+  ).click(
+    function(){
     $("#choiceEvaluations").unbind("mouseleave")
     $("#choiceDiscussions").on("mouseleave", optionMoveLeft)
     optionMoveLeft()
     viewEvaluations()
-  })
+    }
+  )
 })
 
 function optionMoveLeft(){

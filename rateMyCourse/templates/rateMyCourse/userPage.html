@@ -33,15 +33,54 @@
     <hr id="optionBar" class="float" width="7%">
     <hr>
     <!-- Evaluations -->
-    <div id="evaluations" class="row">
-      这是所有评价
-      <hr width="80%">
+    <div id="evaluations" class="container">
+      {% for assessment in assessments %}
+      <div class="row" style="width:62%;">
+        <div class="col mr-auto">
+          <a href="javascript:void(0)" class="btn"><h4>{{assessment.courseName}}</h4></a>
+        </div>
+        <div class="col-auto">
+          {{assessment.time}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          {{assessment.content}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          <small>
+          <i class="fa fa-thumbs-up" aria-hidden="true">
+            赞
+            <a href="javascript:void(0)" class="btn">
+              <small>{{assessment.likeCount}}</small>
+            </a>
+          </i>
+          </small>
+        </div>
+        <div class="col-auto">
+          <small>
+          <i class="fa fa-comment" aria-hidden="true">
+            评论
+            <a href="javascript:void(0)" class="btn">
+              <small>{{assessment.commentCount}}</small>
+            </a>
+          </i>
+          </small>
+        </div>
+      </div>
+      <hr width="62%">
+      {% endfor %}
     </div>
-
     <!-- Discussions -->
-    <div id="discussions" class="row">
-      这是所有讨论留言
-      <hr width="80%">
+    <div id="discussions" class="container" width="62%">
+      {% for discussion in discussions %}
+      <div class="row">
+
+      </div>
+      <hr width="62%">
+      {% endfor %}
     </div>
 
   </div>
