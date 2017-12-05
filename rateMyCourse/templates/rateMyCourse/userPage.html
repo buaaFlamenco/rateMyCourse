@@ -19,6 +19,10 @@
       </div>
       <div class="col col-md-auto">
         {{userName}}
+        <a href="javascript:void(0)" class="btn"
+        data-toggle="modal" data-target="#contactModal">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
     <!-- Section options -->
@@ -37,19 +41,19 @@
       {% for assessment in assessments %}
       <div class="row" style="width:62%;">
         <div class="col mr-auto">
-          <a href="javascript:void(0)" class="btn"><h4>{{assessment.courseName}}</h4></a>
+          <a href="javascript:void(0)" class="btn"><h5>{{assessment.courseName}}</h5></a>
         </div>
-        <div class="col-auto">
+        <div class="col col-auto">
           {{assessment.time}}
         </div>
       </div>
       <div class="row">
-        <div class="col-auto">
+        <div class="col col-auto">
           {{assessment.content}}
         </div>
       </div>
       <div class="row">
-        <div class="col-auto">
+        <div class="col col-auto">
           <small>
           <i class="fa fa-thumbs-up" aria-hidden="true">
             赞
@@ -59,7 +63,7 @@
           </i>
           </small>
         </div>
-        <div class="col-auto">
+        <div class="col col-auto">
           <small>
           <i class="fa fa-comment" aria-hidden="true">
             评论
@@ -76,8 +80,29 @@
     <!-- Discussions -->
     <div id="discussions" class="container" width="62%">
       {% for discussion in discussions %}
-      <div class="row">
-
+      <div class="row" style="width:62%">
+        <div class="col col-md-auto">
+          <img src={{discussion.userImage}} />
+        </div>
+        <div class="col mr-auto">
+          <a href="javascript:void(0)" class="btn">{{discussion.userName}}</a>
+        </div>
+        <div class="col col-md-auto">
+          {{discussion.time}}
+        </div>
+      </div>
+      <div class="row" style="width:62%">
+        <div class="col col-auto">
+          {{discussion.content}}
+        </div>
+      </div>
+      <div class="row" style="width:62%">
+        <div class="col col-auto">
+          <blockquote>
+            {{discussion.title}}<br/>
+            {{discussion.originalContent}}
+          </blockquote>
+        </div>
       </div>
       <hr width="62%">
       {% endfor %}
