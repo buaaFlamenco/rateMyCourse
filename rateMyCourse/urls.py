@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^getComment/$', views.getComment, name='getComment'),
     url(r'^getTeachers/$', views.getTeachers, name='getTeachers'),
     url(r'^getOverAllRate/$', views.getOverAllRate, name='getOverAllRate'),
+
+    url(r'^user/(?P<username>.+)/$', views.userPage, name='userPage'),
 ]

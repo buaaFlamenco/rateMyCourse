@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from rateMyCourse.models import *
 import json
 from urllib import request, parse
@@ -332,3 +332,76 @@ def submitComment(request):
     return HttpResponse(json.dumps({
         'statCode': 0,
         }))
+
+
+def userPage(request, username):
+	user = get_object_or_404(User, username=username)
+	return render(request, "rateMyCourse/userPage.html", {
+		'userName': username,
+		'assessments': [
+			{
+				'courseName': cmt.course.name,
+				'content': cmt.content,
+				'time': cmt.time.strftime('%y/%m/%d'),
+				'likeCount': cmt.support_set.count(),
+				'commentCount': cmt.discuss_set.count(),
+			}
+			for cmt in user.comment_set.all()
+		],
+		'discussions': sorted([
+			{
+				'userName': dsc.user.username,
+				'content': dsc.content,
+				'time': dsc.time.strftime('%y/%m/%d'),
+				'title': dsc.comment.course.name,
+				'originalContent': dsc.comment.content,
+				'newmsg': dsc.newmsg,
+			}
+			for cmt in user.comment_set.all()
+				for dsc in cmt.discuss_set.all()
+		], key=lambda t: not t['newmsg'])
+	})
+
+	'''
+
+    user = User.objects.get(username=username)
+    comments=user.comment_set.all()
+    comment_num=len(comments)
+    ##discusses=user.discuss_set.all()
+    ##discuss_num=len(discusses)
+    return_dic={}
+    return_dic['user_id']=user.username
+    assessments={}
+    discussions={}
+    return_dic['assessments']=assessments
+    return_dic['discussions']=discussions
+
+    discussion={}
+    
+    for i in range(0,comment_num):
+            assessments[i]={}
+            assessments[i]['courseName']=comments[i].course.name
+            assessments[i]['content']=comments[i].content
+            assessments[i]['time']=comments[i].time.strftime('%y/%m/%d')
+            assessments[i]['likeCount']=comments[i].support_set.count()
+            assessments[i]['commentCount']=comments[i].discuss_set.count()
+ 
+    for j in range(0,comment_num):
+            discussion={}
+            discussion[j]=user.comment_set.all()[j].discuss_set.all()
+            discuss_num=len(discussion[j])
+            for k in range(0,discuss_num):
+                    discussions[m]={}
+                    discussions[m]['userName']=discussion[j][k].user.username
+                    discussions[m]['content']=discussion[j][k].content
+                    discussions[m]['time']=discussion[j][k].time.strftime('%y/%m/%d')
+                    discussions[m]['title']=discussion[j][k].comment.course.name
+                    discussions[m]['originalContent']=discussion[j][k].comment.content
+                    m=m+1
+
+            
+            
+            
+            
+    return render(request, "rateMyCourse/userPage.html", return_dic)
+	'''
