@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from rateMyCourse.models import *
 import json
 from urllib import request, parse
@@ -63,7 +63,7 @@ def signUp(request):
     '''
 
 def solrSearch(keywords, school, department):
-    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&sort=rate_count+desc&wt=json&indent=true"
+    url = "http://10.2.28.123:8080/solr/collection1/select?q=%s&rows=100&wt=json&indent=true"
     keys = dict()
 
     ######
@@ -76,9 +76,10 @@ def solrSearch(keywords, school, department):
         keys['school_name'] = school
     if(department != None):
         keys['department_name'] = department
-    keys['course_name'] = keywords
+    if(len(keywords)!=0):
+        keys['course_name'] = keywords
     s = ' '.join([
-        '+' + key + ':\"' + keys[key] + '\"' for key in keys
+        '+' + key + ':' + keys[key] + '' for key in keys
     ])
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
@@ -102,6 +103,8 @@ def search(request):
         if(c_number in courselist[:i]):
             continue
         cs = Course.objects.filter(number=c_number)
+        if(len(cs)==0):
+            continue
         x = getAvgScore(cs)
         courses.append({
             'name': cs[0].name,
@@ -332,3 +335,32 @@ def submitComment(request):
     return HttpResponse(json.dumps({
         'statCode': 0,
         }))
+
+
+def userPage(request, username):
+	user = get_object_or_404(User, username=username)
+	return render(request, "rateMyCourse/userPage.html", {
+		'userName': username,
+		'assessments': [
+			{
+				'courseName': cmt.course.name,
+				'content': cmt.content,
+				'time': cmt.time.strftime('%y/%m/%d'),
+				'likeCount': cmt.support_set.count(),
+				'commentCount': cmt.discuss_set.count(),
+			}
+			for cmt in user.comment_set.all()
+		],
+		'discussions': sorted([
+			{
+				'userName': dsc.user.username,
+				'content': dsc.content,
+				'time': dsc.time.strftime('%y/%m/%d'),
+				'title': dsc.comment.course.name,
+				'originalContent': dsc.comment.content,
+				'newmsg': dsc.newmsg,
+			}
+			for cmt in user.comment_set.all()
+				for dsc in cmt.discuss_set.all()
+		], key=lambda t: not t['newmsg'])
+	})

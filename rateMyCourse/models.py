@@ -122,9 +122,11 @@ class Discuss(models.Model):
 		Comment,
 		on_delete=models.CASCADE,
 	)
+	time = models.DateTimeField()
 	content = models.CharField(max_length=2000)
 	newmsg = models.BooleanField(default=False)
-
+	time = models.DateTimeField()
+        
 class Support(models.Model):
 	user = models.ForeignKey(
 		User,
