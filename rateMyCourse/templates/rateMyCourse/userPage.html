@@ -19,8 +19,7 @@
       </div>
       <div class="col col-md-auto">
         {{userName}}
-        <a href="javascript:void(0)" class="btn"
-        data-toggle="modal" data-target="#contactModal">
+        <a href="javascript:void(0)" class="btn">
           <i class="fa fa-pencil" aria-hidden="true"></i>
         </a>
       </div>
@@ -39,7 +38,7 @@
     <!-- Evaluations -->
     <div id="evaluations" class="container">
       {% for assessment in assessments %}
-      <div class="row" style="width:62%;">
+      <div class="row shortRow">
         <div class="col mr-auto">
           <a href="javascript:void(0)" class="btn"><h5>{{assessment.courseName}}</h5></a>
         </div>
@@ -47,12 +46,12 @@
           {{assessment.time}}
         </div>
       </div>
-      <div class="row">
+      <div class="row shortRow">
         <div class="col col-auto">
           {{assessment.content}}
         </div>
       </div>
-      <div class="row">
+      <div class="row shortRow">
         <div class="col col-auto">
           <small>
           <i class="fa fa-thumbs-up" aria-hidden="true">
@@ -78,9 +77,9 @@
       {% endfor %}
     </div>
     <!-- Discussions -->
-    <div id="discussions" class="container" width="62%">
+    <div id="discussions" class="container">
       {% for discussion in discussions %}
-      <div class="row" style="width:62%">
+      <div class="row shortRow">
         <div class="col col-md-auto">
           <img src={{discussion.userImage}} />
         </div>
@@ -91,23 +90,22 @@
           {{discussion.time}}
         </div>
       </div>
-      <div class="row" style="width:62%">
+      <div class="row shortRow">
         <div class="col col-auto">
           {{discussion.content}}
         </div>
       </div>
-      <div class="row" style="width:62%">
+      <div class="row shortRow">
         <div class="col col-auto">
           <blockquote>
             {{discussion.title}}<br/>
-            {{discussion.originalContent}}
+            <small>{{discussion.originalContent}}</small>
           </blockquote>
         </div>
       </div>
       <hr width="62%">
       {% endfor %}
     </div>
-
   </div>
   <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->

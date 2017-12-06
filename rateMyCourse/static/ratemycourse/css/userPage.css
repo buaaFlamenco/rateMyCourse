@@ -10,9 +10,9 @@
 .btn.active,
 .btn:active.focus,
 .btn.active.focus {
-    color: #646464;
-    background: none;
-    box-shadow:none;
+  color: #646464;
+  background: none;
+  box-shadow:none;
 }
 
 blockquote {
@@ -32,4 +32,8 @@ blockquote {
 }*/
 blockquote p {
   display: inline;
+}
+
+.row.shortRow {
+  width:62%;
 }
