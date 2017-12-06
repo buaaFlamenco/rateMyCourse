@@ -1,7 +1,13 @@
-.btn{
+p{
+  word-wrap:break-word;
+}
+.btn {
   color: #969696;
 }
 
+.btn.textBtn {
+  padding: 0;
+}
 .btn:hover,
 .btn:focus,
 .btn:active:focus,
@@ -34,10 +40,13 @@ blockquote p {
   display: inline;
 }
 
-.row.shortRow {
+.shortRow {
   width:62%;
 }
 
+.shorterRow {
+  width:40%;
+}
 blockquote {
   background: #f9f9f9;
   border-left: 10px solid #ccc;

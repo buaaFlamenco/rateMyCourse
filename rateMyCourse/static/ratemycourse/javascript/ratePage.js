@@ -60,9 +60,6 @@ $(document).ready(function() {
   });
   /////////////////////////////////
 
-
-
-
   $.ajax('/getTeachers', {
     dataType:'json',
     data:{
