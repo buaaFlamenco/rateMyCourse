@@ -76,9 +76,10 @@ def solrSearch(keywords, school, department):
         keys['school_name'] = school
     if(department != None):
         keys['department_name'] = department
-    keys['course_name'] = keywords
+    if(len(keywords)!=0):
+        keys['course_name'] = keywords
     s = ' '.join([
-        '+' + key + ':\"' + keys[key] + '\"' for key in keys
+        '+' + key + ':' + keys[key] + '' for key in keys
     ])
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
@@ -102,6 +103,8 @@ def search(request):
         if(c_number in courselist[:i]):
             continue
         cs = Course.objects.filter(number=c_number)
+        if(len(cs)==0):
+            continue
         x = getAvgScore(cs)
         courses.append({
             'name': cs[0].name,
