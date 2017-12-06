@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^getDepartment/$', views.getDepartment, name='getDepartment'),
     url(r'^getCourse/$', views.getCourse, name='getCourse'),
     url(r'^getComment/$', views.getComment, name='getComment'),
+    url(r'^getDiscuss/$', views.getDiscuss, name='getDiscuss'),
     url(r'^getTeachers/$', views.getTeachers, name='getTeachers'),
     url(r'^getOverAllRate/$', views.getOverAllRate, name='getOverAllRate'),
 

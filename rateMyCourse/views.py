@@ -252,10 +252,31 @@ def getComment(request):
                 'iTerm': cmt.term,
                 'iTeacher': ','.join([t.name for t in cmt.course.teacher_set.all()]),
                 'iTotal': cmt.total_score,
+                'iId': cmt.id,
                 })
     return HttpResponse(json.dumps({
         'statCode': 0,
         'comments': cmtList,
+        }))
+
+def getDiscuss(request):
+    try:
+        discusses = Discuss.objects.filter(comment_id=request.POST['iId'])
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'can not get course_number or course_number not exists',
+            }))
+    disList = []
+    for discuss in discusses:
+        disList.append({
+            'userName': discuss.user.username,
+            'text': discuss.content.replace("\n", "<br/>"),
+            'time': discuss.time.strftime('%y/%m/%d'),
+            })
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        'comments': disList,
         }))
 
 def getTeachers(request):
