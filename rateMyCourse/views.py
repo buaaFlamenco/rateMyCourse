@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_list_or_404,get_object_or_404
 from rateMyCourse.models import *
 import json
 from urllib import request, parse
@@ -332,3 +332,35 @@ def submitComment(request):
     return HttpResponse(json.dumps({
         'statCode': 0,
         }))
+
+
+def userPage(request, username):
+	user = get_object_or_404(User, username=username)
+	return render(request, "rateMyCourse/userPage.html", {
+		'userName': username,
+		'assessments': [
+			{
+				'courseName': cmt.course.name,
+				'content': cmt.content,
+				'time': cmt.time.strftime('%y/%m/%d'),
+				'likeCount': cmt.support_set.count(),
+				'commentCount': cmt.discuss_set.count(),
+			}
+			for cmt in user.comment_set.all()
+		],
+		'discussions': sorted([
+			{
+				'userName': dsc.user.username,
+				'content': dsc.content,
+				'time': dsc.time.strftime('%y/%m/%d'),
+				'title': dsc.comment.course.name 
+
+,
+				'originalContent': dsc.comment.content,
+				'newmsg': dsc.newmsg,
+			}
+			for cmt in user.comment_set.all()
+				for dsc in cmt.discuss_set.all()
+		], key=lambda t: not t['newmsg'])
+	})
+
