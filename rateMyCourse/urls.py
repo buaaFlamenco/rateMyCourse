@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^getOverAllRate/$', views.getOverAllRate, name='getOverAllRate'),
 
     url(r'^user/(?P<username>.+)/$', views.userPage, name='userPage'),
+
 ]
