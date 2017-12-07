@@ -262,11 +262,11 @@ def getComment(request):
 
 def getDiscuss(request):
     try:
-        discusses = Discuss.objects.filter(comment_id=request.POST['iId'])
+        discusses = Discuss.objects.filter(comment_id=request.GET['iId'])
     except Exception:
         return HttpResponse(json.dumps({
             'statCode': -1,
-            'errormessage': 'can not get course_number or course_number not exists',
+            'errormessage': 'can not get comment_id or comment_id not exists',
             }))
     disList = []
     for discuss in discusses:
@@ -370,16 +370,12 @@ def submitDiscuss(request):
             'statCode': -1,
             'errormessage': 'post information not complete! ',
             }))
-    # print(rate, teacher)
-    # print(cset)
-    # assert(len(cset) == 1)
-    # print(anonymous)
     Discuss(
         content=discuss,
         time=timezone.now(),
         user=User.objects.get(username=username),
         newmsg=newmsg,
-        comment=Comment.objects.get(comment_id=comment_id),
+        comment=Comment.objects.get(id=comment_id),
         ).save()
     return HttpResponse(json.dumps({
         'statCode': 0,
