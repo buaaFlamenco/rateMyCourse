@@ -274,6 +274,7 @@ def getDiscuss(request):
             'userName': discuss.user.username,
             'text': discuss.content.replace("\n", "<br/>"),
             'time': discuss.time.strftime('%y/%m/%d'),
+            'discuss_id': discuss.id,
             })
     return HttpResponse(json.dumps({
         'statCode': 0,
