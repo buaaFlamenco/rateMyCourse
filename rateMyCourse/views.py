@@ -4,6 +4,7 @@ import json
 from urllib import request, parse
 from django.http import HttpResponse
 from django.utils import timezone
+import hashlib
 
 # Create your views here.
 
@@ -360,6 +361,16 @@ def submitComment(request):
 
 def userPage(request, username):
 	user = get_object_or_404(User, username=username)
+	try:
+		pwd = request.POST['password']
+	except:
+		pwd = ""
+	md5 = hashlib.md5()
+	md5.update(user.password.encode('utf-8'))
+	if(pwd == md5.hexdigest()):
+		cmtList = user.comment_set.all()
+	else:
+		cmtList = user.comment_set.filter(anonymous=False)
 	return render(request, "rateMyCourse/userPage.html", {
 		'userName': username,
 		'assessments': [
@@ -370,7 +381,7 @@ def userPage(request, username):
 				'likeCount': cmt.support_set.count(),
 				'commentCount': cmt.discuss_set.count(),
 			}
-			for cmt in user.comment_set.all()
+			for cmt in cmtList
 		],
 		'discussions': sorted([
 			{
@@ -381,7 +392,7 @@ def userPage(request, username):
 				'originalContent': dsc.comment.content,
 				'newmsg': dsc.newmsg,
 			}
-			for cmt in user.comment_set.all()
+			for cmt in cmtList
 				for dsc in cmt.discuss_set.all()
 		], key=lambda t: not t['newmsg'])
 	})
