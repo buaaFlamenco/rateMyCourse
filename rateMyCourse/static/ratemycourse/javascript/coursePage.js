@@ -69,8 +69,65 @@ function validateSignIn() {
     }
   })
 }
+function ccomments(node){
+    console.log(node.id);
+    var c =  node.getElementsByTagName("ul");
+    if(c.length!=0){
+        node.removeChild(c[0]);
+        return;
+    }
+    var ulnode = document.createElement("ul");
+    node.appendChild(ulnode);
+    ulnode.setAttribute("class","list-group");
+    ulnode.setAttribute("style","margin-top:32px");
+    var lnode1 = document.createElement("li");
+    ulnode.appendChild(lnode1);
+    lnode1.setAttribute("class","list-group-item");
+    var divnode = document.createElement("div");
+    lnode1.appendChild(divnode);
+    divnode.setAttribute("style","width:100%");
+    //textarea
+    var inputnode = document.createElement("textarea");
+    divnode.appendChild(inputnode);
+    inputnode.setAttribute("class", "texta");
+    //submit
+    var cfmnode = document.createElement("button");
+    divnode.appendChild(cfmnode);
+    cfmnode.setAttribute("class", "cfmbutton");
+    var btnnode = document.createTextNode("发送");
+    cfmnode.appendChild(btnnode);
+    $.ajax('/getDiscuss', {
+        dataType: 'json',
+        data: {'iId': node.id},
+    }).done(function(data){
+        for(var i=0; i< data.discusses.length; i++){
+            var dis = discusses[i];
+            var lnode1 = document.createElement("li");
+            //time
+            var tdivnode = document.createElement("div");
+            lnode1.appendChild(tdivnode);
+            tdivnode.setAttribute("style", "float:right");
+            var tNode = document.createTextNode(dis.time);
+            tdivnode.appendChild(tNode);
+            //username
+            var ndivnode = document.createElement("div");
+            lnode1.appendChild(ndivnode);
+            ndivnode.setAttribute("style", "float:left;margin-right:16px");
+            var nNode = document.createTextNode(dis.userName);
+            ndivnode.appendChild(nNode);
+            //text
+            var cdivnode = document.createElement("div");
+            lnode1.appendChild(cdivnode);
+            cdivnode.setAttribute("style", "float:left");
+            var cNode = document.createTextNode(dis.text);
+            cdivnode.appendChild(cNode);
 
-function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
+            ulnode.appendChild(lnode1);
+            lnode1.setAttribute("class","list-group-item");
+        }
+    })
+}
+function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, commentid) {
     var ScreenGridHtml = `
         <div>
             <img>
@@ -92,8 +149,12 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
             <p>
         </div>
         <div>
+            <a>
+            <a>
+            <a>
             <p>
         </div>
+        <div>
         <br/>
         <br/>
         <br/>
@@ -101,7 +162,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
 
         // create div
         var commentGrid = document.createElement("div");
-        commentGrid.id = "commentGrid";
+        commentGrid.id = commentid;
         commentGrid.innerHTML = ScreenGridHtml;
         //insert user image and name
         var imageTag = commentGrid.getElementsByTagName("img");
@@ -136,6 +197,14 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
         var timenode = document.createTextNode(time);
         pTags[8].appendChild(timenode);
         pTags[8].setAttribute("style", "width:100%;text-align:right;margin-top:32px")
+        //ccomment
+        var aTags =  commentGrid.getElementsByTagName("a");
+        var cnode = document.createTextNode("评论");
+        aTags[0].appendChild(cnode);
+        aTags[0].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px;");
+        aTags[0].setAttribute("class", "comments");
+        aTags[0].setAttribute("href", "#");
+        aTags[0].setAttribute("onclick", "ccomments(this.parentElement.parentElement)");
 
         //css
         var divTags = commentGrid.getElementsByTagName("div");
@@ -143,7 +212,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time) {
         divTags[1].setAttribute("class", "row text-center");
         divTags[2].setAttribute("class", "row");
         divTags[0].setAttribute("style", "width:70%;border-bottom:1px #e4e4e4 solid;");
-        divTags[2].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;");
+        divTags[3].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;");
         var tableTag = commentGrid.getElementsByTagName("table");
         tableTag[0].setAttribute("style", "width:70%; margin-top:16px;border-bottom:1px #e4e4e4 solid");
         return commentGrid;
@@ -156,26 +225,16 @@ function setComments() {//get comments list from service
     }).done(function(data){
         var imgurl = "../../static/ratemycourse/images/user.png";
         var parents = document.getElementById("commentDiv");
-        var comment = document.getElementById("commentGrid");
-        if (comment) {
-            parents.removeChild(comment);
-        }
         for(var i=0; i<data.comments.length; i++){
             //generate a new row
             var cmt = data.comments[i]
-            var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time);
+            var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId);
+        // var Grid = generateGrid(imgurl, "unkown", "2017 秋季", "罗杰", "5.0", "dsfkjhue", "2017/11/13");
             //insert this new row
             parents.appendChild(Grid);
         }
     })
 }
-//var imgurl = {{userimg_list|safe}};
-//var userName = {{userName_list|safe}};
-//var iTerm = {{term_list|safe}};
-//var iTeacher = {{teacher_list|safe}};
-//var iTotal = {{total_list|safe}};
-//var text = {{text_list|safe}};
-//var time = {{time_list|safe}};
 
 $(document).ready(function () {
     // Form validation for Sign in / Sign up forms

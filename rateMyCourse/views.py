@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+﻿from django.shortcuts import render, get_list_or_404, get_object_or_404
 from rateMyCourse.models import *
 import json
 from urllib import request, parse
@@ -276,7 +276,7 @@ def getDiscuss(request):
             })
     return HttpResponse(json.dumps({
         'statCode': 0,
-        'comments': disList,
+        'discusses': disList,
         }))
 
 def getTeachers(request):
