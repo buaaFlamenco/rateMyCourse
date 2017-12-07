@@ -69,9 +69,15 @@ function validateSignIn() {
     }
   })
 }
-function cfmclick(id, inputnode){
+function cfmclick(node){
   if($.cookie('username') == undefined){
     alert("please log in first!");
+    return false;
+  }
+  var id = $(node).parents(".commentGrid").attr("id");
+  var text = $(node).prev().val();
+  if(text==null){
+    alert("please enter words!");
     return false;
   }
   $.ajax("/submitDiscuss/", {
@@ -119,7 +125,7 @@ function ccomments(node){
     divnode.appendChild(cfmnode);
     cfmnode.setAttribute("class", "cfmbutton");
     var btnnode = document.createTextNode("发送");
-    cfmnode.setAttribute("onclick", "cfmclick(node.id, inputnode)");
+    cfmnode.setAttribute("onclick", "cfmclick(this)");
     cfmnode.appendChild(btnnode);
     $.ajax('/getDiscuss', {
         dataType: 'json',
@@ -188,6 +194,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
 
         // create div
         var commentGrid = document.createElement("div");
+        commentGrid.setAttribute("class", "commentGrid");
         commentGrid.id = commentid;
         commentGrid.innerHTML = ScreenGridHtml;
         //insert user image and name
