@@ -69,42 +69,13 @@ function validateSignIn() {
     }
   })
 }
-function cfmclick(node){
-  if($.cookie('username') == undefined){
-    alert("please log in first!");
-    return false;
-  }
-  var id = $(node).parents(".commentGrid").attr("id");
-  var text = $(node).prev().val();
-  if(text==null){
-    alert("please enter words!");
-    return false;
-  }
-  $.ajax("/submitDiscuss/", {
-    dataType: 'json',
-    type: 'POST',
-    traditional: true,
-    data: {
-      'username': $.cookie('username'),
-      'discuss': inputnode.value,
-      'comment_id': id,
-    }
-  }).done(function (data) {
-    if(data.statCode == 0){
-      alert("your comment submited succesfully!")
-      window.location.href = '../'
-    }
-    else {
-      alert(data.errormessage)
-    }
-  });
-}
-function ccomments(node){
+
+function ccomments(node,j){
     console.log(node.id);
     var c =  node.getElementsByTagName("ul");
     if(c.length!=0){
         node.removeChild(c[0]);
-        return;
+        if(j==1) return;
     }
     var ulnode = document.createElement("ul");
     node.appendChild(ulnode);
@@ -132,7 +103,7 @@ function ccomments(node){
         data: {'iId': node.id},
     }).done(function(data){
         for(var i=0; i< data.discusses.length; i++){
-            var dis = discusses[i];
+            var dis = data.discusses[i];
             var lnode1 = document.createElement("li");
             //time
             var tdivnode = document.createElement("div");
@@ -158,7 +129,37 @@ function ccomments(node){
         }
     })
 }
+function cfmclick(node){
+  if($.cookie('username') == undefined){
+    alert("please log in first!");
+    return false;
+  }
+  var id = $(node).parents(".commentGrid").attr("id");
+  var text = $(node).prev().val();
+  if(text==null){
+    alert("please enter words!");
+    return false;
+  }
+  $.ajax("/submitDiscuss/", {
+    dataType: 'json',
+    type: 'POST',
+    traditional: true,
+    data: {
+      'username': $.cookie('username'),
+      'discuss': text,
+      'comment_id': id,
+    }
+  }).done(function (data) {
+    if(data.statCode == 0){
+      alert("your comment submited succesfully!");
+      ccomments($(node).parents(".commentGrid")[0], 0);
+    }
+    else {
+      alert(data.errormessage);
 
+    }
+  });
+}
 function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, commentid) {
     var ScreenGridHtml = `
         <div>
@@ -237,13 +238,13 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         aTags[0].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px;");
         aTags[0].setAttribute("class", "comments");
         aTags[0].setAttribute("href", "#");
-        aTags[0].setAttribute("onclick", "ccomments(this.parentElement.parentElement)");
+        aTags[0].setAttribute("onclick", "ccomments(this.parentElement.parentElement, 1)");
 
         //css
         var divTags = commentGrid.getElementsByTagName("div");
         divTags[0].setAttribute("class", "row text-center");
         divTags[1].setAttribute("class", "row text-center");
-        divTags[2].setAttribute("class", "row");
+        divTags[2].setAttribute("class", "text-center");
         divTags[0].setAttribute("style", "width:70%;border-bottom:1px #e4e4e4 solid;");
         divTags[3].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;");
         var tableTag = commentGrid.getElementsByTagName("table");
