@@ -69,6 +69,30 @@ function validateSignIn() {
     }
   })
 }
+function cfmclick(id, inputnode){
+  if($.cookie('username') == undefined){
+    alert("please log in first!");
+    return false;
+  }
+  $.ajax("/submitDiscuss/", {
+    dataType: 'json',
+    type: 'POST',
+    traditional: true,
+    data: {
+      'username': $.cookie('username'),
+      'discuss': inputnode.value,
+      'comment_id': id,
+    }
+  }).done(function (data) {
+    if(data.statCode == 0){
+      alert("your comment submited succesfully!")
+      window.location.href = '../'
+    }
+    else {
+      alert(data.errormessage)
+    }
+  });
+}
 function ccomments(node){
     console.log(node.id);
     var c =  node.getElementsByTagName("ul");
@@ -95,6 +119,7 @@ function ccomments(node){
     divnode.appendChild(cfmnode);
     cfmnode.setAttribute("class", "cfmbutton");
     var btnnode = document.createTextNode("发送");
+    cfmnode.setAttribute("onclick", "cfmclick(node.id, inputnode)");
     cfmnode.appendChild(btnnode);
     $.ajax('/getDiscuss', {
         dataType: 'json',
@@ -127,6 +152,7 @@ function ccomments(node){
         }
     })
 }
+
 function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, commentid) {
     var ScreenGridHtml = `
         <div>
@@ -196,7 +222,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         //inset time
         var timenode = document.createTextNode(time);
         pTags[8].appendChild(timenode);
-        pTags[8].setAttribute("style", "width:100%;text-align:right;margin-top:32px")
+        pTags[8].setAttribute("style", "float:left;text-align:left;margin-top:32px")
         //ccomment
         var aTags =  commentGrid.getElementsByTagName("a");
         var cnode = document.createTextNode("评论");

@@ -358,6 +358,33 @@ def submitComment(request):
         'statCode': 0,
         }))
 
+def submitDiscuss(request):
+    addHitCount()
+    try:
+        username = request.POST['username']
+        discuss = request.POST['discuss']
+        comment_id = request.POST['comment_id']
+        newmsg = 1
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'post information not complete! ',
+            }))
+    # print(rate, teacher)
+    # print(cset)
+    # assert(len(cset) == 1)
+    # print(anonymous)
+    Discuss(
+        content=discuss,
+        time=timezone.now(),
+        user=User.objects.get(username=username),
+        newmsg=newmsg,
+        comment=Comment.objects.get(comment_id=comment_id),
+        ).save()
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        }))
+
 
 def userPage(request, username):
 	user = get_object_or_404(User, username=username)

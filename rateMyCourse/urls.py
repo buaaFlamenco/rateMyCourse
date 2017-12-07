@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^signIn/$', views.signIn, name='signIn'),
     url(r'^signUp/$', views.signUp, name='signUp'),
     url(r'^submitComment/$', views.submitComment, name='submitComment'),
+    url(r'^submitDiscuss/$', views.submitDiscuss, name='submitDiscuss'),
 
     #TMP GET IN INDEX
     url(r'^getSchool/$', views.getSchool, name='getSchool'),
