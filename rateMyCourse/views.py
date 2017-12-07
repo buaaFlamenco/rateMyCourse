@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+﻿from django.shortcuts import render, get_list_or_404, get_object_or_404
 from rateMyCourse.models import *
 import json
 from urllib import request, parse
 from django.http import HttpResponse
 from django.utils import timezone
+import hashlib
 
 # Create your views here.
 
@@ -252,10 +253,32 @@ def getComment(request):
                 'iTerm': cmt.term,
                 'iTeacher': ','.join([t.name for t in cmt.course.teacher_set.all()]),
                 'iTotal': cmt.total_score,
+                'iId': cmt.id,
                 })
     return HttpResponse(json.dumps({
         'statCode': 0,
         'comments': cmtList,
+        }))
+
+def getDiscuss(request):
+    try:
+        discusses = Discuss.objects.filter(comment_id=request.GET['iId'])
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'can not get comment_id or comment_id not exists',
+            }))
+    disList = []
+    for discuss in discusses:
+        disList.append({
+            'userName': discuss.user.username,
+            'text': discuss.content.replace("\n", "<br/>"),
+            'time': discuss.time.strftime('%y/%m/%d'),
+            'discuss_id': discuss.id,
+            })
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        'discusses': disList,
         }))
 
 def getTeachers(request):
@@ -336,9 +359,42 @@ def submitComment(request):
         'statCode': 0,
         }))
 
+def submitDiscuss(request):
+    addHitCount()
+    try:
+        username = request.POST['username']
+        discuss = request.POST['discuss']
+        comment_id = request.POST['comment_id']
+        newmsg = 1
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'post information not complete! ',
+            }))
+    Discuss(
+        content=discuss,
+        time=timezone.now(),
+        user=User.objects.get(username=username),
+        newmsg=newmsg,
+        comment=Comment.objects.get(id=comment_id),
+        ).save()
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        }))
+
 
 def userPage(request, username):
 	user = get_object_or_404(User, username=username)
+	try:
+		pwd = request.POST['password']
+	except:
+		pwd = ""
+	md5 = hashlib.md5()
+	md5.update(user.password.encode('utf-8'))
+	if(pwd == md5.hexdigest()):
+		cmtList = user.comment_set.all()
+	else:
+		cmtList = user.comment_set.filter(anonymous=False)
 	return render(request, "rateMyCourse/userPage.html", {
 		'userName': username,
 		'assessments': [
@@ -349,7 +405,7 @@ def userPage(request, username):
 				'likeCount': cmt.support_set.count(),
 				'commentCount': cmt.discuss_set.count(),
 			}
-			for cmt in user.comment_set.all()
+			for cmt in cmtList
 		],
 		'discussions': sorted([
 			{
@@ -360,7 +416,7 @@ def userPage(request, username):
 				'originalContent': dsc.comment.content,
 				'newmsg': dsc.newmsg,
 			}
-			for cmt in user.comment_set.all()
+			for cmt in cmtList
 				for dsc in cmt.discuss_set.all()
 		], key=lambda t: not t['newmsg'])
 	})

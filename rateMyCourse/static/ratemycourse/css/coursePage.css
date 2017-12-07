@@ -20,3 +20,20 @@
   margin-left: 32px;
   margin-top: 48px;
 }
+
+.cfmbutton
+  {
+   margin-top:32px;
+   float:right;  
+   width: 48px;
+   height: 36px;
+   margin: auto;
+   background-color: white;
+   border-color: #bfbfbf;
+  }
+ .texta
+  { 
+      margin-top:32px;
+      width:100%;
+      height:64px;
+  }

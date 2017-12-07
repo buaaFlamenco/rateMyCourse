@@ -14,12 +14,14 @@ urlpatterns = [
     url(r'^signIn/$', views.signIn, name='signIn'),
     url(r'^signUp/$', views.signUp, name='signUp'),
     url(r'^submitComment/$', views.submitComment, name='submitComment'),
+    url(r'^submitDiscuss/$', views.submitDiscuss, name='submitDiscuss'),
 
     #TMP GET IN INDEX
     url(r'^getSchool/$', views.getSchool, name='getSchool'),
     url(r'^getDepartment/$', views.getDepartment, name='getDepartment'),
     url(r'^getCourse/$', views.getCourse, name='getCourse'),
     url(r'^getComment/$', views.getComment, name='getComment'),
+    url(r'^getDiscuss/$', views.getDiscuss, name='getDiscuss'),
     url(r'^getTeachers/$', views.getTeachers, name='getTeachers'),
     url(r'^getOverAllRate/$', views.getOverAllRate, name='getOverAllRate'),
 
