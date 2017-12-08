@@ -27,4 +27,34 @@ urlpatterns = [
 
     url(r'^user/(?P<username>.+)/$', views.userPage, name='userPage'),
 
+    # 普通访问这个url返回信息不包含匿名信息
+    # 要包含匿名信息需要发POST请求，请求中包含password，这里面是md5加密后的密码。
+    # 加密后的密码已经存到cookie中，直接$.cookie('password')就能拿到
+
+
+    url(r'^addComment/(?P<commentID>[0-9A-Z]+)/$', views.addCommentPage, name='addCommentPage'),
+    url(r'^changeComment/$', views.changeComment, name='changeComment'),
+
+    # post格式： {
+    # 'comment_id': ...
+    # 'comment_add': 要增加的评价内容
+    # 'password': 加密后的密码
+    # }
+
+    url(r'^delComment', views.delComment, name='delComment'),
+
+    # post格式： {
+    # 'comment_id': ...
+    # 'password': ...
+    # }
+
+    url(r'^changeSupport', views.changeSupport, name='changeSupport'),
+
+    # post格式： {
+    # 'comment_id': ...
+    # 'username': ...
+    # 'password': ...
+    # }
+
+
 ]

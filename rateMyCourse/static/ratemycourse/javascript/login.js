@@ -70,13 +70,14 @@ function validateSignIn() {
 }
 
 function Func_signUp() {
+  pwd = $("#inputPassword").val()
   $.ajax("/signUp/", {
     dataType: 'json',
     type: 'POST',
     data: {
       "username": $("#inputUsername").val(),
       "mail": $("#inputEmail").val(),
-      "password": $("#inputPassword").val(),
+      "password": pwd,
     }
   }).done(function(data) {
     if (data.statCode != 0) {
@@ -87,18 +88,20 @@ function Func_signUp() {
       $("#menuUser").show()
       $("#navUser").text(data.username)
       $.cookie('username', data.username, {path: '/'})
+      $.cookie('password', md5(pwd), {path: '/'})
     }
   })
   return false
 }
 
 function Func_signIn() {
+  pwd = $("#password").val()
   $.ajax("/signIn/", {
     dataType: 'json',
     type: 'POST',
     data: {
       "username": $("#username").val(),
-      "password": $("#password").val()
+      "password": pwd,
     }
   }).done(function(data) {
     if(data.statCode != 0) {
@@ -109,6 +112,7 @@ function Func_signIn() {
       $("#menuUser").show()
       $("#navUser").text(data.username)
       $.cookie('username', data.username, {path: '/'})
+      $.cookie('password', md5(pwd), {path: '/'})
     }
   })
   return false
@@ -119,5 +123,6 @@ function Func_signOut() {
   $("#menuUser").hide()
   $("#menuLogin").show()
   $.removeCookie('username', {path: '/'})
+  $.removeCookie('password', {path: '/'})
   return false
 }

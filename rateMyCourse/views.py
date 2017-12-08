@@ -426,3 +426,128 @@ def userPage(request, username):
 				for dsc in cmt.discuss_set.all()
 		], key=lambda t: not t['newmsg'])
 	})
+
+
+def addCommentPage(request, commentID):
+    print(commentID)
+    comment = get_object_or_404(Comment, id=int(commentID))
+    return render(request, "rateMyCourse/addRatePage.html", {
+        'course': {
+            'name': comment.course.name,
+            'school': comment.course.department.school.name,
+            'department': comment.course.department.name,
+            'term': comment.term,
+            'teacher': comment.course.teacher_set,
+            },
+        'originalRate': comment.content,
+        })
+
+
+
+def changeComment(request):
+    try:
+        commentID = request.POST['comment_id']
+        commentAdd = request.POST['comment_add']
+        password = request.POST['password']
+    except Exception as err:
+        print(err)
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'post information not complete! ',
+            }))
+
+    try:
+        comment = Comment.objects.get(id=commentID) 
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'statCode': -2,
+            'errormessage': 'this id is not matched with any comment',
+            }))
+
+    md5 = hashlib.md5()
+    md5.update(comment.user.password.encode('utf-8'))
+    if(password != md5.hexdigest()):
+        return HttpResponse(json.dumps({
+            'statCode': -3,
+            'errormessage': 'password validate failed',
+            }))
+
+    comment.content += '\n\n'+commentAdd
+    comment.save()
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        }))
+
+def delComment(request):
+    try:
+        commentID = request.POST['comment_id']
+        password = request.POST['password']
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'post information not complete! ',
+            }))
+    try:
+        comment = Comment.objects.get(id=commentID) 
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'statCode': -2,
+            'errormessage': 'this id is not matched with any comment',
+            }))
+
+    md5 = hashlib.md5()
+    md5.update(comment.user.password.encode('utf-8'))
+    if(md5.hexdigest() != password):
+        return HttpResponse(josn.dumps({
+            'statCode': -2,
+            'errormessage': 'password validate failed',
+            }))
+
+    comment.delete()
+    return HttpResponse(json.dumps({
+        'statCode': 0,
+        }))
+
+def changeSupport(request):
+    print(request.POST)
+    try:
+        commentID = request.POST['comment_id']
+        username = request.POST['username']
+        password = request.POST['password']
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'post information not complete! ',
+            }))
+    try:
+        comment = Comment.objects.get(id=commentID) 
+        user = User.objects.get(username=username)
+    except Exception as err:
+        return HttpResponse(json.dumps({
+            'statCode': -2,
+            'errormessage': 'this commentID or username is not matched with any ',
+            }))
+
+    md5 = hashlib.md5()
+    md5.update(user.password.encode('utf-8'))
+    if(md5.hexdigest() != password):
+        return HttpResponse(json.dumps({
+            'statCode': -3,
+            'errormessage': 'password validate failed',
+            }))
+
+    try:
+        support=Support.objects.get(comment=comment,user=user)
+    except Exception as supportFlag:
+        Support(
+            comment=comment,
+            user=user,
+            ).save()
+        return HttpResponse(json.dumps({
+            'statCode': 0,
+            }))
+
+    support.delete()
+    return HttpResponse(json.dumps({
+        'statCode': 1,
+        }))
