@@ -82,6 +82,7 @@ function Func_signUp() {
     if (data.statCode != 0) {
       alert(data.errormessage)
     } else {
+      location.reload();
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
@@ -103,6 +104,7 @@ function Func_signIn() {
     if(data.statCode != 0) {
       alert(data.errormessage)
     } else {
+      location.reload();
       $("#menuLogin").hide()
       $("#menuUser").show()
       $("#navUser").text(data.username)
@@ -113,6 +115,7 @@ function Func_signIn() {
 }
 
 function Func_signOut() {
+  location.reload()
   $("#menuUser").hide()
   $("#menuLogin").show()
   $.removeCookie('username', {path: '/'})
