@@ -239,6 +239,12 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         aTags[0].setAttribute("class", "comments");
         aTags[0].setAttribute("href", "#");
         aTags[0].setAttribute("onclick", "ccomments(this.parentElement.parentElement, 1)");
+        var dnode = document.createTextNode("删除");
+        aTags[1].appendChild(dnode);
+        aTags[1].setAttribute("href", "#");
+        aTags[1].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px; display:none");
+        aTags[1].setAttribute("class", "delete");
+        aTags[1].setAttribute("onclick", "del(this)");
 
         //css
         var divTags = commentGrid.getElementsByTagName("div");
@@ -253,30 +259,74 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
 }
 
 function setComments() {//get comments list from service
-    $.ajax('/getComment', {
-        dataType: 'json',
-        data: {'course_number': window.location.pathname.split('/')[2]},
-    }).done(function(data){
-        var imgurl = "../../static/ratemycourse/images/user.png";
-        var parents = document.getElementById("commentDiv");
-        for(var i=0; i<data.comments.length; i++){
-            //generate a new row
-            var cmt = data.comments[i]
-            var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId);
-        // var Grid = generateGrid(imgurl, "unkown", "2017 秋季", "罗杰", "5.0", "dsfkjhue", "2017/11/13");
-            //insert this new row
-            parents.appendChild(Grid);
-        }
-    })
+    if($.cookie('username') == undefined){
+        $.ajax('/getComment', {
+            dataType: 'json',
+            data: {
+                'course_number': window.location.pathname.split('/')[2]
+            },
+        }).done(function(data){
+            var imgurl = "../../static/ratemycourse/images/user.png";
+            var parents = document.getElementById("commentDiv");
+            var child = parents.children;
+            if(child.length!=0){
+               $("#commentDiv").empty();
+            }
+            for(var i=0; i<data.comments.length; i++){
+                //generate a new row
+                var cmt = data.comments[i]
+                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId);
+                //insert this new row
+                parents.appendChild(Grid);
+            }
+        })
+    }else{
+        $.ajax('/getComment', {
+            dataType: 'json',
+            data: {
+                'course_number': window.location.pathname.split('/')[2],
+                'username': $.cookie('username'),
+            },
+        }).done(function(data){
+            var imgurl = "../../static/ratemycourse/images/user.png";
+            var parents = document.getElementById("commentDiv");
+            var child = parents.children;
+            if(child.length!=0){
+               $("#commentDiv").empty();
+            }
+            for(var i=0; i<data.comments.length; i++){
+                //generate a new row
+                var cmt = data.comments[i]
+                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId);
+                //insert this new row
+                parents.appendChild(Grid);
+                //show delete
+                if(cmt.isSelf==1) Grid.getElementsByClassName('delete')[0].style.display='block';
+            }
+        })
+    }
+    
 }
-
+function del(node){
+   var id = node.parentElement.parentElement.id;
+   console.log(id);
+   $.ajax('/delComment', {
+            dataType: 'json',
+            data: {
+                'course_number': window.location.pathname.split('/')[2],
+                'comment_id': id
+            },
+   }).done(function(data){
+        setComments();
+   })
+  }
 $(document).ready(function () {
     // Form validation for Sign in / Sign up forms
     validateSignUp()
     validateSignIn()
 
     // Login widget set according to cookie
-    if ($.cookie('username') == undefined) {
+    if ($.cookie('username') == undefined) {$
         $("#menuUser").hide()
         $("#menuLogin").show()
     }
