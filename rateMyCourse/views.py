@@ -237,6 +237,11 @@ def getCourse(request):
 
 def getComment(request):
     try:
+        username = request.GET['username']
+    except Exception:
+        username = None
+
+    try:
         courses = Course.objects.filter(number=request.GET['course_number'])
     except Exception:
         return HttpResponse(json.dumps({
@@ -254,6 +259,7 @@ def getComment(request):
                 'iTeacher': ','.join([t.name for t in cmt.course.teacher_set.all()]),
                 'iTotal': cmt.total_score,
                 'iId': cmt.id,
+                'isSelf': 1 if(cmt.user.username == username) else 0,
                 })
     return HttpResponse(json.dumps({
         'statCode': 0,
