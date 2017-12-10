@@ -41,14 +41,14 @@ urlpatterns = [
     # 'password': 加密后的密码
     # }
 
-    url(r'^delComment', views.delComment, name='delComment'),
+    url(r'^delComment/$', views.delComment, name='delComment'),
 
     # post格式： {
     # 'comment_id': ...
     # 'password': ...
     # }
 
-    url(r'^changeSupport', views.changeSupport, name='changeSupport'),
+    url(r'^changeSupport/$', views.changeSupport, name='changeSupport'),
 
     # post格式： {
     # 'comment_id': ...
@@ -56,5 +56,6 @@ urlpatterns = [
     # 'password': ...
     # }
 
+    url(r'^delDiscuss/$', views.delDiscuss, name='delDiscuss'),
 
 ]

@@ -498,7 +498,7 @@ def delComment(request):
     md5 = hashlib.md5()
     md5.update(comment.user.password.encode('utf-8'))
     if(md5.hexdigest() != password):
-        return HttpResponse(josn.dumps({
+        return HttpResponse(json.dumps({
             'statCode': -2,
             'errormessage': 'password validate failed',
             }))
@@ -550,4 +550,37 @@ def changeSupport(request):
     support.delete()
     return HttpResponse(json.dumps({
         'statCode': 1,
+        }))
+
+
+def delDiscuss(request):
+    try:
+        discussID = request.POST['discuss_id']
+        password = request.POST['password']
+    except:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'post information not complete! ',
+            }))
+
+    try:
+        discuss = Discuss.objects.get(id=DiscussID)
+    except:
+        return HttpResponse(json.dumps({
+            'statCode': -2;
+            'errormessage': 'this id is bot matched with any discuss',
+            }))
+
+    md5 = hashlib.md5()
+    md5.update(discuss.user.password)
+    if(md5.hexdigest() != password):
+        return HttpResponse(json.dumps({
+            'statCode': -3,
+            'errormessage': 'password validate failed',
+            }))
+
+    discuss.delete()
+
+    return HttpResponse(json.dumps({
+        'statCode': 0,
         }))
