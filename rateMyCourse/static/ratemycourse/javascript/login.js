@@ -114,7 +114,6 @@ function Func_signIn() {
       $.cookie('password', md5(pwd), {path: '/'})
     }
   })
-  location.reload()
 }
 
 function Func_signOut() {
