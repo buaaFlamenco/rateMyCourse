@@ -114,6 +114,8 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
             <a>
             <a>
             <a>
+            <a>
+            <a>
             <p>
         </div>
         <div>
@@ -175,6 +177,21 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         aTags[1].setAttribute("class", "delete");
         aTags[1].setAttribute("onclick", "del(this)");
 
+        var chnode = document.createTextNode("修改");
+        aTags[2].appendChild(chnode);
+        aTags[2].setAttribute("href", "#");
+        aTags[2].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px; display:none");
+        aTags[2].setAttribute("class", "change");
+        aTags[2].setAttribute("onclick", "changeclick(this)");
+
+        var anode = document.createElement("i");
+        anode.setAttribute("class", "fa fa-thumbs-o-up");
+        aTags[3].appendChild(anode);
+        aTags[3].setAttribute("style", "float:right;margin-top:32px;margin-right:16px;");
+        aTags[3].setAttribute("class", "good");
+        aTags[3].setAttribute("onclick", "gclick(this)");
+        
+
         //css
         var divTags = commentGrid.getElementsByTagName("div");
         divTags[0].setAttribute("class", "row text-center");
@@ -230,7 +247,10 @@ function setComments() {//get comments list from service
                 //insert this new row
                 parents.appendChild(Grid);
                 //show delete
-                if(cmt.isSelf==1) Grid.getElementsByClassName('delete')[0].style.display='block';
+                if(cmt.isSelf==1){
+                    Grid.getElementsByClassName('delete')[0].style.display='block';
+                    Grid.getElementsByClassName('change')[0].style.display='block';
+                }
             }
         })
     }
@@ -239,16 +259,53 @@ function setComments() {//get comments list from service
 function del(node){
    var id = node.parentElement.parentElement.id;
    console.log(id);
-   $.ajax('/delComment', {
+
+   $.ajax("/delComment/", {
+    dataType: 'json',
+    type: 'POST',
+    traditional: true,
+    data: {
+      'comment_id': id,
+      'password':$.cookie('password'),
+    }
+  }).done(function (data) {
+    if(data.statCode == 0){
+     setComments();
+    }
+    else {
+      alert(data.errormessage)
+    }
+  })
+  }
+ function changeclick(node){
+   var id = node.parentElement.parentElement.id;
+   console.log(id);
+   window.location.href="/addComment/"+id;
+  }
+ function gclick(node){
+  var id = node.parentElement.parentElement.id;
+  $.ajax('/changeSupport/', {
             dataType: 'json',
+            type: 'POST',
+            traditional: true,
             data: {
-                'course_number': window.location.pathname.split('/')[2],
-                'comment_id': id
+                'comment_id': id,
+                'username':$.cookie('username'),
+                'password':$.cookie('password')
             },
    }).done(function(data){
-        setComments();
+        $("i").animate({
+            //height:'+=16px',
+            //width:'+=16px'
+            fontSize:'+=8px'
+        },"fast");
+        $("i").animate({
+           // height:'-=16px',
+            //width:'-=16px'
+            fontSize:'-=8px'
+        },"fast");
    })
-  }
+}
 $(document).ready(function () {
     // Form validation for Sign in / Sign up forms
     validateSignUp()
