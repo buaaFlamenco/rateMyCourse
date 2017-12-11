@@ -403,6 +403,7 @@ def userPage(request, username):
 		cmtList = user.comment_set.filter(anonymous=False)
 	return render(request, "rateMyCourse/userPage.html", {
 		'userName': username,
+		'userimgurl': "../../static/ratemycourse/images/user.png", 
 		'assessments': [
 			{
 				'courseName': cmt.course.name,
