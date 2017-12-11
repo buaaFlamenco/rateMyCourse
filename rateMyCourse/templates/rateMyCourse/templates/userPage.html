@@ -36,9 +36,9 @@
     <hr id="optionBar" class="float" width="7%">
     <hr>
     <!-- Evaluations -->
-    <div id="evaluations" class="container">
+    <div id="evaluations">
       {% for assessment in assessments %}
-      <div class="row shortRow">
+      <div class="row shortRow pt-3">
         <div class="col mr-auto">
           <a href="../../course/{{assessment.course_id}}" class="btn"><h5>{{assessment.courseName}}</h5></a>
         </div>
@@ -47,11 +47,11 @@
         </div>
       </div>
       <div class="row shortRow">
-        <p class="shortRow">
+        <p class="shortRow ml-4">
           {{assessment.content}}
         </p>
       </div>
-      <div class="row shortRow">
+      <div class="row shortRow pl-3">
         <div class="col col-auto">
           <small>
           <i class="fa fa-thumbs-up" aria-hidden="true">
@@ -77,9 +77,9 @@
       {% endfor %}
     </div>
     <!-- Discussions -->
-    <div id="discussions" class="container">
+    <div id="discussions">
       {% for discussion in discussions %}
-      <div class="row shortRow">
+      <div class="row shortRow pt-3">
         <div class="col col-md-auto">
           <img src={{discussion.userImage}} />
         </div>
@@ -91,11 +91,11 @@
         </div>
       </div>
       <div class="row shortRow">
-        <p class="shortRow">
+        <p class="shortRow ml-4">
           {{discussion.content}}
         </p>
       </div>
-      <div class="row shortRow">
+      <div class="row shortRow pl-3">
         <blockquote class="shortRow">
           <p class="shorterRow">
             <a href="../../course/{{discussion.course_id}}" class="btn">{{discussion.title}}</a><br/>

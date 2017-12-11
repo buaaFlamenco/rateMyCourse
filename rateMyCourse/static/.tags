@@ -1,5 +1,3 @@
-gulp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/gulpfile.js	/^var gulp = require('gulp');$/;"	variable	line:1
-htmlImport	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/gulpfile.js	/^var htmlImport = require('gulp-html-import');$/;"	variable	line:3
 optionLocation	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/userPage.js	/^var optionLocation = "0px";$/;"	variable	line:1
 optionWidth	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/userPage.js	/^var optionWidth;$/;"	variable	line:2
 optionWidthStr	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/userPage.js	/^var optionWidthStr;$/;"	variable	line:3
@@ -40,6 +38,8 @@ del	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/j
 del	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/coursePage.js	/^function del(node){$/;"	function	line:239
 csrfSafeMethod	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/coursePage.js	/^    function csrfSafeMethod(method) {$/;"	function	line:261
 beforeSend	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/coursePage.js	/^      beforeSend: function(xhr, settings) {$/;"	function	line:266
+gulp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/gulpfile.js	/^var gulp = require('gulp');$/;"	variable	line:1
+htmlImport	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/gulpfile.js	/^var htmlImport = require('gulp-html-import');$/;"	variable	line:3
 validateSignUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignUp() {$/;"	function	line:1
 submitHandler	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^    submitHandler: function() {$/;"	function	line:3
 validateSignUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignUp() {$/;"	function	line:1
@@ -48,9 +48,9 @@ submitHandler	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/rate
 validateSignIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignIn() {$/;"	function	line:44
 Func_signUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signUp() {$/;"	function	line:72
 Func_signIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signIn() {$/;"	function	line:96
-Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:120
-Func_signIn.Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:120
-Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:128
-Func_signIn.Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:128
-setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:133
-Func_signIn.setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:133
+Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:119
+Func_signIn.Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:119
+Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:127
+Func_signIn.Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:127
+setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:132
+Func_signIn.setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:132

@@ -583,14 +583,14 @@ div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCours
 a	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <a href="javascript:void(0)" class="btn" id="choiceDiscussions" onclick="viewDiscussions()">讨论<\/a>$/;"	function	line:33
 hr	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^    <hr id="optionBar" class="float" width="7%">$/;"	function	line:36
 hr	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^    <hr>$/;"	function	line:37
-div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^    <div id="evaluations" class="container">$/;"	function	line:39
-div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow">$/;"	function	line:41
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^    <div id="evaluations">$/;"	function	line:39
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow pt-3">$/;"	function	line:41
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <div class="col mr-auto">$/;"	function	line:42
 a	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^          <a href="..\/..\/course\/{{assessment.course_id}}" class="btn"><h5>{{assessment.courseName}}<\/h5><\/a>$/;"	function	line:43
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <div class="col col-auto">$/;"	function	line:45
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow">$/;"	function	line:49
-p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <p class="shortRow">$/;"	function	line:50
-div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow">$/;"	function	line:54
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <p class="shortRow ml-4">$/;"	function	line:50
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow pl-3">$/;"	function	line:54
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <div class="col col-auto">$/;"	function	line:55
 small	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^          <small>$/;"	function	line:56
 i	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^          <i class="fa fa-thumbs-up" aria-hidden="true">$/;"	function	line:57
@@ -602,16 +602,16 @@ i	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/
 a	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^            <a href="javascript:void(0)" class="btn textBtn">$/;"	function	line:69
 small	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^              <small>{{assessment.commentCount}}<\/small>$/;"	function	line:70
 hr	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <hr class="shortRow">$/;"	function	line:76
-div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^    <div id="discussions" class="container">$/;"	function	line:80
-div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow">$/;"	function	line:82
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^    <div id="discussions">$/;"	function	line:80
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow pt-3">$/;"	function	line:82
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <div class="col col-md-auto">$/;"	function	line:83
 img	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^          <img src={{discussion.userImage}} \/>$/;"	function	line:84
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <div class="col mr-auto">$/;"	function	line:86
 a	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^          <a href="javascript:void(0)" class="btn">{{discussion.userName}}<\/a>$/;"	function	line:87
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <div class="col col-md-auto">$/;"	function	line:89
 div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow">$/;"	function	line:93
-p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <p class="shortRow">$/;"	function	line:94
-div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow">$/;"	function	line:98
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <p class="shortRow ml-4">$/;"	function	line:94
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^      <div class="row shortRow pl-3">$/;"	function	line:98
 blockquote	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^        <blockquote class="shortRow">$/;"	function	line:99
 p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^          <p class="shorterRow">$/;"	function	line:100
 a	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/userPage.html	/^            <a href="..\/..\/course\/{{discussion.course_id}}" class="btn">{{discussion.title}}<\/a><br\/>$/;"	function	line:101

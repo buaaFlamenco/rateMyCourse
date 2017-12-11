@@ -343,6 +343,16 @@ def submitComment(request):
     # print(cset)
     # assert(len(cset) == 1)
     crs = cset[0]
+
+    if(Comment.objects.filter(
+    	course=crs, user=User.objects.get(username=username)
+    	).count() >= 2):
+    	return HttpResponse(json.dumps({
+    		'statCode': -2,
+    		'errormessage': 'you have made 3 comments ont this course',
+    		}))
+
+
     # print(anonymous)
     Comment(
         anonymous=True if anonymous == 'true' else False,
