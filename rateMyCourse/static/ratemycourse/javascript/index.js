@@ -23,15 +23,7 @@ $(document).ready(function() {
   validateSignIn()
 
   // Login widget set according to cookie
-  if($.cookie('username') == undefined) {
-    $("#menuUser").hide()
-    $("#menuLogin").show()
-  }
-  else{
-    $("#menuLogin").hide()
-    $("#menuUser").show()
-    $("#navUser").text($.cookie('username'))
-  }
+  setCookie()
 
   ////////// csrf set up //////////
   function csrfSafeMethod(method) {
@@ -46,9 +38,6 @@ $(document).ready(function() {
       }
   });
   /////////////////////////////////
-
-
-  
 
   $.ajax('/getSchool', {dataType:'json'}).done(function(data) {
     var schoolList = $("#schoolList")

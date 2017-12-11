@@ -1,0 +1,20 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+validateSignUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignUp() {$/;"	function	line:1
+submitHandler	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^    submitHandler: function() {$/;"	function	line:3
+validateSignUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignUp() {$/;"	function	line:1
+validateSignIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignIn() {$/;"	function	line:44
+submitHandler	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^    submitHandler: function() {$/;"	function	line:46
+validateSignIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignIn() {$/;"	function	line:44
+Func_signUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signUp() {$/;"	function	line:72
+Func_signIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signIn() {$/;"	function	line:96
+Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:120
+Func_signIn.Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:120
+Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:128
+Func_signIn.Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:128
+setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:133
+Func_signIn.setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:133

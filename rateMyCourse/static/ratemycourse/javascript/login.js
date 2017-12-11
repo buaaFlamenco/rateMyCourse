@@ -91,7 +91,6 @@ function Func_signUp() {
       $.cookie('password', md5(pwd), {path: '/'})
     }
   })
-  return false
 }
 
 function Func_signIn() {
@@ -115,14 +114,30 @@ function Func_signIn() {
       $.cookie('password', md5(pwd), {path: '/'})
     }
   })
-  return false
+  location.reload()
 }
 
 function Func_signOut() {
-  location.reload()
   $("#menuUser").hide()
   $("#menuLogin").show()
   $.removeCookie('username', {path: '/'})
   $.removeCookie('password', {path: '/'})
-  return false
+  location.reload()
+}
+
+function Func_gotoMyPage() {
+  myPageURL = "/user/" + $("#navUser").text()
+  window.location.replace(myPageURL);
+}
+
+function setCookie() {
+  if($.cookie('username') == undefined) {
+    $("#menuUser").hide()
+    $("#menuLogin").show()
+  }
+  else{
+    $("#menuLogin").hide()
+    $("#menuUser").show()
+    $("#navUser").text($.cookie('username'))
+  }
 }

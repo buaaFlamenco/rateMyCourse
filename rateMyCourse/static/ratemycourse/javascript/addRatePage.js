@@ -5,15 +5,7 @@ $(document).ready(function() {
   validateSignIn()
 
   // Login widget set according to cookie
-  if($.cookie("username") == undefined) {
-    $("#menuUser").hide()
-    $("#menuLogin").show()
-  }
-  else{
-    $("#menuLogin").hide()
-    $("#menuUser").show()
-    $("#navUser").text($.cookie("username"))
-  }
+  setCookie()
 
   ////////// csrf set up //////////
   function csrfSafeMethod(method) {
@@ -42,20 +34,20 @@ function Func_submit() {
     }
   }
 
-  $.ajax("/submitComment/", {
+  $.ajax("/changeComment/", {
     dataType: "json",
     type: "POST",
     traditional: true,
     data: {
-      "username": $.cookie("username"),
-      "course_number":window.location.pathname.split("/")[2],
-      "comment": $("#additionalRate").val(),
+      "comment_id": location.pathname.split("/")[2],
+      "comment_add": $("#additionalRate").val(),
+      "password": $.cookie("password")
       // rates
     }
   }).done(function (data) {
     if(data.statCode == 0){
       alert("your comment submited succesfully!")
-      window.location.href = "../"
+      location.href = "../"
     }
     else {
       alert(data.errormessage)

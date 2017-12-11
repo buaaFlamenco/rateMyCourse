@@ -23,4 +23,12 @@ gulp.task('importCommonNavbar', function () {
     gulp.src('../../../templates/rateMyCourse/templates/ratePage.html')
         .pipe(htmlImport('../../../templates/rateMyCourse/components/'))
         .pipe(gulp.dest('../../../templates/rateMyCourse'))
+
+    gulp.src('../../../templates/rateMyCourse/templates/userPage.html')
+        .pipe(htmlImport('../../../templates/rateMyCourse/components/'))
+        .pipe(gulp.dest('../../../templates/rateMyCourse'))
+        
+    gulp.src('../../../templates/rateMyCourse/templates/addRatePage.html')
+        .pipe(htmlImport('../../../templates/rateMyCourse/components/'))
+        .pipe(gulp.dest('../../../templates/rateMyCourse'))
 })
