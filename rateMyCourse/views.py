@@ -406,6 +406,7 @@ def userPage(request, username):
 		'assessments': [
 			{
 				'courseName': cmt.course.name,
+				'course_id': cmt.course.number,
 				'content': cmt.content,
 				'time': cmt.time.strftime('%y/%m/%d'),
 				'likeCount': cmt.support_set.count(),
@@ -416,6 +417,7 @@ def userPage(request, username):
 		'discussions': sorted([
 			{
 				'userName': dsc.user.username,
+				'course_id': dsc.comment.course.number,
 				'content': dsc.content,
 				'time': dsc.time.strftime('%y/%m/%d'),
 				'title': dsc.comment.course.name,
