@@ -418,6 +418,7 @@ def userPage(request, username):
 		'discussions': sorted([
 			{
 				'userName': dsc.user.username,
+				'userimgurl': "../../static/ratemycourse/images/user.png", 
 				'course_id': dsc.comment.course.number,
 				'content': dsc.content,
 				'time': dsc.time.strftime('%y/%m/%d'),
