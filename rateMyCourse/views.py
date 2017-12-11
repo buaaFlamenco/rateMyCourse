@@ -569,7 +569,7 @@ def delDiscuss(request):
         discuss = Discuss.objects.get(id=DiscussID)
     except:
         return HttpResponse(json.dumps({
-            'statCode': -2;
+            'statCode': -2,
             'errormessage': 'this id is bot matched with any discuss',
             }))
 
