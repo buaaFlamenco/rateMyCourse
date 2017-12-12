@@ -17,7 +17,9 @@ function clickSearchButton() {
 
 $(document).ready(function() {
   //alert("!!!")
-
+  // Navbar style settings
+  collapseNavbar()
+  $(window).scroll(collapseNavbar)
   // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()

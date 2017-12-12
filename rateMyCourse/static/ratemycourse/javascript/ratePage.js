@@ -30,6 +30,9 @@ function choose_term(text){
 
 $(document).ready(function() {
   // alert("!!!")
+  // Navbar style settings
+  collapseNavbar()
+  $(window).scroll(collapseNavbar)
   // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()

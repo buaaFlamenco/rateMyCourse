@@ -2,6 +2,9 @@ var optionLocation = "0px";
 var optionWidth;
 var optionWidthStr;
 $(document).ready(function() {
+  // Navbar style settings
+  collapseNavbar()
+  $(window).scroll(collapseNavbar)
   // Set optionBar width
   optionWidth = $(optionColumn).width()
   $("#optionBar").width(optionWidth)

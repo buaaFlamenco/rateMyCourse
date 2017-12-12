@@ -250,17 +250,20 @@ function del(node){
    })
   }
 $(document).ready(function () {
-    // Form validation for Sign in / Sign up forms
-    validateSignUp()
-    validateSignIn()
+  // Navbar style settings
+  collapseNavbar()
+  $(window).scroll(collapseNavbar)
+  // Form validation for Sign in / Sign up forms
+  validateSignUp()
+  validateSignIn()
 
-    // Login widget set according to cookie
-    setCookie()
+  // Login widget set according to cookie
+  setCookie()
 
-  ////////// csrf set up //////////
-    function csrfSafeMethod(method) {
-      // these HTTP methods do not require CSRF protection
-      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+////////// csrf set up //////////
+  function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
   }
   $.ajaxSetup({
       beforeSend: function(xhr, settings) {
