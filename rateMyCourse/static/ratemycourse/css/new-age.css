@@ -100,6 +100,8 @@ section {
           color: white; }
       #mainNav.navbar-shrink {
         border-color: rgba(34, 34, 34, 0.1);
+        border-width: 1px;
+        border-bottom-style: ridge;
         background-color: white; }
         #mainNav.navbar-shrink .navbar-brand {
           color: #222222; }
