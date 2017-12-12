@@ -190,6 +190,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         aTags[3].setAttribute("style", "float:right;margin-top:32px;margin-right:16px;");
         aTags[3].setAttribute("class", "good");
         aTags[3].setAttribute("onclick", "gclick(this)");
+        aTags[3].setAttribute("href", "javascript:void(0)");
         
 
         //css
@@ -294,12 +295,12 @@ function del(node){
                 'password':$.cookie('password')
             },
    }).done(function(data){
-        $("i").animate({
+        $(node).animate({
             //height:'+=16px',
             //width:'+=16px'
             fontSize:'+=8px'
         },"fast");
-        $("i").animate({
+        $(node).animate({
            // height:'-=16px',
             //width:'-=16px'
             fontSize:'-=8px'
