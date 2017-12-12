@@ -3,6 +3,18 @@ from django.db import models
 
 # Create your models here.
 
+class EmailVerifyRecord(models.Model):
+    # 验证码
+    code = models.CharField(max_length=20, verbose_name=u"验证码")
+    name = models.CharField(max_length=50, verbose_name=u"username")
+    # 包含注册验证和找回验证
+    send_time = models.DateTimeField(verbose_name=u"发送时间", default=datetime.datetime.now)
+    class Meta:
+        verbose_name = u"邮箱验证码"
+        verbose_name_plural = verbose_name
+    def __unicode__(self):
+        return '{0}({1})'.format(self.code, self.email)
+
 class School(models.Model):
     # attributes
     name = models.CharField(max_length=50)
@@ -43,6 +55,7 @@ class User(models.Model):
     username = models.CharField(max_length=50, unique=True) # 用户名不可重复
     mail = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
+    is_active = models.BooleanField(default=False)
     # validationState = models.BooleanField(default=False)
     # validationCode = models.CharField(max_length=50)
     def __str__(self):

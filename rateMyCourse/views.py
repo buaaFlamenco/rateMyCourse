@@ -201,6 +201,7 @@ def signIn(request):
             'errormessage': 'wrong password',
             }))
     else:
+        sendRegisterEmail(username, mail)
         return HttpResponse(json.dumps({
             'statCode': 0,
             'username': username,
@@ -598,3 +599,98 @@ def delDiscuss(request):
     return HttpResponse(json.dumps({
         'statCode': 0,
         }))
+
+
+
+from random import Random  # 用于生成随机码
+from django.core.mail import send_mail  # 发送邮件模块
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
+
+# Create your views here.
+
+
+def randomStr(randomlength=8):
+    str = ''
+    chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+    length = len(chars) - 1
+    random = Random()
+    for i in range(randomlength):
+        str += chars[random.randint(0, length)]
+    return str
+
+def sendRegisterEmail(user,receiver):
+
+    #
+    sender = 'tyseven7@163.com'
+    #receiver = 'tyseven7@163.com'
+    #user = '12345'
+    smtpserver = 'smtp.163.com'
+    username = 'tyseven7@163.com'
+    password = 'tyseven7'
+    #
+
+
+    emailRecord = EmailVerifyRecord()
+    # 将给用户发的信息保存在数据库中
+    code = randomStr(16)
+    emailRecord.code = code
+    emailRecord.name = user
+    emailRecord.save()
+
+
+    subject = "公客网站激活"
+    body = "激活链接：10.2.28.123/active/"+code+"/"
+
+
+    msg = MIMEText( body, 'plain', 'utf-8' )
+    msg['Subject'] = Header( subject, 'utf-8' )
+    msg['From'] = Header("公客网站", 'utf-8')
+    msg['To'] =  Header(user, 'utf-8')
+
+    smtp = smtplib.SMTP()
+    smtp.connect( smtpserver )
+    smtp.login( username, password )
+    a = smtp.sendmail( sender, receiver, msg.as_string() )
+    smtp.quit()
+
+    return HttpResponse(emailRecord)
+
+
+def active(request, active_code):
+    try:
+        all_recodes = EmailVerifyRecord.objects.filter(code=active_code)
+    except Exception:
+        return HttpResponse(json.dumps({
+            'statCode': -1,
+            'errormessage': 'no such active_code',
+        }))
+    if all_recodes:
+        for recode in all_recodes:
+            username = recode.name
+            try:
+                user = User.objects.get(username=username)
+            except Exception:
+                return HttpResponse(json.dumps({
+                    'statCode': -3,
+                    'errormessage': 'no such user',
+                    'username': username,
+                }))
+            if user.is_active:
+                return HttpResponse(json.dumps({
+                    'statCode': -4,
+                    'errormessage': 'this user has been actived',
+                    'username': username,
+                }))
+
+            user.is_active = True
+            user.save()
+
+    else:
+        return HttpResponse(json.dumps({
+            'statCode': -2,
+            'errormessage': 'no such active_code',
+        }))
+
+    return HttpResponse(user.username+'  '+str(user.is_active))

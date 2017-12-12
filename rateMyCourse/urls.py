@@ -13,6 +13,7 @@ urlpatterns = [
     #POST
     url(r'^signIn/$', views.signIn, name='signIn'),
     url(r'^signUp/$', views.signUp, name='signUp'),
+    url(r'^active/(?P<active_code>.*)/$', views.active, name="active"),
     url(r'^submitComment/$', views.submitComment, name='submitComment'),
     url(r'^submitDiscuss/$', views.submitDiscuss, name='submitDiscuss'),
 
