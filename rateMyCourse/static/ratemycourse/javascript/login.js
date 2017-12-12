@@ -107,8 +107,8 @@ function Func_signIn() {
       alert(data.errormessage)
     } else {
       location.reload();
-      $("#menuLogin").hide()
-      $("#menuUser").show()
+      $("#navLogin").hide()
+      $("#navUser").show()
       $("#navUser").text(data.username)
       $.cookie('username', data.username, {path: '/'})
       $.cookie('password', md5(pwd), {path: '/'})
@@ -117,8 +117,8 @@ function Func_signIn() {
 }
 
 function Func_signOut() {
-  $("#menuUser").hide()
-  $("#menuLogin").show()
+  $("#navUser").hide()
+  $("#navLogin").show()
   $.removeCookie('username', {path: '/'})
   $.removeCookie('password', {path: '/'})
   location.reload()
@@ -131,12 +131,12 @@ function Func_gotoMyPage() {
 
 function setCookie() {
   if($.cookie('username') == undefined) {
-    $("#menuUser").hide()
-    $("#menuLogin").show()
+    $("#navUser").hide()
+    $("#navLogin").show()
   }
   else{
-    $("#menuLogin").hide()
-    $("#menuUser").show()
+    $("#navLogin").hide()
+    $("#navUser").show()
     $("#navUser").text($.cookie('username'))
   }
 }
