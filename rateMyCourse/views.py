@@ -607,7 +607,7 @@ from django.core.mail import send_mail  # 发送邮件模块
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
-
+from django.conf import settings
 # Create your views here.
 
 
@@ -621,13 +621,9 @@ def randomStr(randomlength=8):
     return str
 
 def sendRegisterEmail(user,receiver):
-    HOST = 'http://conquerors.top/'
-    EMAIL_HOST_USER = 'flamenquer@163.com'
-    EMAIL_HOST_PASSWORD = 'flamenquer1506'
-    EMAIL_HOST = 'smtp.163.com'
     #
 
-
+    print(settings.HOST)
     emailRecord = EmailVerifyRecord()
     # 将给用户发的信息保存在数据库中
     code = randomStr(16)
@@ -637,18 +633,18 @@ def sendRegisterEmail(user,receiver):
 
 
     subject = "公客网站激活"
-    body = "激活链接： "+HOST+"active/"+code+"/"
+    body = "激活链接： "+settings.HOST+"active/"+code+"/"
 
 
     msg = MIMEText( body, 'plain', 'utf-8' )
     msg['Subject'] = Header( subject, 'utf-8' )
-    msg['From'] = 'flamenco<'+EMAIL_HOST_USER+'>'
+    msg['From'] = 'flamenco<'+settings.EMAIL_HOST_USER+'>'
     msg['To'] =  receiver
 
     smtp = smtplib.SMTP()
-    smtp.connect(EMAIL_HOST)
-    smtp.login( EMAIL_HOST_USER, EMAIL_HOST_PASSWORD )
-    a = smtp.sendmail( EMAIL_HOST_USER, receiver, msg.as_string() )
+    smtp.connect(settings.EMAIL_HOST)
+    smtp.login( settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD )
+    a = smtp.sendmail( settings.EMAIL_HOST_USER, receiver, msg.as_string() )
     smtp.quit()
 
     return HttpResponse(emailRecord)
@@ -682,6 +678,7 @@ def active(request, active_code):
 
             user.is_active = True
             user.save()
+            recode.delete()
 
     else:
         return HttpResponse(json.dumps({
@@ -689,4 +686,4 @@ def active(request, active_code):
             'errormessage': 'no such active_code',
         }))
 
-    return HttpResponse(user.username+'  '+str(user.is_active))
+    return render(request, "rateMyCourse/index.html")

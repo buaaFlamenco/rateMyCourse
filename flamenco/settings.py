@@ -29,7 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*',]
 
-
+HOST = 'http://conquerors.top/'
+EMAIL_HOST_USER = 'flamenquer@163.com'
+EMAIL_HOST_PASSWORD = 'flamenquer1506'
+EMAIL_HOST = 'smtp.163.com'
 # Application definition
 
 INSTALLED_APPS = [
