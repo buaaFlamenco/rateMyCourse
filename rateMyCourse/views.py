@@ -686,4 +686,4 @@ def active(request, active_code):
             'errormessage': 'no such active_code',
         }))
 
-    return render(request, "rateMyCourse/index.html")
+    return HttpResponse(user.username+'激活成功')
