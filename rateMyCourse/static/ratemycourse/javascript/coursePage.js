@@ -191,7 +191,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         aTags[3].setAttribute("class", "good");
         aTags[3].setAttribute("onclick", "gclick(this)");
         aTags[3].setAttribute("href", "javascript:void(0)");
-        
+
 
         //css
         var divTags = commentGrid.getElementsByTagName("div");
@@ -308,9 +308,9 @@ function del(node){
    })
 }
 $(document).ready(function () {
-  // Navbar style settings
-  collapseNavbar()
-  $(window).scroll(collapseNavbar)
+  // Animation settings
+  setAnimations()
+  
   // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()

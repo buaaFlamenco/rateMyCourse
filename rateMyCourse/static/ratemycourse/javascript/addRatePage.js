@@ -1,8 +1,8 @@
 $(document).ready(function() {
   // alert("!!!")
-  // Navbar style settings
-  collapseNavbar()
-  $(window).scroll(collapseNavbar)
+  // Animation settings
+  setAnimations()
+
   // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()
