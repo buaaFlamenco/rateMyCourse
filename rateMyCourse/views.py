@@ -621,14 +621,10 @@ def randomStr(randomlength=8):
     return str
 
 def sendRegisterEmail(user,receiver):
-
-    #
-    sender = 'tyseven7@163.com'
-    #receiver = 'tyseven7@163.com'
-    #user = '12345'
-    smtpserver = 'smtp.163.com'
-    username = 'tyseven7@163.com'
-    password = 'tyseven7'
+    HOST = 'http://conquerors.top/'
+    EMAIL_HOST_USER = 'flamenquer@163.com'
+    EMAIL_HOST_PASSWORD = 'flamenquer1506'
+    EMAIL_HOST = 'smtp.163.com'
     #
 
 
@@ -641,18 +637,18 @@ def sendRegisterEmail(user,receiver):
 
 
     subject = "公客网站激活"
-    body = "激活链接：10.2.28.123/active/"+code+"/"
+    body = "激活链接： "+HOST+"active/"+code+"/"
 
 
     msg = MIMEText( body, 'plain', 'utf-8' )
     msg['Subject'] = Header( subject, 'utf-8' )
-    msg['From'] = Header("公客网站", 'utf-8')
-    msg['To'] =  Header(user, 'utf-8')
+    msg['From'] = 'flamenco<'+EMAIL_HOST_USER+'>'
+    msg['To'] =  receiver
 
     smtp = smtplib.SMTP()
-    smtp.connect( smtpserver )
-    smtp.login( username, password )
-    a = smtp.sendmail( sender, receiver, msg.as_string() )
+    smtp.connect(EMAIL_HOST)
+    smtp.login( EMAIL_HOST_USER, EMAIL_HOST_PASSWORD )
+    a = smtp.sendmail( EMAIL_HOST_USER, receiver, msg.as_string() )
     smtp.quit()
 
     return HttpResponse(emailRecord)
