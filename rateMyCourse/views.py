@@ -53,6 +53,7 @@ def signUp(request):
                 'errormessage': 'other error, maybe out of length',
                 }))
     else:
+        sendRegisterEmail(username, mail)
         return HttpResponse(json.dumps({
             'statCode': 0,
             'username': username,
@@ -201,7 +202,6 @@ def signIn(request):
             'errormessage': 'wrong password',
             }))
     else:
-        sendRegisterEmail(username, mail)
         return HttpResponse(json.dumps({
             'statCode': 0,
             'username': username,
