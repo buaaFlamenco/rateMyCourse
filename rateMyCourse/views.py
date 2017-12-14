@@ -252,6 +252,18 @@ def getComment(request):
     cmtList = []
     for c in courses:
         for cmt in c.comment_set.all():
+            snum = 0
+            support = 0
+            cnum = 0
+            sup = Support.objects.filter(comment=cmt)
+            for s in sup:
+                snum = snum+1
+                if(s.user.username == username):
+                    support = 1
+            dis = Discuss.objects.filter(comment=cmt)
+            for d in dis:
+                cnum = cnum+1
+
             cmtList.append({
                 'userName': cmt.user.username if cmt.anonymous == False else '匿名用户',
                 'text': cmt.content.replace("\n", "<br/>"),
@@ -261,6 +273,9 @@ def getComment(request):
                 'iTotal': cmt.total_score,
                 'iId': cmt.id,
                 'isSelf': 1 if(cmt.user.username == username) else 0,
+                'snum': snum,# 点赞总数
+                'cnum': cnum,#讨论总数
+                'support': support,#是否支持
                 })
     return HttpResponse(json.dumps({
         'statCode': 0,
