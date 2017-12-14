@@ -19,9 +19,9 @@ gulp.task('importCommonNavbar', function () {
         .pipe(htmlImport('templates/rateMyCourse/components/'))
         .pipe(gulp.dest('templates/rateMyCourse'))
 
-    gulp.src('../../../templates/rateMyCourse/templates/ratePage.html')
-        .pipe(htmlImport('../../../templates/rateMyCourse/components/'))
-        .pipe(gulp.dest('../../../templates/rateMyCourse'))
+    gulp.src('templates/rateMyCourse/templates/ratePage.html')
+        .pipe(htmlImport('templates/rateMyCourse/components/'))
+        .pipe(gulp.dest('templates/rateMyCourse'))
 
     gulp.src('templates/rateMyCourse/templates/userPage.html')
         .pipe(htmlImport('templates/rateMyCourse/components/'))
