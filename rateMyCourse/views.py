@@ -78,7 +78,7 @@ def solrSearch(keywords, school, department):
         keys['school_name'] = school
     if(department != None):
         keys['department_name'] = department
-    if(len(keywords)!=0):
+    if(len(keywords) != 0):
         keys['course_name'] = keywords
     s = ' '.join([
         '+' + key + ':' + keys[key] + '' for key in keys
@@ -105,7 +105,7 @@ def search(request):
         if(c_number in courselist[:i]):
             continue
         cs = Course.objects.filter(number=c_number)
-        if(len(cs)==0):
+        if(len(cs) == 0):
             continue
         x = getAvgScore(cs)
         courses.append({

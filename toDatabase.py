@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 # delete all
-for m in [School, Teacher, Course, Rate, Department]:
+for m in [School, Teacher, Course, Department]:
 	m.objects.all().delete()
 
 rootPath = "rateMyCourse/static/courseInfo/"
