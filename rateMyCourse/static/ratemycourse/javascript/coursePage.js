@@ -306,12 +306,12 @@ function del(node){
             },
    }).done(function(data){
         if(data.statCode >= 0){
-            $(node).animate({
+            $(node).children("i").animate({
                 //height:'+=16px',
                 //width:'+=16px'
                 fontSize:'+=8px'
             },"fast");
-            $(node).animate({
+            $(node).children("i").animate({
                // height:'-=16px',
                 //width:'-=16px'
                 fontSize:'-=8px'
