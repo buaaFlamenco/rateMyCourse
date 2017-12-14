@@ -1,11 +1,13 @@
 'use strict'
-function ccomments(node,j){
+function ccomments(node,j, t){
     console.log(node.id);
     var c =  node.getElementsByTagName("ul");
     if(c.length!=0){
         node.removeChild(c[0]);
+        $(t).attr("class","comments");
         if(j==1) return;
     }
+    $(t).attr("class","commentsclk");
     var ulnode = document.createElement("ul");
     node.appendChild(ulnode);
     ulnode.setAttribute("class","list-group");
@@ -43,7 +45,8 @@ function ccomments(node,j){
             //username
             var ndivnode = document.createElement("div");
             lnode1.appendChild(ndivnode);
-            ndivnode.setAttribute("style", "float:left;margin-right:16px");
+           // ndivnode.setAttribute("style", "float:left;margin-right:16px");
+            ndivnode.setAttribute("class", "disusername");
             var nNode = document.createTextNode(dis.userName);
             ndivnode.appendChild(nNode);
             //text
@@ -81,7 +84,7 @@ function cfmclick(node){
   }).done(function (data) {
     if(data.statCode == 0){
       alert("your comment submited succesfully!");
-      ccomments($(node).parents(".commentGrid")[0], 0);
+      ccomments($(node).parents(".commentGrid")[0], 0, $(node).parents(".commentGrid").children(".commentsclk")[0]);
     }
     else {
       alert(data.errormessage);
@@ -89,7 +92,7 @@ function cfmclick(node){
     }
   });
 }
-function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, commentid) {
+function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, commentid, cnum, snum) {
     var ScreenGridHtml = `
         <div>
             <img>
@@ -164,22 +167,22 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         pTags[8].setAttribute("style", "float:left;text-align:left;margin-top:32px")
         //ccomment
         var aTags =  commentGrid.getElementsByTagName("a");
-        var cnode = document.createTextNode("评论");
+        var cnode = document.createTextNode("评论("+cnum+")");
         aTags[0].appendChild(cnode);
-        aTags[0].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px;");
+        //aTags[0].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px;");
         aTags[0].setAttribute("class", "comments");
-        aTags[0].setAttribute("href", "#");
-        aTags[0].setAttribute("onclick", "ccomments(this.parentElement.parentElement, 1)");
+        aTags[0].setAttribute("href", "javascript:void(0)");
+        aTags[0].setAttribute("onclick", "ccomments(this.parentElement.parentElement, 1, this)");
         var dnode = document.createTextNode("删除");
         aTags[1].appendChild(dnode);
-        aTags[1].setAttribute("href", "#");
+        aTags[1].setAttribute("href", "javascript:void(0)");
         aTags[1].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px; display:none");
         aTags[1].setAttribute("class", "delete");
         aTags[1].setAttribute("onclick", "del(this)");
 
         var chnode = document.createTextNode("修改");
         aTags[2].appendChild(chnode);
-        aTags[2].setAttribute("href", "#");
+        aTags[2].setAttribute("href", "javascript:void(0)");
         aTags[2].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px; display:none");
         aTags[2].setAttribute("class", "change");
         aTags[2].setAttribute("onclick", "changeclick(this)");
@@ -187,10 +190,12 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         var anode = document.createElement("i");
         anode.setAttribute("class", "fa fa-thumbs-o-up");
         aTags[3].appendChild(anode);
-        aTags[3].setAttribute("style", "float:right;margin-top:32px;margin-right:16px;");
+        //aTags[3].setAttribute("style", "float:right;margin-top:32px;margin-right:16px;color:black");
         aTags[3].setAttribute("class", "good");
         aTags[3].setAttribute("onclick", "gclick(this)");
         aTags[3].setAttribute("href", "javascript:void(0)");
+        var numnode = document.createTextNode("("+snum+")");
+        aTags[3].appendChild(numnode);
 
 
         //css
@@ -222,7 +227,7 @@ function setComments() {//get comments list from service
             for(var i=0; i<data.comments.length; i++){
                 //generate a new row
                 var cmt = data.comments[i]
-                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId);
+                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId, cmt.cnum, cmt.snum);
                 //insert this new row
                 parents.appendChild(Grid);
             }
@@ -244,7 +249,7 @@ function setComments() {//get comments list from service
             for(var i=0; i<data.comments.length; i++){
                 //generate a new row
                 var cmt = data.comments[i]
-                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId);
+                var Grid = generateGrid(imgurl, cmt.userName, cmt.iTerm, cmt.iTeacher, cmt.iTotal, cmt.text, cmt.time, cmt.iId, cmt.cnum, cmt.snum);
                 //insert this new row
                 parents.appendChild(Grid);
                 //show delete
@@ -252,6 +257,7 @@ function setComments() {//get comments list from service
                     Grid.getElementsByClassName('delete')[0].style.display='block';
                     Grid.getElementsByClassName('change')[0].style.display='block';
                 }
+                if(cmt.support==1) Grid.getElementsByClassName('good')[0].setAttribute("class", "goodclick");
             }
         })
     }
@@ -274,7 +280,7 @@ function del(node){
      setComments();
     }
     else {
-      alert(data.errormessage)
+      alert(data.errormessage);
     }
   })
   }
@@ -285,6 +291,10 @@ function del(node){
   }
  function gclick(node){
   var id = node.parentElement.parentElement.id;
+  if($.cookie('username') == undefined){
+    alert("please log in first!");
+    return false;
+  }
   $.ajax('/changeSupport/', {
             dataType: 'json',
             type: 'POST',
@@ -295,16 +305,25 @@ function del(node){
                 'password':$.cookie('password')
             },
    }).done(function(data){
-        $(node).animate({
-            //height:'+=16px',
-            //width:'+=16px'
-            fontSize:'+=8px'
-        },"fast");
-        $(node).animate({
-           // height:'-=16px',
-            //width:'-=16px'
-            fontSize:'-=8px'
-        },"fast");
+        if(data.statCode >= 0){
+            $(node).animate({
+                //height:'+=16px',
+                //width:'+=16px'
+                fontSize:'+=8px'
+            },"fast");
+            $(node).animate({
+               // height:'-=16px',
+                //width:'-=16px'
+                fontSize:'-=8px'
+            },"fast");
+            if(data.statCode == 0){
+                $(node).attr("class","goodclick");
+            }else{
+                $(node).attr("class","good");
+            }
+        }else{
+            alert(data.errormessage);
+        }
    })
 }
 $(document).ready(function () {

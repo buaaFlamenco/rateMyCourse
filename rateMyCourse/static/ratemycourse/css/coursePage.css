@@ -38,3 +38,37 @@
       height:64px;
       font-size: 16px;
   }
+  .good
+{
+  float:right;
+  margin-top:32px;
+  margin-right:16px;
+}
+.goodclick
+{
+  float:right;
+  margin-top:32px;
+  margin-right:16px;
+  color:prime;
+}
+.comments
+{
+    float:right;
+    text-align:right;
+    margin-top:32px;
+    margin-right:16px;
+}
+.commentsclk
+{
+    float:right;
+    text-align:right;
+    margin-top:32px;
+    margin-right:16px;
+    color:prime;
+}
+.disusername
+{
+    float:left;
+    margin-right:16px;
+    font-weight:bold;
+}
