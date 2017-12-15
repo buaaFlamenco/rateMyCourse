@@ -8,6 +8,7 @@ import hashlib
 
 # Create your views here.
 
+detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
 def addHitCount():
 	try:
@@ -143,6 +144,7 @@ def getAvgScore(courses):
             x[i] /= count
     return x
 
+'''
 def coursePage(request, course_number):
     addHitCount()
     courses = get_list_or_404(Course, number=course_number)
@@ -161,7 +163,26 @@ def coursePage(request, course_number):
         'course_website': courses[0].website if courses[0].website != '' else '.',
         'profession_website': couses[0].department.website if courses[0].department.website != '' else '.',
         })
+'''
 
+def coursePage(request, course_number):
+	addHitCount()
+	courses = get_list_or_404(Course, number=course_number)
+	x = getAvgScore(courses)
+	return render(request, "rateMyCourse/coursePage.html", {
+		'course_name': courses[0].name,
+		'course_credit': courses[0].credit,
+		'course_profession': courses[0].department.name,
+		'course_type': courses[0].department.name,
+		'course_scores': '%.1f'%(sum(x) / 4),
+		'detail_names': detail_names,
+		'detail_scores': x,
+		'course_website': courses[0].website if courses[0].website != '' else '.',
+        'profession_website': couses[0].department.website if courses[0].department.website != '' else '.',
+		})
+
+
+'''
 def ratePage(request, course_number):
     addHitCount()
     cs = get_list_or_404(Course, number=course_number)
@@ -175,6 +196,19 @@ def ratePage(request, course_number):
             'aspect2': '充实程度',
             'aspect3': '课程难度',
             'aspect4': '课程收获',
+        })
+'''
+
+def ratePage(request, course_number):
+    addHitCount()
+    cs = get_list_or_404(Course, number=course_number)
+    return render(request, "rateMyCourse/ratePage.html", {
+            'course': {
+                'name': cs[0].name,
+                'school': cs[0].department.school.name,
+                'department': cs[0].department.name,
+            },
+            'detail_names': detail_names,
         })
 
 def signIn(request):
