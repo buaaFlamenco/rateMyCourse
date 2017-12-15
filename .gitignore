@@ -11,3 +11,4 @@ rateMyCourse/static/ratemycourse/javascript/temp.html
 *.pyc
 __pycache__/
 *.pyc
+rateMyCourse/templates/rateMyCourse/temp.html

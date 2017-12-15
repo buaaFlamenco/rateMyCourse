@@ -6,6 +6,17 @@ p{
   transition: color 0.5s ease;
 }
 
+.btn.no-outline:hover,
+.btn.no-outline:focus,
+.btn.no-outline:active:focus,
+.btn.no-outlineactive:focus,
+.btn.no-outline.focus,
+.btn.no-outline.active,
+.btn.no-outline:active.focus,
+.btn.no-outline.active.focus {
+  box-shadow:none;
+}
+
 form label.error{
 color: Red;
 }

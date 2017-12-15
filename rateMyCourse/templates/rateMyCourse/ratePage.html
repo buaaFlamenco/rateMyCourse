@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
-  <link rel="stylesheet" href="../../../static/ratemycourse/css/new-age.css">
-  <link rel="stylesheet" href="../../../static/ratemycourse/css/allPages.css" type="text/css">
+  <link rel="stylesheet" href="../../../static/ratemycourse/css/new-age.css" />
+  <link rel="stylesheet" href="../../../static/ratemycourse/css/allPages.css" />
 </head>
 
 <body>
@@ -121,66 +121,32 @@
     </div>
   </div>
   <div class="container">
+    {% for itemName in detail_names %}
     <div class="row w-100 my-1" style="background:#eeeeee">
       <div class="col-md-2">
-        <p class="lead my-2 text-dark">{{aspect1}}</p>
+        <p class="lead my-2 text-dark">{{itemName}}</p>
       </div>
       <div class="col-md-10">
-        <div class="btn-group text-dark my-1">
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B11" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B12" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B13" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B14" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B15" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
+        <div class="btn-group text-dark my-1" id="{{forloop.counter0}}">
+          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+            <i class="fa fa-star-o text-dark"></i>
+          </a>
+          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+            <i class="fa fa-star-o text-dark"></i>
+          </a>
+          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+            <i class="fa fa-star-o text-dark"></i>
+          </a>
+          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+            <i class="fa fa-star-o text-dark"></i>
+          </a>
+          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+            <i class="fa fa-star-o text-dark"></i>
+          </a>
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="row w-100 my-1" style="background:#eeeeee">
-      <div class="col-md-2">
-        <p class="lead my-2 text-dark">{{aspect2}}</p>
-      </div>
-      <div class="col-md-10">
-        <div class="btn-group text-dark my-1">
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B21" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B22" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B23" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B24" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B25" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row w-100 my-1" style="background:#eeeeee">
-      <div class="col-md-2">
-        <p class="lead my-2 text-dark">{{aspect3}}</p>
-      </div>
-      <div class="col-md-10">
-        <div class="btn-group text-dark my-1">
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B31" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B32" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B33" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B34" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B35" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-        </div>
-      </div>
-    </div>
-    <div class="row w-100 my-1" style="background:#eeeeee">
-      <div class="col-md-2">
-        <p class="lead my-2 text-dark">{{aspect4}}</p>
-      </div>
-      <div class="col-md-10">
-        <div class="btn-group text-dark my-1">
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B41" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B42" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B43" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B44" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-          <a class="fa fa-star-o text-dark btn btn-sm" aria-hidden="true" style="font-size:32px" id="B45" onclick="chooseScore(this.id)" href="javascript:void(0)"></a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
   <div class="container">
     <div class="row w-100 my-1" style="background:#eeeeee">
@@ -194,7 +160,8 @@
   <div class="container">
     <div class="row w-100 my-1" style="background:#cccccc">
       <div class="col-md-2">
-        <input type="button" value="提交" class="btn  btn-outline-dark w-100" style="background:#00ddff" onclick="return Func_submit()"> </div>
+        <a class="btn btn-outline-dark w-100" href="javascript:void(0)" onclick="return Func_submit()"> 提交 </a>
+      </div>
       <div class="col-md-10">
         <lable>是否匿名</lable>
         <input id="anonymous" type="checkbox" value="true" class="mx-2"> </div>

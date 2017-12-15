@@ -1,38 +1,24 @@
 var score=[0,0,0,0];
 
-function chooseScore(id){
-  var c0="#B";
-  var c1=id.charAt(1);
-  var c2=id.charAt(2);
-  var i=2;
-  score[parseInt(c1)-1]=parseInt(c2);
-  for(i=1;i<=parseInt(c2);i++)
-  {
-    var s=c0.concat(c1.concat(i.toString()));
-    $(s).removeClass("fa fa-star-o text-dark");
-    $(s).addClass("fa fa-star text-warning");
-
-  }
-  for(i=5;i>parseInt(c2);i--)
-  {
-    var s=c0.concat(c1.concat(i.toString()));
-  	$(s).removeClass("fa fa-star text-warning");
-   	$(s).addClass("fa fa-star-o text-dark");
-  }
-}
-
 function choose_term(text){
-
   //$(this).parent().prev().text($(this).text());
   var termList = $("#termList")
   termList.prev().text(text);
 }
 
 $(document).ready(function() {
-  // alert("!!!")
+  // Rate settings
+  $(".star").click(function() {
+    var parentId = parseInt($(this).parent().prop("id"))
+    $(this).children().removeClass("fa fa-star-o text-dark").addClass("fa fa-star text-warning")
+    $(this).prevAll().children().removeClass("fa fa-star-o text-dark").addClass("fa fa-star text-warning")
+    $(this).nextAll().children().removeClass("fa fa-star text-warning").addClass("fa fa-star-o text-dark")
+    score[parentId] = $(this).index() + 1
+  })
+
   // Animation settings
   setAnimations()
-  
+
   // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()
@@ -81,24 +67,24 @@ $(document).ready(function() {
 function Func_submit() {
 
   if($.cookie('username') == undefined){
-    alert("please log in first!")
+    alert("提交评价请先登录")
     return false
   }
   if($('#buttonSelectTerm').text() == '选择学期'){
-    alert("please choose your term!")
+    alert("请选择学期")
   	return false
   }
   if($('#buttonSelectTeacher').text() == '选择教师'){
-    alert('please choose your teacher(s)!')
+    alert('请选择教师')
   	return false
   }
   if($('#writeCommentText').val().length < 30){
-    alert('please write more for your course!(more than 30 characters)')
+    alert('评价部分至少需要30字')
 	return false
   }
   for(i = 0; i　< score.length; i++){
     if(score[i] == 0){
-      alert('please rate for all aspect!')
+      alert('请填写所有选课部分')
       return false
     }
   }
@@ -114,8 +100,7 @@ function Func_submit() {
       'term': $('#buttonSelectTerm').text(),
       'teacher': $('#buttonSelectTeacher').text().split(','),
       'comment': $('#writeCommentText').val(),
-      'rate':score,
-      // rates
+      'rate':score
     }
   }).done(function (data) {
     if(data.statCode == 0){
