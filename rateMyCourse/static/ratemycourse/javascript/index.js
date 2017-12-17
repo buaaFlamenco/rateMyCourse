@@ -18,8 +18,12 @@ function clickSearchButton() {
 $(document).ready(function() {
   //alert("!!!")
 
-  // Set animations for all elements on page
+  // Set animations for common elements on page
   setAnimations()
+
+  // Set scroll reveal
+  window.sr = ScrollReveal({duration: 1500})
+  sr.reveal('.selection', 100)
 
   // Form validation for Sign in / Sign up forms
   validateSignUp()

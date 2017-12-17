@@ -4,17 +4,6 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-validateSignUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignUp() {$/;"	function	line:1
-submitHandler	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^    submitHandler: function() {$/;"	function	line:3
-validateSignUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignUp() {$/;"	function	line:1
-validateSignIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignIn() {$/;"	function	line:44
-submitHandler	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^    submitHandler: function() {$/;"	function	line:46
-validateSignIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function validateSignIn() {$/;"	function	line:44
-Func_signUp	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signUp() {$/;"	function	line:72
-Func_signIn	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signIn() {$/;"	function	line:96
-Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:119
-Func_signIn.Func_signOut	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_signOut() {$/;"	function	line:119
-Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:127
-Func_signIn.Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:127
-setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:132
-Func_signIn.setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:132
+.scrollable-menu	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/css/index.css	/^.scrollable-menu {$/;"	function	line:1
+.blur	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/css/index.css	/^.blur {$/;"	function	line:7
+.selection	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/css/index.css	/^.selection {$/;"	function	line:14

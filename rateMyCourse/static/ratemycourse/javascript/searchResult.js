@@ -1,8 +1,11 @@
 $(document).ready(function() {
-  // alert("!!!")
   // Animation settings
   setAnimations()
-  
+
+  // Set scroll reveal
+  window.sr = ScrollReveal()
+  sr.reveal('.course-item', {duration:1500, reset:true}, 100)
+
   // Form validation for Sign in / Sign up forms
   validateSignUp()
   validateSignIn()

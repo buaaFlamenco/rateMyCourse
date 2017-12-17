@@ -15,11 +15,6 @@ viewDiscussions	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ra
 csrfSafeMethod	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/addRatePage.js	/^  function csrfSafeMethod(method) {$/;"	function	line:11
 beforeSend	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/addRatePage.js	/^      beforeSend: function(xhr, settings) {$/;"	function	line:16
 Func_submit	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/addRatePage.js	/^function Func_submit() {$/;"	function	line:25
-Func_search	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^function Func_search() {$/;"	function	line:1
-clickSearchButton	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^function clickSearchButton() {$/;"	function	line:13
-function.clickSearchButton	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^function clickSearchButton() {$/;"	function	line:13
-csrfSafeMethod	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^  function csrfSafeMethod(method) {$/;"	function	line:29
-beforeSend	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^      beforeSend: function(xhr, settings) {$/;"	function	line:34
 ccomments	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/coursePage.js	/^function ccomments(node,j){$/;"	function	line:2
 c	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/coursePage.js	/^    var c =  node.getElementsByTagName("ul");$/;"	variable	line:4
 ulnode	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/coursePage.js	/^    var ulnode = document.createElement("ul");$/;"	variable	line:9
@@ -54,3 +49,14 @@ Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ra
 Func_signIn.Func_gotoMyPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function Func_gotoMyPage() {$/;"	function	line:127
 setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:132
 Func_signIn.setCookie	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/login.js	/^function setCookie() {$/;"	function	line:132
+Func_search	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^function Func_search() {$/;"	function	line:1
+clickSearchButton	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^function clickSearchButton() {$/;"	function	line:13
+function.clickSearchButton	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^function clickSearchButton() {$/;"	function	line:13
+csrfSafeMethod	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^  function csrfSafeMethod(method) {$/;"	function	line:36
+beforeSend	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/index.js	/^      beforeSend: function(xhr, settings) {$/;"	function	line:41
+csrfSafeMethod	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/searchResult.js	/^  function csrfSafeMethod(method) {$/;"	function	line:25
+beforeSend	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/javascript/searchResult.js	/^      beforeSend: function(xhr, settings) {$/;"	function	line:30
+.course-item	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/css/searchResult.css	/^.course-item {$/;"	function	line:1
+.scrollable-menu	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/css/index.css	/^.scrollable-menu {$/;"	function	line:1
+.blur	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/css/index.css	/^.blur {$/;"	function	line:7
+.selection	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/static/ratemycourse/css/index.css	/^.selection {$/;"	function	line:14
