@@ -36,6 +36,16 @@ function ccomments(node,j, t){
         for(var i=0; i< data.discusses.length; i++){
             var dis = data.discusses[i];
             var lnode1 = document.createElement("li");
+            //feedback
+            var badivnode = document.createElement("div");
+            lnode1.appendChild(badivnode);
+            badivnode.setAttribute("style", "float:right;margin-left:16px");
+            var anode = document.createElement("a");
+            badivnode.appendChild(anode);
+            anode.setAttribute("href", "javascript:void(0)");
+            anode.setAttribute("onclick", "feedback(this)");
+            var cNode = document.createTextNode("回复");
+            anode.appendChild(cNode);
             //time
             var tdivnode = document.createElement("div");
             lnode1.appendChild(tdivnode);
@@ -92,6 +102,11 @@ function cfmclick(node){
     }
   });
 }
+function feedback(node){
+    var text = $(node).parent().next().next().text();
+    var textarea=$(node).parents("ul").find(".texta");
+    textarea.val("").focus().val("@"+text); 
+  }
 function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, commentid, cnum, snum) {
     var ScreenGridHtml = `
         <div>
@@ -195,7 +210,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         aTags[3].setAttribute("onclick", "gclick(this)");
         aTags[3].setAttribute("href", "javascript:void(0)");
         var numnode = document.createTextNode("("+snum+")");
-        aTags[3].appendChild(numnode);
+        anode.appendChild(numnode);
 
 
         //css
@@ -316,10 +331,23 @@ function del(node){
                 //width:'-=16px'
                 fontSize:'-=8px'
             },"fast");
+             var number=$(node).children("i").text();
+             var r="";
+             var i=0;
+             for(i=0;i<number.length;i++){
+                    if(number[i]=='(') break;
+             }
+             for(i=i+1;number[i]!=')';i++){
+                    r=r+number[i];
+             }
             if(data.statCode == 0){
                 $(node).attr("class","goodclick");
+                var total=parseInt(r)+1;
+                $(node).children("i").text("("+total+")");
             }else{
                 $(node).attr("class","good");
+                var total=parseInt(r)-1;
+                $(node).children("i").text("("+total+")");
             }
         }else{
             alert(data.errormessage);
