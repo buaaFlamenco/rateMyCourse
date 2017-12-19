@@ -2,9 +2,15 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var htmlImport = require('gulp-html-import');
 
-gulp.task('default', ['importIndexNavbar', 'importCommonNavbar']);
+gulp.task('default', function() {
+});
 
-gulp.task('syncBrowser', function() {
+gulp.task('dev', function() {
+  // HtmlImport settings
+  gulp.watch('templates/rateMyCourse/templates/index.html', ['importIndexNavbar']);
+  gulp.watch('templates/rateMyCourse/templates/!(index).html', ['importCommonNavbar']);
+
+  // BrowserSync settings
   browserSync.init({
     proxy: "localhost:8000"
   });
