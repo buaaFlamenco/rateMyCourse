@@ -8,7 +8,7 @@ function setAnimations() {
 }
 
 function collapseNavbar() {
-  if ($("#mainNav").offset().top > 100) {
+  if ($("#mainNav").offset().top > 2) {
     $("#mainNav").addClass("navbar-shrink")
   } else {
     $("#mainNav").removeClass("navbar-shrink")

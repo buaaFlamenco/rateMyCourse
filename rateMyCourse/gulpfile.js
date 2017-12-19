@@ -9,10 +9,13 @@ gulp.task('dev', function() {
   // HtmlImport settings
   gulp.watch('templates/rateMyCourse/templates/index.html', ['importIndexNavbar']);
   gulp.watch('templates/rateMyCourse/templates/!(index).html', ['importCommonNavbar']);
+  gulp.watch('templates/rateMyCourse/components/indexNavbar.html', ['importIndexNavbar']);
+  gulp.watch('templates/rateMyCourse/components/commonNavbar.html', ['importCommonNavbar']);
 
   // BrowserSync settings
   browserSync.init({
-    proxy: "localhost:8000"
+    proxy: "localhost:8000",
+    browser: "firefox"
   });
   gulp.watch('templates/rateMyCourse/*.html', browserSync.reload);
   gulp.watch('templates/ratemycourse/javascript/*.js', browserSync.reload);

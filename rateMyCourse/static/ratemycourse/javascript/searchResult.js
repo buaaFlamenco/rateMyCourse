@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  // Animation settings
+  // Common animation settings
   setAnimations()
 
   // Set scroll reveal
