@@ -20,7 +20,7 @@ class School(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-    	return self.name
+        return self.name
 
 class Department(models.Model):
     # attributes
@@ -34,7 +34,7 @@ class Department(models.Model):
         null=True,
     )
     def __str__(self):
-    	return self.name
+        return self.name
 
 class Teacher(models.Model):
     # attributes
@@ -48,7 +48,7 @@ class Teacher(models.Model):
         null=True,
     )
     def __str__(self):
-    	return self.name
+        return self.name
 
 class User(models.Model):
     # attributes
@@ -59,7 +59,7 @@ class User(models.Model):
     # validationState = models.BooleanField(default=False)
     # validationCode = models.CharField(max_length=50)
     def __str__(self):
-    	return self.username
+        return self.username
 
 class Course(models.Model):
     # attributes
@@ -80,7 +80,7 @@ class Course(models.Model):
         Teacher,
     )
     def __str__(self):
-    	return self.name
+        return self.name
 
 class Comment(models.Model):
     # attributes
@@ -106,7 +106,7 @@ class Comment(models.Model):
     total_score = models.FloatField()
     
     def __str__(self):
-    	return self.content
+        return self.content
 
 class Rate(models.Model):
     # attributes
@@ -124,31 +124,37 @@ class Rate(models.Model):
         on_delete=models.CASCADE,
     )
     def __str__(self):
-    	return "rate from %s"%self.user
+        return "rate from %s"%self.user
 
 class Discuss(models.Model):
-	user = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-	)
-	comment = models.ForeignKey(
-		Comment,
-		on_delete=models.CASCADE,
-	)
-	time = models.DateTimeField()
-	content = models.CharField(max_length=2000)
-	newmsg = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+    )
+    aiteuser = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="aiteuser",
+        null=True,
+    )
+    time = models.DateTimeField()
+    content = models.CharField(max_length=2000)
+    newmsg = models.BooleanField(default=False)
         
 class Support(models.Model):
-	user = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-	)
-	comment = models.ForeignKey(
-		Comment,
-		on_delete=models.CASCADE,
-	)
-	newmsg = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    comment = models.ForeignKey(
+        Comment,
+        on_delete=models.CASCADE,
+    )
+    newmsg = models.BooleanField(default=False)
 
 class HitCount(models.Model):
     name = models.CharField(max_length=50)
