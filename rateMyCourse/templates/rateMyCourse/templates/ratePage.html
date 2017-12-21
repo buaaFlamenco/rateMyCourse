@@ -12,6 +12,7 @@
 
 <body>
   @import "commonNavbar.html"
+  <!-- Headers -->
   <div class="container mb-4">
     <div class="row my-1">
       <div class="col-md-12 text-white">
@@ -32,7 +33,7 @@
         <p class="lead my-2 text-dark text-right">开课学期</p>
       </div>
       <div class="col-md-10 px-5">
-        <div class="dropdown">
+        <div class="dropdown my-1">
           <a class="btn btn-outline-info dropdown-toggle px-4" data-toggle="dropdown" href="javascript:void(0)" id="buttonSelectTerm">选择学期</a>
           <div class="dropdown-menu" id="termList">
             <a class="dropdown-item btn btn-primary " href="javascript:void(0)" onclick="choose_term(this.text)">2015年秋季</a>
@@ -49,7 +50,7 @@
         <p class="lead my-2 text-dark text-right">授课教师</p>
       </div>
       <div class="col-md-10 px-5">
-        <div class="btn-group">
+        <div class="dropdown my-1">
           <a class="btn btn-outline-info dropdown-toggle px-4" data-toggle="dropdown" href="javascript:void(0)" id="buttonSelectTeacher">选择教师</a>
           <div class="dropdown-menu" id="teacherList"> </div>
         </div>
@@ -85,24 +86,34 @@
       <div class="col-md-2">
         <p class="lead my-2 text-dark text-right">写评价</p>
       </div>
-      <div class="col-md-10 px-5"> <textarea class="w-75 form-control-sm" rows="10" id="writeCommentText">  </textarea> </div>
+      <div class="col-md-10 px-5">
+        <textarea class="w-75 my-2" rows="10" id="writeCommentText">
+          </textarea>
+      </div>
     </div>
-    <br>
     <div class="row  my-1">
       <div class="col-md-2">
         <p class="lead my-2 text-dark text-right">匿名</p>
       </div>
       <div class="col-md-10 px-5">
-        <input class= "align-bottom" id="anonymous" type="checkbox" value="true" class="mx-2">
+        <input class= "my-3" id="anonymous" type="checkbox" value="true" class="mx-2">
       </div>
     </div>
     <div class="row  my-1">
       <div class="col-md-2">
       </div>
       <div class="col-md-10 px-5">
-        <a class="btn btn-outline-success px-4" href="javascript:void(0)" onclick="return Func_submit()">
+        <a class="btn btn-outline-success px-3" href="javascript:void(0)" onclick="return Func_submit()">
            提交
         </a>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <p class="text-center text-dark my-5">© Copyright 2017 Flamenco - All rights reserved. </p>
       </div>
     </div>
   </div>
