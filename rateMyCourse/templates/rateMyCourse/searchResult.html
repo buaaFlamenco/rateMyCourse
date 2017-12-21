@@ -84,7 +84,7 @@
 
   <div class="container">
     <p id="count">搜索到{{count}}门课程</p> {% for course in courses %}
-    <div class="course-item container my-2" id="course{{forloop.counter}}"  style="background-color:#fafafa">
+    <div class="course-item container my-3" id="course{{forloop.counter}}"  style="background-color:#fafafa">
       <div class="row p-4">
         <a href="/course/{{course.ID}}" class="btn no-outline"><h2>{{course.name}}</h2></a>
       </div>
@@ -102,7 +102,7 @@
           <p>{{course.credit}}</p>
         </div>
       </div>
-      <div class="row p-4">
+      <div class="row pt-4 px-4">
         <div class="col-md-auto">
           <i class="fa fa-star-o text-dark" id="ic{{forloop.counter}}1" aria-hidden="true" style="font-size:32px;"></i>
           <i class="fa fa-star-o text-dark" id="ic{{forloop.counter}}2" aria-hidden="true" style="font-size:32px;"></i>
@@ -143,12 +143,13 @@
            var s="#p".concat(i.toString());
            if(i==parseInt(p)){
                $(s).removeClass("page-link ");
-               $(s).addClass("page-link bg-info text-dark");
+               $(s).addClass("page-link bg-info text-light");
            }else{
-               $(s).removeClass("page-link bg-info text-dark");
+               $(s).removeClass("page-link bg-info text-light");
                $(s).addClass("page-link");
            }
        }
+       $("html, body").stop().animate({scrollTop:0}, 500, "swing");
     }
 
     window.onload = function() {
@@ -169,7 +170,6 @@
             var s="#ic".concat("{{forloop.counter}}".concat(i.toString()));
             $(s).removeClass("fa fa-star text-warning");
             $(s).addClass("fa fa-star-o text-dark");
-
           }
       {% endfor %}
       toPage("1");

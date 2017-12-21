@@ -11,13 +11,13 @@ body {
 body {
   font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif'; }
 
-a {
+/* a {
   color: #fdcc52;
   -webkit-transition: all .35s;
   -moz-transition: all .35s;
   transition: all .35s; }
   a:hover, a:focus {
-    color: #fcbd20; }
+    color: #fcbd20; } */
 
 hr {
   max-width: 100px;
