@@ -8,10 +8,10 @@ function setAnimations() {
 }
 
 function collapseNavbar() {
-  if ($("#mainNav").offset().top > 2) {
-    $("#mainNav").addClass("navbar-shrink")
+  if ($(".navbar").offset().top > 2) {
+    $(".navbar").addClass("navbar-shrink")
   } else {
-    $("#mainNav").removeClass("navbar-shrink")
+    $(".navbar").removeClass("navbar-shrink")
   }
 }
 

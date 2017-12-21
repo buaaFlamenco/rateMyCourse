@@ -7,15 +7,6 @@ function choose_term(text){
 }
 
 $(document).ready(function() {
-  // Rate settings
-  $(".star").click(function() {
-    var parentId = parseInt($(this).parent().prop("id"))
-    $(this).children().removeClass("fa fa-star-o text-dark").addClass("fa fa-star text-warning")
-    $(this).prevAll().children().removeClass("fa fa-star-o text-dark").addClass("fa fa-star text-warning")
-    $(this).nextAll().children().removeClass("fa fa-star text-warning").addClass("fa fa-star-o text-dark")
-    score[parentId] = $(this).index() + 1
-  })
-
   // Animation settings
   setAnimations()
 
@@ -33,6 +24,15 @@ $(document).ready(function() {
     $("#menuUser").show()
     $("#navUser").text($.cookie('username'))
   }
+
+  // Rate settings
+  $(".star").click(function() {
+    var parentId = parseInt($(this).parent().prop("id"))
+    $(this).children().removeClass("fa fa-star-o text-dark").addClass("fa fa-star text-warning")
+    $(this).prevAll().children().removeClass("fa fa-star-o text-dark").addClass("fa fa-star text-warning")
+    $(this).nextAll().children().removeClass("fa fa-star text-warning").addClass("fa fa-star-o text-dark")
+    score[parentId] = $(this).index() + 1
+  })
 
   ////////// csrf set up //////////
   function csrfSafeMethod(method) {

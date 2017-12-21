@@ -12,22 +12,28 @@
 
 <body>
   @import "commonNavbar.html"
-  <div class="container">
-    <div class="row w-100 my-1" style="background:#cccccc">
+  <div class="container mb-4">
+    <div class="row my-1">
       <div class="col-md-12 text-white">
-        <h1 class="display-3 mb-4 text-dark" id="courseName">{{course.name}}</h1>
-        <p class="lead mb-5 text-dark">{{course.school}}-&gt;{{course.department}}</p>
+        <h1 class="display-5 mb-4 text-dark" id="courseName">{{course.name}}</h1>
+        <nav role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">{{course.school}}</li>
+            <li class="breadcrumb-item active">{{course.department}}</li>
+          </ol>
+        </nav>
       </div>
     </div>
+    <hr>
   </div>
   <div class="container">
-    <div class="row w-100 my-1" style="background:#eeeeee">
+    <div class="row my-1">
       <div class="col-md-2">
-        <p class="lead my-2 text-dark">开课学期</p>
+        <p class="lead my-2 text-dark text-right">开课学期</p>
       </div>
-      <div class="col-md-10">
-        <div class="btn-group">
-          <a class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown" href="javascript:void(0)" id="buttonSelectTerm">选择学期</a>
+      <div class="col-md-10 px-5">
+        <div class="dropdown">
+          <a class="btn btn-outline-info dropdown-toggle px-4" data-toggle="dropdown" href="javascript:void(0)" id="buttonSelectTerm">选择学期</a>
           <div class="dropdown-menu" id="termList">
             <a class="dropdown-item btn btn-primary " href="javascript:void(0)" onclick="choose_term(this.text)">2015年秋季</a>
             <a class="dropdown-item btn btn-primary " href="javascript:void(0)" onclick="choose_term(this.text)">2016年春季</a>
@@ -38,70 +44,67 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="row w-100 my-1" style="background:#eeeeee">
+    <div class="row my-1">
       <div class="col-md-2">
-        <p class="lead my-2 text-dark">授课教师</p>
+        <p class="lead my-2 text-dark text-right">授课教师</p>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-10 px-5">
         <div class="btn-group">
-          <a class="btn dropdown-toggle btn-outline-dark px-5" data-toggle="dropdown" href="javascript:void(0)" id="buttonSelectTeacher">选择教师</a>
+          <a class="btn btn-outline-info dropdown-toggle px-4" data-toggle="dropdown" href="javascript:void(0)" id="buttonSelectTeacher">选择教师</a>
           <div class="dropdown-menu" id="teacherList"> </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
     {% for itemName in detail_names %}
-    <div class="row w-100 my-1" style="background:#eeeeee">
+    <div class="row  my-1">
       <div class="col-md-2">
-        <p class="lead my-2 text-dark">{{itemName}}</p>
+        <p class="lead my-2 text-dark text-right">{{itemName}}</p>
       </div>
-      <div class="col-md-10">
+      <div class="col-md-10 px-5">
         <div class="btn-group text-dark my-1" id="{{forloop.counter0}}">
-          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+          <a class="star btn no-outline" href="javascript:void(0)">
             <i class="fa fa-star-o text-dark"></i>
           </a>
-          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+          <a class="star btn no-outline" href="javascript:void(0)">
             <i class="fa fa-star-o text-dark"></i>
           </a>
-          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+          <a class="star btn no-outline" href="javascript:void(0)">
             <i class="fa fa-star-o text-dark"></i>
           </a>
-          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+          <a class="star btn no-outline"  href="javascript:void(0)">
             <i class="fa fa-star-o text-dark"></i>
           </a>
-          <a class="star btn btn-sm no-outline" style="font-size:32px" href="javascript:void(0)">
+          <a class="star btn no-outline" href="javascript:void(0)">
             <i class="fa fa-star-o text-dark"></i>
           </a>
         </div>
       </div>
     </div>
     {% endfor %}
-  </div>
-  <div class="container">
-    <div class="row w-100 my-1" style="background:#eeeeee">
+    <div class="row  my-1">
       <div class="col-md-2">
-        <p class="lead my-2 text-dark">写评价</p>
+        <p class="lead my-2 text-dark text-right">写评价</p>
       </div>
-      <div class="col-md-10"> <textarea class="w-50 form-control-sm" rows="10" id="writeCommentText">  </textarea> </div>
-    </div>
-  </div>
-  <br>
-  <div class="container">
-    <div class="row w-100 my-1" style="background:#cccccc">
-      <div class="col-md-2">
-        <a class="btn btn-outline-dark w-100" href="javascript:void(0)" onclick="return Func_submit()"> 提交 </a>
-      </div>
-      <div class="col-md-10">
-        <lable>是否匿名</lable>
-        <input id="anonymous" type="checkbox" value="true" class="mx-2"> </div>
+      <div class="col-md-10 px-5"> <textarea class="w-75 form-control-sm" rows="10" id="writeCommentText">  </textarea> </div>
     </div>
     <br>
-    <br>
-    <br>
-    <br>
+    <div class="row  my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">匿名</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <input class= "align-bottom" id="anonymous" type="checkbox" value="true" class="mx-2">
+      </div>
+    </div>
+    <div class="row  my-1">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10 px-5">
+        <a class="btn btn-outline-success px-4" href="javascript:void(0)" onclick="return Func_submit()">
+           提交
+        </a>
+      </div>
+    </div>
   </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
