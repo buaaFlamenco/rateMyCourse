@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from rateMyCourse.models import *
 import json
+import re
 from urllib import request, parse
 from django.http import HttpResponse
 from django.utils import timezone
@@ -225,6 +226,16 @@ def submitComment(request):
         'statCode': 0,
         }))
 
+def get_aite_user(discuss):
+    findout = re.search("@(.+?) ", discuss + " ")
+    if not findout:
+        return None
+    try:
+        u = User.objects.get(username=findout.group(1))
+    except:
+        return None
+    return u
+
 def submitDiscuss(request):
     addHitCount()
     try:
@@ -237,12 +248,16 @@ def submitDiscuss(request):
             'statCode': -1,
             'errormessage': 'post information not complete! ',
             }))
+
+    aite_u = get_aite_user(discuss)
+
     Discuss(
         content=discuss,
         time=timezone.now(),
         user=User.objects.get(username=username),
         newmsg=newmsg,
         comment=Comment.objects.get(id=comment_id),
+        aiteuser=aite_u,
         ).save()
     return HttpResponse(json.dumps({
         'statCode': 0,

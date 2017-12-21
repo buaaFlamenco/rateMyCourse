@@ -47,7 +47,7 @@ def solrSearch(keywords, school, department):
 
     ######
     # this is a fool idea to fix bug that if nothing to write in nothing you can search
-    if(school == None and keywords == ''):
+    if(school == None and keywords == '\"\"'):
     	school = "北京航空航天大学"
     ######
 
@@ -164,7 +164,8 @@ def userPage(request, username):
 			}
 			for cmt in cmtList
 		], key=lambda t: t['time'])),
-		'discussions': sorted([
+		'discussions': sorted(
+        [
 			{
 				'userName': dsc.user.username,
 				'userimgurl': "../../static/ratemycourse/images/user.png", 
@@ -177,7 +178,21 @@ def userPage(request, username):
 			}
 			for cmt in cmtList
 				for dsc in cmt.discuss_set.all()
-		], key=lambda t: not t['newmsg'])
+		] 
+        + 
+        [
+            {
+                'userName': dsc.user.username,
+                'userimgurl': "../../static/ratemycourse/images/user.png", 
+                'course_id': dsc.comment.course.number,
+                'content': dsc.content,
+                'time': dsc.time.strftime('%y/%m/%d'),
+                'title': dsc.comment.course.name,
+                'originalContent': dsc.comment.content,
+                'newmsg': dsc.newmsg,
+            }
+            for dsc in user.aiteuser.all()
+        ], key=lambda t: not t['newmsg'])
 	})
 
 def addCommentPage(request, commentID):
