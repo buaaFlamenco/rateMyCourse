@@ -90,7 +90,8 @@
 
   <div class="container">
     <p id="count">搜索到{{count}}门课程</p> {% for course in courses %}
-    <div class="course-item container my-3" id="course{{forloop.counter}}"  style="background-color:#fafafa">
+    <!-- Course Item -->
+    <div class="course-item container my-3" id="course{{forloop.counter}}" style="background-color:#f2f2f2">
       <div class="row p-4">
         <a href="/course/{{course.ID}}" class="btn no-outline"><h2>{{course.name}}</h2></a>
       </div>
