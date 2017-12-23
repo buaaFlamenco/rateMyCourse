@@ -80,7 +80,7 @@ function cfmclick(node){
   }
   var id = $(node).parents(".commentGrid").attr("id");
   var text = $(node).prev().val();
-  if(text==null){
+  if(text.length==0){
     alert("内容不能为空！");
     return false;
   }
