@@ -187,6 +187,7 @@ def submitComment(request):
             'statCode': -1,
             'errormessage': 'post information not complete! ',
             }))
+
     cset = Course.objects.filter(number=course_number)
     # print(rate, teacher)
     for t in teacher:
@@ -194,6 +195,12 @@ def submitComment(request):
     # print(cset)
     # assert(len(cset) == 1)
     crs = cset[0]
+
+    if not(User.objects.get(username=username).is_active):
+        return HttpResponse(json.dumps({
+            'statCode': -3,
+            'errormessage': 'your acount is not active',
+            }))
 
     if(Comment.objects.filter(
         course=crs, user=User.objects.get(username=username)
@@ -247,6 +254,12 @@ def submitDiscuss(request):
         return HttpResponse(json.dumps({
             'statCode': -1,
             'errormessage': 'post information not complete! ',
+            }))
+
+    if not(User.objects.get(username=username).is_active):
+        return HttpResponse(json.dumps({
+            'statCode': -2,
+            'errormessage': 'your acount is not active',
             }))
 
     aite_u = get_aite_user(discuss)

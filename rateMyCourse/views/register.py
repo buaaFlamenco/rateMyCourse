@@ -114,7 +114,7 @@ def signUp(request):
         elif("username" in errmsg):
             return HttpResponse(json.dumps({
                 'statCode': -3,
-                'errormessage': 'username repeated',
+                'errormessage': '该用户名已被使用',
                 }))
         else:
             return HttpResponse(json.dumps({
