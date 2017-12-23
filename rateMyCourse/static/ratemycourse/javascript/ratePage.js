@@ -67,7 +67,7 @@ $(document).ready(function() {
 function Func_submit() {
 
   if($.cookie('username') == undefined){
-    alert("提交评价请先登录")
+    alert("提交评价前请先登录")
     return false
   }
   if($('#buttonSelectTerm').text() == '选择学期'){
@@ -79,7 +79,7 @@ function Func_submit() {
   	return false
   }
   if($('#writeCommentText').val().length < 30){
-    alert('评价部分至少需要30字')
+    alert('评价部分内容需要30字')
 	return false
   }
   for(i = 0; i　< score.length; i++){

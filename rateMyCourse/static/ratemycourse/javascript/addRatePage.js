@@ -26,15 +26,14 @@ $(document).ready(function() {
 })
 
 function Func_submit() {
-  if($("#additionalRate").val().length < 30){
-    alert("please write more for your course!(more than 30 characters)")
-	   return false
+  if($.cookie('username') == undefined){
+    alert("提交评价前请先登录")
+    return false
   }
-  for(i = 0; i　< score.length; i++){
-    if(score[i] == 0){
-      alert("please rate for all aspect!")
-      return false
-    }
+  
+  if($("#additionalRate").val().length < 30){
+    alert("评价内容至少需要30字")
+	   return false
   }
 
   $.ajax("/changeComment/", {
@@ -49,7 +48,7 @@ function Func_submit() {
     }
   }).done(function (data) {
     if(data.statCode == 0){
-      alert("your comment submited succesfully!")
+      alert("评论追加成功")
       location.href = "../"
     }
     else {
