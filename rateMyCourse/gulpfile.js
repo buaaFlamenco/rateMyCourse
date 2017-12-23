@@ -3,7 +3,7 @@ var browserSync = require('browser-sync');
 var htmlImport = require('gulp-html-import');
 
 gulp.task('default', function () {
-}); 
+});
 
 gulp.task('dev', function() {
   // HtmlImport settings
@@ -15,7 +15,7 @@ gulp.task('dev', function() {
   // BrowserSync settings
   browserSync.init({
     proxy: "127.0.0.1:8000",
-    browser: "firebox"
+    browser: "firefox"
   });
   gulp.watch('templates/rateMyCourse/*.html', browserSync.reload);
   gulp.watch('templates/ratemycourse/javascript/*.js', browserSync.reload);
