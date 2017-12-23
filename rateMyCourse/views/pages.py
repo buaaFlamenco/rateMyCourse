@@ -52,14 +52,15 @@ def solrSearch(keywords, school, department):
     ######
 
     if(school != None):
-        keys['school_name'] = school
+        keys['school_name'] = "\"" + school + "\""
     if(department != None):
-        keys['department_name'] = department
+        keys['department_name'] = "\"" + department + "\""
     if(len(keywords) != 0):
         keys['course_name'] = keywords
     s = ' '.join([
         '+' + key + ':' + keys[key] + '' for key in keys
     ])
+    print(s)
     t = request.urlopen(url%parse.quote(s)).read().decode('utf-8')
     t = json.loads(t)
     return [i['course_number'] for i in t['response']['docs']]
