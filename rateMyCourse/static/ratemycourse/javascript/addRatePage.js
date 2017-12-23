@@ -30,9 +30,9 @@ function Func_submit() {
     alert("提交评价前请先登录")
     return false
   }
-  
-  if($("#additionalRate").val().length < 30){
-    alert("评价内容至少需要30字")
+
+  if($("#additionalRate").val().length < 10){
+    alert("增加的评价内容至少需要10字")
 	   return false
   }
 
