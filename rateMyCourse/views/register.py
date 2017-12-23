@@ -58,7 +58,7 @@ def active(request, active_code):
     except Exception:
         return HttpResponse(json.dumps({
             'statCode': -1,
-            'errormessage': 'no such active_code',
+            'errormessage': '不存在该激活码',
         }))
     if all_recodes:
         for recode in all_recodes:
@@ -68,13 +68,13 @@ def active(request, active_code):
             except Exception:
                 return HttpResponse(json.dumps({
                     'statCode': -3,
-                    'errormessage': 'no such user',
+                    'errormessage': '不存在此用户',
                     'username': username,
                 }))
             if user.is_active:
                 return HttpResponse(json.dumps({
                     'statCode': -4,
-                    'errormessage': 'this user has been actived',
+                    'errormessage': '此用户已被激活',
                     'username': username,
                 }))
 
@@ -85,7 +85,7 @@ def active(request, active_code):
     else:
         return HttpResponse(json.dumps({
             'statCode': -2,
-            'errormessage': 'no such active_code',
+            'errormessage': '不存在该激活码',
         }))
 
     return HttpResponse(user.username+'激活成功')
@@ -100,7 +100,7 @@ def signUp(request):
     except Exception:
         return HttpResponse(json.dumps({
             'statCode': -1,
-            'errormessage': 'can not get username or mail or password',
+            'errormessage': '未能获取到用户名，邮箱或密码',
             }))
     try:
         User(username=username, mail=mail, password=password).save()
@@ -109,7 +109,7 @@ def signUp(request):
         if("mail" in errmsg):
             return HttpResponse(json.dumps({
                 'statCode': -2,
-                'errormessage': 'mail repeated',
+                'errormessage': '该邮箱已被使用',
                 }))
         elif("username" in errmsg):
             return HttpResponse(json.dumps({
@@ -119,7 +119,7 @@ def signUp(request):
         else:
             return HttpResponse(json.dumps({
                 'statCode': -4,
-                'errormessage': 'other error, maybe out of length',
+                'errormessage': '输入字符过多',
                 }))
     else:
         sendRegisterEmail(username, mail)
@@ -141,7 +141,7 @@ def signIn(request):
     except Exception:
         return HttpResponse(json.dumps({
             'statCode': -1,
-            'errormessage': 'can not get username or mail or password',
+            'errormessage': '未能获取到用户名，邮箱或密码',
             }))
     try:
         u = User.objects.get(username=username)
@@ -151,12 +151,12 @@ def signIn(request):
         except Exception:
             return HttpResponse(json.dumps({
             'statCode': -2,
-            'errormessage': 'username or mail mot exists',
+            'errormessage': '用户名或邮箱不存在',
             }))
     if(password != u.password):
         return HttpResponse(json.dumps({
             'statCode': -3,
-            'errormessage': 'wrong password',
+            'errormessage': '密码错误',
             }))
     else:
         return HttpResponse(json.dumps({
