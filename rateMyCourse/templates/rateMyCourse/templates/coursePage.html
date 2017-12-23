@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../../static/ratemycourse/css/coursePage.css" type="text/css">
 </head>
 <body>
-  <div class="py-5" style="background: url(../../../static/ratemycourse/images/bg1.jpg);background-size:cover;">
+  <div class="py-5" style="background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);">
    @import "commonNavbar.html"
     <div class="container py-5">
       <div class="text-center text-dark">
@@ -53,7 +53,7 @@
       <div style="width:76%">
           <div class="row show-grid" style="width:100%;margin-left:16px">
               <div class="col-md-8"><h3 class="text-dark"> 总分：{{course_scores}}</h3></div>
-              <div class="col-md-4" ><a class="btn btn-lg btn-default" id="toComment" href="rate">撰写评价</a></div>
+              <div class="col-md-4" ><a class="btn btn-outline-primary btn-lg btn-default" id="toComment" href="rate">撰写评价</a></div>
         </div>
         <table style="width:80%; margin-top:16px; margin-left:32px">
           <tbody>
@@ -78,10 +78,12 @@
       </div>
       <div class="text-center" style="border-left:1px #e4e4e4 solid; width:23%;">
         <div class="text-dark text-center" style="margin-top:54px">
-          <a href="{{course_website}}">
+         <!-- <a href="{{course_website}}">-->
+         <a>
             <p class="text-dark">课程网站</p>
           </a>
-          <a href="{{profession_website}}">
+         <!-- <a href="{{profession_website}}">-->
+         <a>
             <p style="margin-top:32px;" class="text-dark">学院官网</p>
           </a>
         </div>

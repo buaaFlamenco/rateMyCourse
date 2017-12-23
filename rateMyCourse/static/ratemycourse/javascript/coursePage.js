@@ -11,7 +11,7 @@ function ccomments(node,j, t){
     var ulnode = document.createElement("ul");
     node.appendChild(ulnode);
     ulnode.setAttribute("class","list-group");
-    ulnode.setAttribute("style","margin-top:32px");
+    ulnode.setAttribute("style","margin-top:16px");
     var lnode1 = document.createElement("li");
     ulnode.appendChild(lnode1);
     lnode1.setAttribute("class","list-group-item");
@@ -25,7 +25,8 @@ function ccomments(node,j, t){
     //submit
     var cfmnode = document.createElement("button");
     divnode.appendChild(cfmnode);
-    cfmnode.setAttribute("class", "cfmbutton");
+    cfmnode.setAttribute("type", "button");
+    cfmnode.setAttribute("class", "btn btn-outline-primary cfmbutton");
     var btnnode = document.createTextNode("发送");
     cfmnode.setAttribute("onclick", "cfmclick(this)");
     cfmnode.appendChild(btnnode);
@@ -63,8 +64,9 @@ function ccomments(node,j, t){
             var cdivnode = document.createElement("div");
             lnode1.appendChild(cdivnode);
             cdivnode.setAttribute("style", "float:left");
-            var cNode = document.createTextNode(dis.text);
+            var cNode = document.createElement("p");
             cdivnode.appendChild(cNode);
+            cNode.innerHTML = dis.text;
 
             ulnode.appendChild(lnode1);
             lnode1.setAttribute("class","list-group-item");
@@ -73,13 +75,13 @@ function ccomments(node,j, t){
 }
 function cfmclick(node){
   if($.cookie('username') == undefined){
-    alert("please log in first!");
+    alert("请先登录！");
     return false;
   }
   var id = $(node).parents(".commentGrid").attr("id");
   var text = $(node).prev().val();
   if(text==null){
-    alert("please enter words!");
+    alert("内容不能为空！");
     return false;
   }
   $.ajax("/submitDiscuss/", {
@@ -93,7 +95,7 @@ function cfmclick(node){
     }
   }).done(function (data) {
     if(data.statCode == 0){
-      alert("your comment submited succesfully!");
+      alert("已成功提交！");
       ccomments($(node).parents(".commentGrid")[0], 0, $(node).parents(".commentGrid").children(".commentsclk")[0]);
     }
     else {
@@ -139,7 +141,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         <div>
         <br/>
         <br/>
-        <br/>
+        </div>
         `;
 
         // create div
@@ -152,7 +154,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         imageTag[0].src = imageUrls;
         imageTag[0].width = "86";
         imageTag[0].height = "86";
-        imageTag[0].setAttribute("style", "margin-bottom:16px;margin-top:16px");
+        imageTag[0].setAttribute("style", "margin-top:8px");
 
         var pTags = commentGrid.getElementsByTagName("p");
         var userNameNode = document.createTextNode(userName);
@@ -179,7 +181,7 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         //inset time
         var timenode = document.createTextNode(time);
         pTags[8].appendChild(timenode);
-        pTags[8].setAttribute("style", "float:left;text-align:left;margin-top:32px")
+        pTags[8].setAttribute("style", "float:left;text-align:left;margin-top:16px")
         //ccomment
         var aTags =  commentGrid.getElementsByTagName("a");
         var cnode = document.createTextNode("评论("+cnum+")");
@@ -191,14 +193,14 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         var dnode = document.createTextNode("删除");
         aTags[1].appendChild(dnode);
         aTags[1].setAttribute("href", "javascript:void(0)");
-        aTags[1].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px; display:none");
+        aTags[1].setAttribute("style", "float:right;text-align:right;margin-top:16px;margin-right:16px; display:none");
         aTags[1].setAttribute("class", "delete");
         aTags[1].setAttribute("onclick", "del(this)");
 
         var chnode = document.createTextNode("修改");
         aTags[2].appendChild(chnode);
         aTags[2].setAttribute("href", "javascript:void(0)");
-        aTags[2].setAttribute("style", "float:right;text-align:right;margin-top:32px;margin-right:16px; display:none");
+        aTags[2].setAttribute("style", "float:right;text-align:right;margin-top:16px;margin-right:16px; display:none");
         aTags[2].setAttribute("class", "change");
         aTags[2].setAttribute("onclick", "changeclick(this)");
 
@@ -219,9 +221,9 @@ function generateGrid(imageUrls, userName, iTerm, iTeacher, iToal, text, time, c
         divTags[1].setAttribute("class", "row text-center");
         divTags[2].setAttribute("class", "text-center");
         divTags[0].setAttribute("style", "width:70%;border-bottom:1px #e4e4e4 solid;");
-        divTags[3].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;");
+        divTags[3].setAttribute("style", "width:100%;border-bottom:1px #e4e4e4 solid;margin-bottom:16px");
         var tableTag = commentGrid.getElementsByTagName("table");
-        tableTag[0].setAttribute("style", "width:70%; margin-top:16px;border-bottom:1px #e4e4e4 solid");
+        tableTag[0].setAttribute("style", "width:70%; margin-top:8px;border-bottom:1px #e4e4e4 solid");
         return commentGrid;
 }
 
@@ -307,7 +309,7 @@ function del(node){
  function gclick(node){
   var id = node.parentElement.parentElement.id;
   if($.cookie('username') == undefined){
-    alert("please log in first!");
+    alert("请先登录!");
     return false;
   }
   $.ajax('/changeSupport/', {
