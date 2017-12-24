@@ -203,7 +203,7 @@ def submitComment(request):
             }))
 
     if(Comment.objects.filter(
-        course=crs, user=User.objects.get(username=username)
+        course__number=course_number, user=User.objects.get(username=username)
         ).count() >= 2):
         return HttpResponse(json.dumps({
             'statCode': -2,
