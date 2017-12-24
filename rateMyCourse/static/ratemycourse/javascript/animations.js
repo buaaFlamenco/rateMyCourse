@@ -5,6 +5,8 @@ function setAnimations() {
 
   //Dropdown style settings
   slideDropdown()
+  //set search Expand
+  searchExpand()
 }
 
 function collapseNavbar() {
@@ -23,4 +25,12 @@ function slideDropdown() {
   $('.dropdown').on('hide.bs.dropdown', function() {
     $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
   });
+}
+function searchExpand() {
+    $(".search").focus(function () {
+        $(".search").animate({ width: '+=64px' });
+    })
+    $(".search").blur(function () {
+        $(".search").animate({ width: '-=64px' });
+    }) 
 }

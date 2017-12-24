@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="../../../static/ratemycourse/css/allPages.css" />
   {% csrf_token %}
   <title>评价 - 公客</title>
-  <link rel="shortcut icon" href="../../static/favicon.ico"/>
-  <link rel="bookmark" href="../../static/favicon.ico"/>
+  <link rel="shortcut icon" href="../../../static/favicon.ico"/>
+  <link rel="bookmark" href="../../../static/favicon.ico"/>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
       <ul class="navbar-nav">
         <li>
           <form class="form-inline m-0" action="/search">
-            <input class="form-control input-lg" type="text" placeholder="搜索学校/专业/课程" style="float:right" name="keywords"> </form>
+            <input class="form-control input-lg search" type="text" placeholder="搜索学校/专业/课程" style="float:right" name="keywords"> </form>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -162,8 +162,7 @@
         <p class="lead my-2 text-dark text-right">写评价</p>
       </div>
       <div class="col-md-10 px-5">
-        <textarea class="w-75 my-2" rows="10" id="writeCommentText">
-          </textarea>
+        <textarea class="w-100 my-2" rows="10" id="writeCommentText"></textarea>
       </div>
     </div>
     <div class="row  my-1">

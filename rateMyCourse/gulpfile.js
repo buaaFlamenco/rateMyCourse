@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var htmlImport = require('gulp-html-import');
 
-gulp.task('default', function() {
+gulp.task('default', function () {
 });
 
 gulp.task('dev', function() {
