@@ -49,7 +49,7 @@ function Func_submit() {
   }).done(function (data) {
     if(data.statCode == 0){
       alert("评论追加成功")
-      location.href = "../"
+      location.href = "/course/" + data.course_number
     }
     else {
       alert(data.errormessage)

@@ -98,7 +98,7 @@ def getComment(request):
             dis = Discuss.objects.filter(comment=cmt)
             for d in dis:
                 cnum = cnum+1
-
+                
             cmtList.append({
                 'userName': cmt.user.username if cmt.anonymous == False else '匿名用户',
                 'text': cmt.content.replace("\n", "<br/>"),
@@ -308,6 +308,7 @@ def changeComment(request):
     comment.save()
     return HttpResponse(json.dumps({
         'statCode': 0,
+        'course_number': comment.course.number,
         }))
 
 def delComment(request):
