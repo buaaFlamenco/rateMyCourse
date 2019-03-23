@@ -12,3 +12,4 @@ rateMyCourse/static/ratemycourse/javascript/temp.html
 __pycache__/
 *.pyc
 rateMyCourse/templates/rateMyCourse/temp.html
+rateMyCourse/migrations/*

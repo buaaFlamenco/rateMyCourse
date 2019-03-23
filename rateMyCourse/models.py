@@ -79,7 +79,7 @@ class User(models.Model):
 class Course(models.Model):
     """
     Table of users. \n
-    username: char, length = 64, the name of the course \n
+    name: char, length = 64, the name of the course \n
     website: URL, the (introduction) website of the course \n
     course_ID: char, length = 50, unique ID of the class, primary key \n
     description: char, length = 512, the description of the class, including time, place and so on \n
@@ -140,7 +140,7 @@ class Ranks(models.Model):
     funny_score = models.FloatField(default=0)
     gain_score = models.FloatField(default=0)
     recommend_score = models.FloatField(default=0)
-    edit_time = models.DateTimeField
+    edit_time = models.DateTimeField(default=datetime.datetime.now)
 
 
 class SelectCourse(models.Model):
