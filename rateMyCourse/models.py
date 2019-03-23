@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+import datetime
+
 from django.db import models
 
 
@@ -23,18 +25,18 @@ class Teacher(models.Model):
     name: char, length = 64, the name of teacher \n
     website: URL, the (introduction) website of the teacher \n
     title: char, length = 64, the title of the teacher \n
-    department: foreign key to table DEPARTMENT, defines which department that the teacher belongs to
+    //department: foreign key to table DEPARTMENT, defines which department that the teacher belongs to
     """
     name = models.CharField(max_length=64)
     website = models.URLField(blank=True)
-    title = models.CharField(max_length=64)
+    title = models.CharField(max_length=64, blank=True)
 
-    # connections
+    '''# connections
     department = models.ForeignKey(
         Department,
         on_delete=models.SET_NULL,
         null=True,
-    )
+    )'''
 
     def __str__(self):
         return self.name
@@ -66,9 +68,9 @@ class User(models.Model):
     mail = models.EmailField(max_length=64, unique=True)
     # TODO md5+salt
     password = models.CharField(max_length=32)
-    role = models.CharField(max_length=1, choices=ROLE_CHOICE)
+    role = models.CharField(max_length=1, choices=ROLE_CHOICE,default='O')
     self_introduction = models.CharField(max_length=256, blank=True, unique=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICE)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICE,default='A')
 
     def __str__(self):
         return self.username
@@ -81,23 +83,25 @@ class Course(models.Model):
     website: URL, the (introduction) website of the course \n
     ID: char, length = 50, unique ID of the class, primary key \n
     description: char, length = 512, the description of the class, including time, place and so on \n
-    average_rank: float, the average rank of the class \n
+    # average_rank: float, the average rank of the class \n
     course_type: tuple, the type of the course \n
+    credit: float, the credit of a course
     """
-    # todo mo detailed course type
+    '''# todo mo detailed course type
     COURSE_TYPE_CHOICE = (
         ('C', 'Compulsory '),
         ('S', 'Selective'),
         ('G', 'General'),
-    )
+    )'''
 
     # attributes
     name = models.CharField(max_length=64)
     website = models.URLField()
-    ID = models.CharField(max_length=50, primary_key=True)
+    ID = models.CharField(max_length=50,unique=True,null=True)
     description = models.CharField(max_length=512, blank=True)
-    average_rank = models.FloatField()
-    course_type = models.CharField(max_length=1, choices=COURSE_TYPE_CHOICE)
+    # average_rank = models.FloatField()
+    course_type = models.CharField(max_length=64,blank=True)
+    credit = models.IntegerField()
 
     def __str__(self):
         return self.name
@@ -169,8 +173,8 @@ class Comment(models.Model):
     parent_comment: int, the id of it parent comment, default = -1 \n
     """
     content = models.CharField(max_length=2048)
-    create_time = models.DateTimeField()
-    edit_time = models.DateTimeField()
+    create_time = models.DateTimeField(default=datetime.datetime.now)
+    edit_time = models.DateTimeField(default=datetime.datetime.now)
     parent_comment = models.IntegerField(default=-1)
 
     def __str__(self):
