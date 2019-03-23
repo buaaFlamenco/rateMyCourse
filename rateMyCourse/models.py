@@ -68,9 +68,9 @@ class User(models.Model):
     mail = models.EmailField(max_length=64, unique=True)
     # TODO md5+salt
     password = models.CharField(max_length=32)
-    role = models.CharField(max_length=1, choices=ROLE_CHOICE,default='O')
+    role = models.CharField(max_length=1, choices=ROLE_CHOICE, default='O')
     self_introduction = models.CharField(max_length=256, blank=True, unique=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICE,default='A')
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICE, default='A')
 
     def __str__(self):
         return self.username
@@ -81,7 +81,7 @@ class Course(models.Model):
     Table of users. \n
     username: char, length = 64, the name of the course \n
     website: URL, the (introduction) website of the course \n
-    ID: char, length = 50, unique ID of the class, primary key \n
+    course_ID: char, length = 50, unique ID of the class, primary key \n
     description: char, length = 512, the description of the class, including time, place and so on \n
     # average_rank: float, the average rank of the class \n
     course_type: tuple, the type of the course \n
@@ -97,10 +97,10 @@ class Course(models.Model):
     # attributes
     name = models.CharField(max_length=64)
     website = models.URLField()
-    ID = models.CharField(max_length=50,unique=True,null=True)
+    course_ID = models.CharField(max_length=50, unique=True, null=True)
     description = models.CharField(max_length=512, blank=True)
     # average_rank = models.FloatField()
-    course_type = models.CharField(max_length=64,blank=True)
+    course_type = models.CharField(max_length=64, blank=True)
     credit = models.IntegerField()
 
     def __str__(self):
