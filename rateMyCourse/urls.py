@@ -16,7 +16,7 @@ urlpatterns = [
     
     #POST
     url(r'^signIn/$', register.signIn, name='signIn'),
-    url(r'^signUp/$', register.signUp, name='signUp'),
+    url(r'^signUp/$', register.sign_up, name='signUp'),
     url(r'^active/(?P<active_code>.*)/$', register.active, name="active"),
     url(r'^submitComment/$', api.submitComment, name='submitComment'),
     url(r'^submitDiscuss/$', api.submitDiscuss, name='submitDiscuss'),
