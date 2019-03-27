@@ -69,7 +69,7 @@ class User(models.Model):
     # TODO md5+salt
     password = models.CharField(max_length=32)
     role = models.CharField(max_length=1, choices=ROLE_CHOICE, default='O')
-    self_introduction = models.CharField(max_length=256, blank=True, unique=True)
+    self_introduction = models.CharField(max_length=256, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICE, default='A')
 
     def __str__(self):

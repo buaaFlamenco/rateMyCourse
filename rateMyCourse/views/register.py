@@ -54,6 +54,41 @@ def sign_up(request):
         }))
 
 
+def update_user(request):
+    """
+    注册用户。传入POST，应至少包含 username, 其他可选项是role, gender, self introduction。 \n
+    对于正常合法传入，更新用户信息并返回成功信息（status=1） \n
+    其他非法情况返回错误信息（status=-1） 错误信息保存在errMsg中 \n
+    """
+    try:
+        username = request.POST['username']
+        user = User.objects.get(username=username)
+    except Exception:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': '不存在此用户',
+        }))
+    else:
+        try:
+            user.gender=request.POST['gender']
+            user.role=request.POST['role']
+            user.self_introduction=request.POST['self_introduction']
+            user.save()
+        except Exception:
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': '保存失败，请检查内容正确性',
+            }))
+        else:
+            return HttpResponse(json.dumps({
+                'status': 1,
+                'length': 1,
+                'body': {
+                    'message': "用户{0}信息更新成功".format(username)
+                }
+            }))
+
+
 def randomStr(randomlength=8):
     str = ''
     chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
@@ -92,43 +127,6 @@ def sendRegisterEmail(user, receiver):
     return HttpResponse(emailRecord)
 
 
-def active(request, active_code):
-    try:
-        all_recodes = EmailVerifyRecord.objects.filter(code=active_code)
-    except Exception:
-        return HttpResponse(json.dumps({
-            'statCode': -1,
-            'errormessage': '不存在该激活码',
-        }))
-    if all_recodes:
-        for recode in all_recodes:
-            username = recode.name
-            try:
-                user = User.objects.get(username=username)
-            except Exception:
-                return HttpResponse(json.dumps({
-                    'statCode': -3,
-                    'errormessage': '不存在此用户',
-                    'username': username,
-                }))
-            if user.is_active:
-                return HttpResponse(json.dumps({
-                    'statCode': -4,
-                    'errormessage': '此用户已被激活',
-                    'username': username,
-                }))
-
-            user.is_active = True
-            user.save()
-            recode.delete()
-
-    else:
-        return HttpResponse(json.dumps({
-            'statCode': -2,
-            'errormessage': '不存在该激活码',
-        }))
-
-    return HttpResponse(user.username + '激活成功')
 
 
 def signIn(request):
