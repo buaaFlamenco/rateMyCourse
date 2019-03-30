@@ -5,9 +5,57 @@ from urllib import request, parse
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 from rateMyCourse.models import *
+from django.http import HttpResponse
 
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
+def searchTeacher(request):
+    """
+    搜索教师.
+    教师姓名，空为任意教师
+    姓名包含关键字的所有教师
+    """
+    try:
+        username = request.POST['username']
+    except Exception:
+        return HttpResponse(json.dumps({
+            'nameList': Teacher.objects.all(),
+        }))
+    return HttpResponse(json.dumps({
+                'nameList': Teacher.objects.filter(name=username),
+            }))
+
+def searchCourse(request):
+    """
+    搜索课程.
+    课程姓名，空为任意课程
+    姓名包含关键字的所有课程
+    """
+    try:
+        courseName = request.POST['Course']
+    except Exception:
+        return HttpResponse(json.dumps({
+            'nameList': Course.objects.all(),
+        }))
+    return HttpResponse(json.dumps({
+                'nameList': Course.objects.filter(Course=courseName),
+            }))
+
+def searchUser(request):
+    """
+    搜索用户.
+    用户姓名，空为任意用户
+    姓名包含关键字的所有用户
+    """
+    try:
+        username = request.POST['username']
+    except Exception:
+        return HttpResponse(json.dumps({
+            'nameList': User.objects.all(),
+        }))
+    return HttpResponse(json.dumps({
+                'nameList': User.objects.filter(name=username),
+            }))
 
 def getAvgScore(courses):
     x = [0] * 4
