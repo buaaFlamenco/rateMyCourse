@@ -2,12 +2,13 @@ import hashlib
 import json
 from urllib import request, parse
 
+from django.http import HttpResponse
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 from rateMyCourse.models import *
-from django.http import HttpResponse
 
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
+
 
 def searchTeacher(request):
     """
@@ -15,15 +16,23 @@ def searchTeacher(request):
     教师姓名，空为任意教师
     姓名包含关键字的所有教师
     """
+    retdist = []
     try:
         username = request.POST['username']
+        teacher_list = Teacher.objects.filter(name=username)
+        for teacher in teacher_list:
+            retdist.append(teacher.ret())
     except Exception:
         return HttpResponse(json.dumps({
-            'nameList': Teacher.objects.all(),
+            'status': -1,
+            'errMsg': 'username Error',
         }))
     return HttpResponse(json.dumps({
-                'nameList': Teacher.objects.filter(name=username),
-            }))
+        'status': 1,
+        'length': len(teacher_list),
+        'body': retdist,
+    }))
+
 
 def searchCourse(request):
     """
@@ -38,8 +47,9 @@ def searchCourse(request):
             'nameList': Course.objects.all(),
         }))
     return HttpResponse(json.dumps({
-                'nameList': Course.objects.filter(Course=courseName),
-            }))
+        'nameList': Course.objects.filter(Course=courseName),
+    }))
+
 
 def searchUser(request):
     """
@@ -54,8 +64,9 @@ def searchUser(request):
             'nameList': User.objects.all(),
         }))
     return HttpResponse(json.dumps({
-                'nameList': User.objects.filter(name=username),
-            }))
+        'nameList': User.objects.filter(name=username),
+    }))
+
 
 def getAvgScore(courses):
     x = [0] * 4

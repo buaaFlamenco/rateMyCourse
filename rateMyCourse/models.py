@@ -41,6 +41,9 @@ class Teacher(models.Model):
     def __str__(self):
         return self.name
 
+    def ret(self):
+        return self.name, self.website, self.title
+
 
 class User(models.Model):
     """
@@ -75,6 +78,9 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+    def ret(self):
+        return self.username, self.mail, self.role, self.gender, self.self_introduction
+
 
 class Course(models.Model):
     """
@@ -105,6 +111,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
+    def ret(self):
+        return self.name, self.website, self.course_ID, self.description, self.course_type, self.credit
 
 
 class TeachCourse(models.Model):
