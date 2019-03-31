@@ -16,21 +16,21 @@ def searchTeacher(request):
     教师姓名，空为任意教师
     姓名包含关键字的所有教师
     """
-    retdist = []
+    retlist = []
     try:
         username = request.POST['username']
         teacher_list = Teacher.objects.filter(name=username)
         for teacher in teacher_list:
-            retdist.append(teacher.ret())
+            retlist.append(teacher.ret())
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
-            'errMsg': 'username Error',
+            'errMsg': 'teacher name Error',
         }))
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(teacher_list),
-        'body': retdist,
+        'body': retlist,
     }))
 
 
@@ -40,14 +40,21 @@ def searchCourse(request):
     课程姓名，空为任意课程
     姓名包含关键字的所有课程
     """
+    retlist = []
     try:
         courseName = request.POST['Course']
+        course_list = Course.objects.filter(name=courseName)
+        for course in course_list:
+            retlist.append(course.ret())
     except Exception:
         return HttpResponse(json.dumps({
-            'nameList': Course.objects.all(),
+            'status': -1,
+            'errMsg': 'course name Error',
         }))
     return HttpResponse(json.dumps({
-        'nameList': Course.objects.filter(Course=courseName),
+        'status': 1,
+        'length': len(course_list),
+        'body': retlist,
     }))
 
 
@@ -57,14 +64,21 @@ def searchUser(request):
     用户姓名，空为任意用户
     姓名包含关键字的所有用户
     """
+    retlist = []
     try:
         username = request.POST['username']
+        user_list = User.objects.filter(name=username)
+        for user in user_list:
+            retlist.append(user.ret())
     except Exception:
         return HttpResponse(json.dumps({
-            'nameList': User.objects.all(),
+            'status': -1,
+            'errMsg': 'user name Error',
         }))
     return HttpResponse(json.dumps({
-        'nameList': User.objects.filter(name=username),
+        'status': 1,
+        'length': len(user_list),
+        'body': retlist,
     }))
 
 

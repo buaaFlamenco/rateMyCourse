@@ -70,9 +70,9 @@ def update_user(request):
         }))
     else:
         try:
-            user.gender=request.POST['gender']
-            user.role=request.POST['role']
-            user.self_introduction=request.POST['self_introduction']
+            user.gender = request.POST['gender']
+            user.role = request.POST['role']
+            user.self_introduction = request.POST['self_introduction']
             user.save()
         except Exception:
             return HttpResponse(json.dumps({

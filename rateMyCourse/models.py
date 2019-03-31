@@ -18,6 +18,12 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
+    def ret(self):
+        return {
+            'name': self.name,
+            'website': self.website
+        }
+
 
 class Teacher(models.Model):
     """
@@ -42,7 +48,11 @@ class Teacher(models.Model):
         return self.name
 
     def ret(self):
-        return self.name, self.website, self.title
+        return {
+            'name': self.name,
+            'website': self.website,
+            'title': self.title
+        }
 
 
 class User(models.Model):
@@ -79,7 +89,13 @@ class User(models.Model):
         return self.username
 
     def ret(self):
-        return self.username, self.mail, self.role, self.gender, self.self_introduction
+        return {
+            'username': self.username,
+            'mail': self.mail,
+            'role': self.role,
+            'gender': self.gender,
+            'self_introduction': self.self_introduction
+        }
 
 
 class Course(models.Model):
@@ -113,7 +129,14 @@ class Course(models.Model):
         return self.name
 
     def ret(self):
-        return self.name, self.website, self.course_ID, self.description, self.course_type, self.credit
+        return {
+            'name': self.name,
+            'website': self.website,
+            'course_ID': self.course_ID,
+            'description': self.description,
+            'course_type': self.course_type,
+            'credit': self.credit
+        }
 
 
 class TeachCourse(models.Model):
@@ -150,6 +173,15 @@ class Ranks(models.Model):
     gain_score = models.FloatField(default=0)
     recommend_score = models.FloatField(default=0)
     edit_time = models.DateTimeField(default=datetime.datetime.now)
+
+    def ret(self):
+        return {
+            'difficulty_score': self.difficulty_score,
+            'funny_score': self.funny_score,
+            'gain_score': self.gain_score,
+            'recommend_score': self.recommend_score,
+            'edit_time': self.edit_time
+        }
 
 
 class SelectCourse(models.Model):
@@ -189,6 +221,14 @@ class Comment(models.Model):
     def __str__(self):
         return self.id
 
+    def ret(self):
+        return {
+            'content': self.content,
+            'create_time': self.create_time,
+            'edit_time': self.edit_time,
+            'parent_comment': self.parent_comment
+        }
+
 
 class MakeComment(models.Model):
     """
@@ -214,3 +254,9 @@ class MakeComment(models.Model):
 class HitCount(models.Model):
     name = models.CharField(max_length=50)
     count = models.IntegerField()
+
+    def ret(self):
+        return {
+            'name': self.name,
+            'count': self.count
+        }
