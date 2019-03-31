@@ -1,7 +1,24 @@
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import search, api, register
+from .views import search, api, register,models
 
+
+
+urlpatterns=[
+    url(r'^signIn/$', register.signIn, name='signIn'),
+    url(r'^signUp/$', register.sign_up, name='signUp'),
+
+
+    url(r'^searchTeacher/$', search.searchTeacher, name='searchTeacher'),
+    url(r'^searchCourse/$', search.searchCourse, name='searchCourse'),
+    url(r'^searchUser/$', search.searchUser, name='searchUser'),
+
+    url(r'^addTeacher/$',models.addTeacher,name="addTeacher"),
+    url(r'^addCourse/$',models.addCourse,name="addCourse"),
+    url(r'^addTeachCourse/$',models.addTeachCourse,name="addTeachCourse"),
+
+]
+'''
 urlpatterns = [
     #GET
     url(r'^$', search.getIndex, name='getIndex'),
@@ -62,3 +79,5 @@ urlpatterns = [
     url(r'^delDiscuss/$', api.delDiscuss, name='delDiscuss'),
 
 ]
+
+'''
