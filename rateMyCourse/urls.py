@@ -17,7 +17,9 @@ urlpatterns=[
     url(r'^addCourse/$',models.addCourse,name="addCourse"),
     url(r'^addTeachCourse/$',models.addTeachCourse,name="addTeachCourse"),
 
-    url(r'^makeComments/$',comments.make_comment,name="makeComment")
+    url(r'^makeComments/$',comments.make_comment,name="makeComment"),
+    url(r'^getCommentsByCourse/$',comments.get_comment_by_course,name="getCommentsByCourse"),
+    url(r'^editComments/$',comments.edit_comment,name="editComments")
 
 ]
 '''
