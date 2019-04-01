@@ -50,7 +50,7 @@ def get_comment_by_course(request):
     返回一个列表，每项为一条评论，时间顺序
     """
     try:
-        course_ID=request.POST['course_ID']
+        course_ID=request.GET['course_ID']
         rawList = MakeComment.objects.filter(course_id=Course.objects.get(course_ID=course_ID).id)
 
         retList=[]

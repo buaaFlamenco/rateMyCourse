@@ -89,54 +89,14 @@ def update_user(request):
             }))
 
 
-def randomStr(randomlength=8):
-    str = ''
-    chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
-    length = len(chars) - 1
-    random = Random()
-    for i in range(randomlength):
-        str += chars[random.randint(0, length)]
-    return str
-
-
-def sendRegisterEmail(user, receiver):
-    #
-
-    print(settings.HOST)
-    emailRecord = EmailVerifyRecord()
-    # 将给用户发的信息保存在数据库中
-    code = randomStr(16)
-    emailRecord.code = code
-    emailRecord.name = user
-    emailRecord.save()
-
-    subject = "公客网站激活"
-    body = "激活链接： " + settings.HOST + "active/" + code + "/"
-
-    msg = MIMEText(body, 'plain', 'utf-8')
-    msg['Subject'] = Header(subject, 'utf-8')
-    msg['From'] = 'flamenco<' + settings.EMAIL_HOST_USER + '>'
-    msg['To'] = receiver
-
-    smtp = smtplib.SMTP()
-    smtp.connect(settings.EMAIL_HOST)
-    smtp.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
-    a = smtp.sendmail(settings.EMAIL_HOST_USER, receiver, msg.as_string())
-    smtp.quit()
-
-    return HttpResponse(emailRecord)
-
-
-
-
-def signIn(request):
+def sign_in(request):
     try:
         username = request.POST['username']
         password = request.POST['password']
     except Exception:
         return HttpResponse(json.dumps({
-            'statCode': -1,
-            'errormessage': '未能获取到用户名，邮箱或密码',
+            'status': -1,
+            'errMsg': '未能获取到用户名，邮箱或密码',
         }))
     try:
         u = User.objects.get(username=username)
@@ -145,16 +105,21 @@ def signIn(request):
             u = User.objects.get(mail=username)
         except Exception:
             return HttpResponse(json.dumps({
-                'statCode': -2,
-                'errormessage': '用户名或邮箱不存在',
+                'status': -2,
+                'errMsg': '用户名或邮箱不存在',
             }))
     if (password != u.password):
         return HttpResponse(json.dumps({
-            'statCode': -3,
-            'errormessage': '密码错误',
+            'status': -3,
+            'errMsg': '密码错误',
         }))
     else:
         return HttpResponse(json.dumps({
-            'statCode': 0,
-            'username': username,
+            'status': 0,
+            'length': 1,
+            'body':{
+                'username':username
+            }
         }))
+
+
