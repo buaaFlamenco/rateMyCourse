@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from django.contrib import admin
-from .views import search, api, register,models
+from .views import search, api, register,models,comments
 
 
 
@@ -16,6 +16,8 @@ urlpatterns=[
     url(r'^addTeacher/$',models.addTeacher,name="addTeacher"),
     url(r'^addCourse/$',models.addCourse,name="addCourse"),
     url(r'^addTeachCourse/$',models.addTeachCourse,name="addTeachCourse"),
+
+    url(r'^makeComments/$',comments.make_comment,name="makeComment")
 
 ]
 '''

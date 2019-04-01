@@ -218,8 +218,7 @@ class Comment(models.Model):
     edit_time = models.DateTimeField(default=datetime.datetime.now)
     parent_comment = models.IntegerField(default=-1)
 
-    def __str__(self):
-        return self.id
+
 
     def ret(self):
         return {
