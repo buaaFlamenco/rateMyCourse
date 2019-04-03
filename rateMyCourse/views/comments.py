@@ -58,8 +58,8 @@ def get_comment_by_course(request):
             rdict={}
             rdict['username']=i.user.username
             rdict['content']=i.comment.content
-            rdict['editTime']=i.comment.edit_time
-            rdict['createTime']=i.comment.create_time
+            rdict['editTime']=str(i.comment.edit_time)
+            rdict['createTime']=str(i.comment.create_time)
             rdict['commentID']=i.id
             retList.append(rdict)
 

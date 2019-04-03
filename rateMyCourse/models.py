@@ -180,7 +180,7 @@ class Ranks(models.Model):
             'funny_score': self.funny_score,
             'gain_score': self.gain_score,
             'recommend_score': self.recommend_score,
-            'edit_time': self.edit_time
+            'edit_time': str(self.edit_time)
         }
 
 
@@ -223,8 +223,8 @@ class Comment(models.Model):
     def ret(self):
         return {
             'content': self.content,
-            'create_time': self.create_time,
-            'edit_time': self.edit_time,
+            'create_time': str(self.create_time),
+            'edit_time': str(self.edit_time),
             'parent_comment': self.parent_comment
         }
 

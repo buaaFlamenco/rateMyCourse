@@ -5,7 +5,7 @@ from .views import search, api, register,models,comments
 
 
 urlpatterns=[
-    url(r'^signIn/$', register.signIn, name='signIn'),
+    url(r'^signIn/$', register.sign_in, name='signIn'),
     url(r'^signUp/$', register.sign_up, name='signUp'),
     url(r'^updateUser/$', register.update_user, name='updateUser'),
 
