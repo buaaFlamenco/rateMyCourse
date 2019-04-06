@@ -1,0 +1,311 @@
+[
+{
+  "model": "rateMyCourse.department",
+  "pk": 1,
+  "fields": {
+    "name": "Office",
+    "website": ""
+  }
+},
+{
+  "model": "rateMyCourse.department",
+  "pk": 2,
+  "fields": {
+    "name": "\u6d3e\u51fa\u6240",
+    "website": "http://www.110.com"
+  }
+},
+{
+  "model": "rateMyCourse.teacher",
+  "pk": 1,
+  "fields": {
+    "name": "qiang",
+    "website": "http://www.qiang.com",
+    "title": "First Qiang"
+  }
+},
+{
+  "model": "rateMyCourse.teacher",
+  "pk": 2,
+  "fields": {
+    "name": "police",
+    "website": "http://www.110.com",
+    "title": "Dear Police"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 1,
+  "fields": {
+    "username": "ming",
+    "mail": "ming@test.com",
+    "password": "ming",
+    "role": "S",
+    "self_introduction": "mingming",
+    "gender": "M"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 2,
+  "fields": {
+    "username": "hong",
+    "mail": "hong@test.com",
+    "password": "hong",
+    "role": "S",
+    "self_introduction": "honghong",
+    "gender": "F"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 3,
+  "fields": {
+    "username": "qiang",
+    "mail": "qiang@test.com",
+    "password": "qiang",
+    "role": "T",
+    "self_introduction": "qiangqiang",
+    "gender": "M"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 4,
+  "fields": {
+    "username": "slave",
+    "mail": "slave@test.com",
+    "password": "slave",
+    "role": "O",
+    "self_introduction": "slaveslave",
+    "gender": "A"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 5,
+  "fields": {
+    "username": "police",
+    "mail": "police@test.com",
+    "password": "police",
+    "role": "T",
+    "self_introduction": "policepolice",
+    "gender": "M"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 6,
+  "fields": {
+    "username": "rbq",
+    "mail": "rbq@test.com",
+    "password": "rbq",
+    "role": "O",
+    "self_introduction": "",
+    "gender": "A"
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 1,
+  "fields": {
+    "name": "\u8bba\u6301\u4e45\u6218",
+    "website": "http://www.longlong.com",
+    "course_ID": "0",
+    "description": "\u732b\u771f\u53ef\u7231",
+    "course_type": "\u5fc5\u4fee",
+    "credit": 1
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 2,
+  "fields": {
+    "name": "\u7b2c\u4e09\u6b21\u4e16\u754c\u5927\u6218",
+    "website": "http://www.ww3.com",
+    "course_ID": "1",
+    "description": "",
+    "course_type": "",
+    "credit": 1
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 3,
+  "fields": {
+    "name": "\u5982\u4f55\u8fdb\u7262\u5b50",
+    "website": "http://www.jubao.com",
+    "course_ID": "110",
+    "description": "\u5f88\u7b80\u5355",
+    "course_type": "\u5fc5\u4fee",
+    "credit": 3
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 4,
+  "fields": {
+    "name": "rbq",
+    "website": "http://www.rbq.com",
+    "course_ID": "000000",
+    "description": "",
+    "course_type": "",
+    "credit": 1
+  }
+},
+{
+  "model": "rateMyCourse.teachcourse",
+  "pk": 1,
+  "fields": {
+    "course": 1,
+    "department": 1,
+    "teachers": [
+      1
+    ]
+  }
+},
+{
+  "model": "rateMyCourse.teachcourse",
+  "pk": 2,
+  "fields": {
+    "course": 2,
+    "department": 1,
+    "teachers": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "rateMyCourse.teachcourse",
+  "pk": 3,
+  "fields": {
+    "course": 3,
+    "department": 2,
+    "teachers": [
+      2
+    ]
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 1,
+  "fields": {
+    "content": "\u771f\u68d2",
+    "create_time": "2019-04-02T00:00:00Z",
+    "edit_time": "2019-04-04T18:00:00Z",
+    "parent_comment": -1
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 2,
+  "fields": {
+    "content": "\u6211\u4e5f\u8fd9\u4e48\u89c9\u5f97",
+    "create_time": "2019-04-03T15:17:49Z",
+    "edit_time": "2019-04-03T15:17:49Z",
+    "parent_comment": 1
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 3,
+  "fields": {
+    "content": "\u6211\u6210\u529f\u8fdb\u53bb\u5566\uff01",
+    "create_time": "2019-04-05T15:20:58Z",
+    "edit_time": "2019-04-05T15:20:58Z",
+    "parent_comment": -1
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 4,
+  "fields": {
+    "content": "\u90a3\u4f60\u5f88\u68d2\u68d2\u54e6",
+    "create_time": "2019-04-05T15:21:17Z",
+    "edit_time": "2019-04-05T15:21:17Z",
+    "parent_comment": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 5,
+  "fields": {
+    "content": "rbq",
+    "create_time": "2019-04-06T13:58:06Z",
+    "edit_time": "2019-04-06T13:58:06Z",
+    "parent_comment": -1
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "course": 1,
+    "comment": 1
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "course": 1,
+    "comment": 2
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 3,
+  "fields": {
+    "user": 4,
+    "course": 3,
+    "comment": 3
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 4,
+  "fields": {
+    "user": 5,
+    "course": 3,
+    "comment": 4
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 5,
+  "fields": {
+    "user": 6,
+    "course": 4,
+    "comment": 5
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$8lvA2ch3SuqD$OVPXfzj4e8jMlP8O0DFkEXr4H9MkEw9QOVynCZqhF/4=",
+    "last_login": "2019-04-05T06:27:32.990Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "437566830@qq.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-04-05T06:27:16.437Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "hn7uj9sg41jyheuzrcj1w1dmfixklm7i",
+  "fields": {
+    "session_data": "YjJlNjM0MjJkOGNlMWZlNDdhMDUwOWEyYWVkNTMyZDQ4ODliMDAwNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYjViYmVjOGMzYzJmN2JlZjFlYTRmMjBkMDM4MTRiMjllNzU0MTcwIn0=",
+    "expire_date": "2019-04-19T06:27:33.115Z"
+  }
+}
+]

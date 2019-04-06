@@ -13,3 +13,6 @@ __pycache__/
 *.pyc
 rateMyCourse/templates/rateMyCourse/temp.html
 rateMyCourse/migrations/*
+
+# vs code
+.vscode

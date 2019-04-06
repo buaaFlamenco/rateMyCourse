@@ -7,13 +7,6 @@ import json
 # Create your tests here.
 
 class APITestCase(TestCase):
-	def test_addHitCount(self):
-		HitCount(name='hit', count=0).save()
-		hit1 = HitCount.objects.get(name='hit').count
-		addHitCount()
-		hit2 = HitCount.objects.get(name='hit').count
-		self.assertEqual(hit1, hit2 - 1)
-
 	def test_signUp(self):
 		c = Client()
 		response = json.loads(c.post('/signUp/', {'username': 'testuser', 'password': 'testpassword'}).content)

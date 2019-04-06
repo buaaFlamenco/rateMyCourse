@@ -27,6 +27,7 @@ def searchTeacher(request):
             'status': -1,
             'errMsg': 'teacher name Error',
         }), content_type="application/json")
+
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(teacher_list),
@@ -56,7 +57,6 @@ def searchCourse(request):
         'length': len(course_list),
         'body': retlist,
     }), content_type="application/json")
-
 
 def searchUser(request):
     """

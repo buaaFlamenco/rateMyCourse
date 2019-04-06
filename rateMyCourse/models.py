@@ -106,7 +106,9 @@ class Course(models.Model):
     course_ID: char, length = 50, unique ID of the class, primary key \n
     description: char, length = 512, the description of the class, including time, place and so on \n
     # average_rank: float, the average rank of the class \n
+
     course_type: the type of the course \n
+
     credit: float, the credit of a course
     """
     '''# todo mo detailed course type
@@ -137,7 +139,6 @@ class Course(models.Model):
             'course_type': self.course_type,
             'credit': self.credit
         }
-
 
 class TeachCourse(models.Model):
     """
@@ -204,7 +205,7 @@ class SelectCourse(models.Model):
         on_delete=models.CASCADE,
     )
 
-
+    
 class Comment(models.Model):
     """
     details of each comment. \n
@@ -217,8 +218,6 @@ class Comment(models.Model):
     create_time = models.DateTimeField(default=datetime.datetime.now)
     edit_time = models.DateTimeField(default=datetime.datetime.now)
     parent_comment = models.IntegerField(default=-1)
-
-
 
     def ret(self):
         return {

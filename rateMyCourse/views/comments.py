@@ -22,6 +22,7 @@ def make_comment(request):
             'status': -1,
             'errMsg': '缺失信息',
         }), content_type="application/json")
+
     else:
         try:
             c=Comment(content=content)
@@ -34,6 +35,7 @@ def make_comment(request):
             return HttpResponse(json.dumps({
                 'status': -1,
                 'errMsg': '发表评论失败',
+
             }), content_type="application/json")
         else:
             return HttpResponse(json.dumps({
