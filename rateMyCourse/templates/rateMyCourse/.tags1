@@ -1,0 +1,58 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+html	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^<html>$/;"	function	line:2
+head	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^<head>$/;"	function	line:4
+meta	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <meta charset="utf-8">$/;"	function	line:5
+meta	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <meta name="viewport" content="width=device-width, initial-scale=1">$/;"	function	line:6
+link	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <link rel="stylesheet" href="https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/font-awesome\/4.7.0\/css\/font-awesome.min.css" type="text\/css">$/;"	function	line:7
+link	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <link rel="stylesheet" href="..\/..\/static\/ratemycourse\/css\/new-age.css">$/;"	function	line:8
+link	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <link rel="stylesheet" href="..\/..\/static\/ratemycourse\/bootstrap-4.0.0-beta.2-dist\/css\/bootstrap.min.css" type="text\/css">$/;"	function	line:9
+link	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <link rel="stylesheet" href="..\/..\/static\/ratemycourse\/css\/new-age.css">$/;"	function	line:10
+link	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <link rel="stylesheet" href="..\/..\/static\/ratemycourse\/css\/allPages.css" type="text\/css">$/;"	function	line:11
+link	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <link rel="stylesheet" href="..\/..\/static\/ratemycourse\/css\/searchResult.css" type="text\/css">$/;"	function	line:12
+body	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^<body>$/;"	function	line:15
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <div class="container">$/;"	function	line:17
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^    <p id="count">搜索到{{count}}门课程<\/p> {% for course in courses %}$/;"	function	line:18
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^    <div class="course-item container" id="course{{forloop.counter}}">$/;"	function	line:19
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^      <div class="row" style="background:#eeeeee">$/;"	function	line:20
+a	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <a href="\/course\/{{course.ID}}" style="text-decoration:none;font-size:50px;color:#000000; width:62%;">{{course.name}}<\/a>$/;"	function	line:21
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^      <div class="row" style="background:#eeeeee">$/;"	function	line:23
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学校$/;"	function	line:24
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^          <p>{{course.school}}<\/p>$/;"	function	line:25
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 专业$/;"	function	line:27
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^          <p>{{course.department}}<\/p>$/;"	function	line:28
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 类型$/;"	function	line:30
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^          <p>{{course.type}}<\/p>$/;"	function	line:31
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学分$/;"	function	line:33
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^          <p>{{course.credit}}<\/p>$/;"	function	line:34
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^      <div class="row" style="background:#eeeeee">$/;"	function	line:37
+ic	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}1" aria-hidden="true" style="font-size:32px;"><\/ic>$/;"	function	line:38
+ic	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}2" aria-hidden="true" style="font-size:32px;"><\/ic>$/;"	function	line:39
+ic	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}3" aria-hidden="true" style="font-size:32px;"><\/ic>$/;"	function	line:40
+ic	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}4" aria-hidden="true" style="font-size:32px;"><\/ic>$/;"	function	line:41
+ic	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}5" aria-hidden="true" style="font-size:32px;"><\/ic>$/;"	function	line:42
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <div class="mx-3" style="font-size:15px;color:#CCBBCC"> 评价数：{{course.ratenumber}} <\/div>$/;"	function	line:43
+br	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^      <br> <\/div> {% endfor %}$/;"	function	line:45
+ul	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^    <ul id="c_pagination" class="pagination"> {% for page in pages %}$/;"	function	line:46
+li	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^      <li class="page-item">$/;"	function	line:47
+a	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^        <a class="page-link " id="p{{page.number}}" onclick="toPage({{page.number}})" href="javascript:void(0)">{{page.number}}<\/a>$/;"	function	line:48
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <div class="row">$/;"	function	line:51
+div	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^    <div class="col-md-12 mt-3">$/;"	function	line:52
+p	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^      <p class="text-center text-dark my-5">© Copyright 2017 Flamenco - All rights reserved. <\/p>$/;"	function	line:53
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script>$/;"	function	line:56
+toPage	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^    function toPage(p){$/;"	function	line:57
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="http:\/\/code.jquery.com\/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"><\/script>$/;"	function	line:102
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="https:\/\/unpkg.com\/scrollreveal\/dist\/scrollreveal.min.js"><\/script>$/;"	function	line:103
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="..\/..\/static\/ratemycourse\/carhartl-jquery-cookie-92b7715\/jquery.cookie.js"><\/script>$/;"	function	line:104
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="..\/..\/static\/ratemycourse\/bootstrap-4.0.0-beta.2-dist\/js\/bootstrap.bundle.js"><\/script>$/;"	function	line:105
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/popper.js\/1.12.6\/umd\/popper.min.js"><\/script>$/;"	function	line:106
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="..\/..\/static\/ratemycourse\/bootstrap-4.0.0-beta.2-dist\/js\/bootstrap.min.js"><\/script>$/;"	function	line:107
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="..\/..\/static\/ratemycourse\/jquery-validation-1.17.0\/dist\/jquery.validate.js"><\/script>$/;"	function	line:108
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="https:\/\/cdn.bootcss.com\/blueimp-md5\/2.10.0\/js\/md5.js"><\/script>$/;"	function	line:109
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="..\/..\/static\/ratemycourse\/javascript\/login.js"><\/script>$/;"	function	line:110
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="..\/..\/static\/ratemycourse\/javascript\/animations.js"><\/script>$/;"	function	line:111
+script	/Users/andy/Documents/GitHub/rateMyCourse/rateMyCourse/templates/rateMyCourse/templates/searchResult.html	/^  <script src="..\/..\/static\/ratemycourse\/javascript\/searchResult.js"><\/script>$/;"	function	line:112

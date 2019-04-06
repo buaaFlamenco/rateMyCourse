@@ -1,0 +1,59 @@
+
+.userName{
+  margin-left: 32px;
+  margin-top: 32px;
+}
+
+.cfmbutton
+  {
+    margin-top:8px;
+    float:right;  
+    width: 48px;
+    height: 36px;
+    font-size: 12px;
+    border-color: #bfbfbf;
+  }
+ .texta
+  { 
+      margin-top:16px;
+      width:100%;
+      height:64px;
+      font-size: 14px;
+      letter-spacing:2px;
+  }
+  .good
+{
+  float:right;
+  margin-top:16px;
+  margin-right:16px;
+  color:black;
+}
+.goodclick
+{
+  float:right;
+  margin-top:16px;
+  margin-right:16px;
+  color:primary;
+}
+.comments
+{
+    float:right;
+    text-align:right;
+    margin-top:16px;
+    margin-right:16px;
+    color:black;
+}
+.commentsclk
+{
+    float:right;
+    text-align:right;
+    margin-top:16px;
+    margin-right:16px;
+    color:primary;
+}
+.disusername
+{
+    float:left;
+    margin-right:16px;
+    font-weight:bold;
+}

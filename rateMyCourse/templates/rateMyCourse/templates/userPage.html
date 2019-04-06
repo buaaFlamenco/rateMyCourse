@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/new-age.css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/allPages.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/userPage.css" type="text/css">
+  {% csrf_token %}
+  <title>{{userName}} - 公客</title>
+  <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <link rel="bookmark" href="../../static/favicon.ico"/>
+</head>
+
+<body>
+  @import "commonNavbar.html"
+  <div class="container">
+    <!-- Profile -->
+    <div class="row my-4">
+      <div class="col col-md-auto">
+        <img src={{userimgurl}} />
+      </div>
+      <div class="col col-md-auto">
+        {{userName}}
+        <a href="javascript:void(0)" class="btn">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+    <!-- Section options -->
+    <div class="row no-gutters">
+      <div class="col col-md-auto" id="optionColumn">
+        <a href="javascript:void(0)" class="btn" id="choiceEvaluations" onclick="viewEvaluations()">评价</a>
+      </div>
+      <div class="col col-md-auto">
+        <a href="javascript:void(0)" class="btn" id="choiceDiscussions" onclick="viewDiscussions()">讨论</a>
+      </div>
+    </div>
+    <hr id="optionBar" class="float" width="7%">
+    <hr>
+    <!-- Evaluations -->
+    <div id="evaluations">
+      {% for assessment in assessments %}
+      <div class="row shortRow pt-3">
+        <div class="col mr-auto">
+          <a href="../../course/{{assessment.course_id}}" class="btn"><h5>{{assessment.courseName}}</h5></a>
+        </div>
+        <div class="col col-auto">
+          {{assessment.time}}
+        </div>
+      </div>
+      <div class="row shortRow">
+        <p class="shortRow ml-4">
+          {{assessment.content}}
+        </p>
+      </div>
+      <div class="row shortRow pl-3">
+        <div class="col col-auto">
+          <small>
+          <i class="fa fa-thumbs-up" aria-hidden="true">
+            赞
+            <a href="javascript:void(0)" class="btn textBtn">
+              <small>{{assessment.likeCount}}</small>
+            </a>
+          </i>
+          </small>
+        </div>
+        <div class="col col-auto">
+          <small>
+          <i class="fa fa-comment" aria-hidden="true">
+            评论
+            <a href="javascript:void(0)" class="btn textBtn">
+              <small>{{assessment.commentCount}}</small>
+            </a>
+          </i>
+          </small>
+        </div>
+      </div>
+      <hr class="shortRow">
+      {% endfor %}
+    </div>
+    <!-- Discussions -->
+    <div id="discussions">
+      {% for discussion in discussions %}
+      <div class="row shortRow pt-3">
+        <div class="col col-md-auto">
+          <img src={{discussion.userImage}} />
+        </div>
+        <div class="col mr-auto">
+          <a href="javascript:void(0)" class="btn">{{discussion.userName}}</a>
+        </div>
+        <div class="col col-md-auto">
+          {{discussion.time}}
+        </div>
+      </div>
+      <div class="row shortRow">
+        <p class="shortRow ml-4">
+          {{discussion.content}}
+        </p>
+      </div>
+      <div class="row shortRow pl-3">
+        <blockquote class="shortRow">
+          <p class="shorterRow">
+            <a href="../../course/{{discussion.course_id}}" class="btn">{{discussion.title}}</a><br/>
+            <small>{{discussion.originalContent}}</small>
+          </p>
+        </blockquote>
+      </div>
+      <hr width="62%">
+      {% endfor %}
+    </div>
+  </div>
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="../../static/ratemycourse/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>
+  <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
+  <script src="../../static/ratemycourse/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+  <script src="../../static/ratemycourse/javascript/login.js"></script>
+  <script src="../../static/ratemycourse/javascript/animations.js"></script>
+  <script src="../../static/ratemycourse/javascript/userPage.js"></script>
+</body>
+
+</html>

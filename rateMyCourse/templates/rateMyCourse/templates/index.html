@@ -6,23 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/new-age.css">
   <link rel="stylesheet" href="../../static/ratemycourse/css/allPages.css" type="text/css">
   <link rel="stylesheet" href="../../static/ratemycourse/css/index.css" type="text/css">
+  {% csrf_token %}
+  <title>公客 为大学选课排忧解难</title>
+  <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <link rel="bookmark" href="../../static/favicon.ico"/>
 </head>
 
 <body>
   @import "indexNavbar.html"
-  <div class="py-5 text-center opaque-overlay" style="background-image: url('../../static/ratemycourse/images/indexPageBackground1.png');">
-    <div class="container py-5">
+  <div class="py-5 text-center opaque-overlay" style="background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);">
+    <div class="container py-5 my-5">
       <div class="row">
         <div class="col-md-12 text-white">
-          <h1 class="display-3 mb-4">公客</h1>
+          <h1 class="display-3 my-4">公客</h1>
           <p class="lead mb-5">为大学选课排忧解难</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="py-5 text-center bg-light">
+  <div class="pt-5 text-center bg-light">
     <div class="container">
       <div class="row">
         <div class="col-md-4 p-4">
@@ -31,8 +36,9 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="dropdown open">
-                <a class="btn btn-light btn-lg dropdown-toggle my-1" href="." data-toggle="dropdown" id="buttonSelectSchool">选择学校</a>
+              <div class="dropdown">
+                <a class="selection btn btn-light btn-lg dropdown-toggle my-1" href="."
+                data-toggle="dropdown" id="buttonSelectSchool">选择学校</a>
                 <div class="dropdown-menu" id="schoolList">
                   <!--Action needed-->
                 </div>
@@ -46,8 +52,9 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="btn-group">
-                <a class="btn btn-light btn-lg dropdown-toggle disabled my-1" data-toggle="dropdown" id="buttonSelectDepartment" href="javascript:void(0)">选择专业</a>
+              <div class="dropdown">
+                <a class="selection btn btn-light btn-lg dropdown-toggle disabled my-1"
+                data-toggle="dropdown" id="buttonSelectDepartment" href="javascript:void(0)">选择专业</a>
                 <div class="dropdown-menu scrollable-menu" id="departmentList" role="menu">
                   <!--Added by index.js-->
                 </div>
@@ -62,8 +69,8 @@
           <!--img class="img-fluid d-block rounded-circle mx-auto" src="https://pingendo.github.io/templates/sections/assets/test_carlito.jpg"-->
           <div class="row">
             <div class="col-md-12">
-              <div class="dropdown open">
-                <a class="btn btn-light btn-lg my-1" href="javascript:void(0)" data-toggle="dropdown" id="buttonSearchCourse">搜索课程</a>
+              <div class="dropdown">
+                <a class="selection btn btn-light btn-lg my-1" href="javascript:void(0)" data-toggle="dropdown" id="buttonSearchCourse">搜索课程</a>
                 <div class="dropdown-menu">
                   <div class="container" style="width=400px">
                     <div class="input-group">
@@ -120,14 +127,36 @@
       </div>
     </div>
   </div>
+  <!-- Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> 公客们 </h5>
+          <a class="close" href="javascript:void(0)" data-dismiss="modal" aria-label="Close" style="outline:none;">
+            <span aria-hidden="true">&times;</span>
+          </a>
+        </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="modal-body text-center">
+                <img src="../../static/ratemycourse/images/conquerorsQR.png"/>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
   <script src="../../static/ratemycourse/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
-  <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
   <script src="../../static/ratemycourse/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+  <script src="../../static/ratemycourse/javascript/animations.js"></script>
   <script src="../../static/ratemycourse/javascript/login.js"></script>
   <script src="../../static/ratemycourse/javascript/index.js"></script>
 </body>

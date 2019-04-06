@@ -1,0 +1,106 @@
+p {
+  word-wrap:break-word;
+}
+
+a {
+  transition: color 0.5s ease;
+}
+
+.btn {
+  transition: color 0.5s ease;
+}
+
+.btn.no-outline:hover,
+.btn.no-outline:focus,
+.btn.no-outline:active:focus,
+.btn.no-outline:active:focus,
+.btn.no-outline.focus,
+.btn.no-outline.active,
+.btn.no-outline:active.focus,
+.btn.no-outline.active.focus {
+  box-shadow:none;
+}
+
+form label.error{
+color: Red;
+}
+
+form input.error{
+border:solid 1px red;
+}
+
+hr{
+  margin:0;
+}
+
+hr.float{
+  margin: -1px;
+  border-color: #646464;
+  border-width:2px;
+}
+
+#commonNav {
+  border-color: rgba(34, 34, 34, 0.05);
+  background-color: white;
+  -webkit-transition: all .35s;
+  -moz-transition: all .35s;
+  transition: all .35s;
+  font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+  font-weight: 200;
+  letter-spacing: 1px; }
+  #commonNav .navbar-brand {
+    color: #e6b135;
+    font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+    font-weight: 200;
+    letter-spacing: 1px; }
+    #commonNav .navbar-brand:hover, #commonNav .navbar-brand:focus {
+      color: #fcbd20; }
+  #commonNav .navbar-toggler {
+    font-size: 1rem;
+    padding: 8px 10px;
+    color: #222222; }
+  #commonNav .navbar-nav > li > a {
+    font-size: 1rem;
+    font-family: 'Lato', 'Helvetica', 'Arial', 'sans-serif';
+    letter-spacing: 2px;
+    text-transform: uppercase; }
+    #commonNav .navbar-nav > li > a.active {
+      color: #fdcc52 !important;
+      background-color: transparent; }
+      #commonNav .navbar-nav > li > a.active:hover {
+        background-color: transparent; }
+  #commonNav .navbar-nav > li > a,
+  #commonNav .navbar-nav > li > a:focus {
+    color: #222222; }
+    #commonNav .navbar-nav > li > a:hover,
+    #commonNav .navbar-nav > li > a:focus:hover {
+      color: #fdcc52; }
+  @media (min-width: 992px) {
+    #commonNav {
+      border-color: transparent;
+      background-color: transparent; }
+      #commonNav .navbar-brand {
+        color: fade(white, 70%); }
+        #commonNav .navbar-brand:hover, #commonNav .navbar-brand:focus {
+          color: #fcbd20; }
+      #commonNav .navbar-nav > li > a,
+      #commonNav .navbar-nav > li > a:focus {
+        color: rgba(142, 139, 139, 1); }
+        #commonNav .navbar-nav > li > a:hover,
+        #commonNav .navbar-nav > li > a:focus:hover {
+          color: #fdcc52; }
+      #commonNav.navbar-shrink {
+        border-color: rgba(34, 34, 34, 0.1);
+        border-width: 1px;
+        border-bottom-style: ridge;
+        background-color: white; }
+        #commonNav.navbar-shrink .navbar-brand {
+          color: #222222; }
+          #commonNav.navbar-shrink .navbar-brand:hover, #commonNav.navbar-shrink .navbar-brand:focus {
+            color: #fdcc52; }
+        #commonNav.navbar-shrink .navbar-nav > li > a,
+        #commonNav.navbar-shrink .navbar-nav > li > a:focus {
+          color: #222222; }
+          #commonNav.navbar-shrink .navbar-nav > li > a:hover,
+          #commonNav.navbar-shrink .navbar-nav > li > a:focus:hover {
+            color: #fdcc52; } }

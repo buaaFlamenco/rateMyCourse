@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/new-age.css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/allPages.css">
+  {% csrf_token %}
+  <title>追加评价 - 公客</title>
+  <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <link rel="bookmark" href="../../static/favicon.ico"/>
+</head>
+
+<body>
+  <div style="padding-top:70px">
+  <!-- Space used to modify navbar with fixed-top style-->
+</div>
+<nav class="navbar navbar-expand-md navbar-light fixed-top" id="commonNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">公客</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+      <ul class="navbar-nav">
+        <li>
+          <form class="form-inline m-0" action="/search">
+            <input class="form-control input-lg search" type="text" placeholder="搜索学校/专业/课程" style="float:right" name="keywords"> </form>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <!-- Login dropdown-->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" id="navLogin">
+          <i class="fa d-inline fa-lg fa-user-circle-o mr-1"></i>
+          登录/注册</a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <div class="container px-3 py-2" style="width:260px;">
+              <form id="formLogin" novalidate method="POST" action="/signIn/">
+                <label>登录</label>
+                <div class="form-group">
+                   <input id="username" type="text" placeholder="用户名"
+                    class="form-control" name="username">
+                   <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                  <input id="password" type="password" placeholder="密码" class="form-control has-warning" name="password" required>
+                  <small class="invalid-feedback">
+                    密码不能为空
+                  </small>
+                </div>
+                <input type="submit" id="btnLogin" class="btn btn-outline-info px-4" value="登录">
+               </form>
+              <div class="dropdown-divider"></div>
+              <form class="mt-2" action="signUpTrigger" method="post">
+                <a href="javascript:void(0)" id="btnNewUser" data-toggle="collapse" data-target="#formRegister" class="">新用户注册</a>
+              </form>
+              <form id="formRegister" class="form in collapse mt-2" style="height: auto;" novalidate>
+                <div class="form-group has-success">
+                  <input id="inputEmail" name="inputEmail" type="email" placeholder="Email" class="form-control form-control-success" name="email" required>
+                </div>
+                <div class="form-group">
+                  <input id="inputUsername" name="inputUsername" type="text" placeholder="用户名"
+                  pattern="^[a-z,A-Z,0-9,_]{6,15}$" data-valid-min="6" title="Choose a username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <input id="inputPassword" name="inputPassword" type="password" placeholder="密码" class="form-control" name="password" required>
+                </div>
+                <div class="form-group">
+                  <input id="inputVerify" name="inputVerify" type="password" placeholder="确认密码" class="form-control" required>
+                </div>
+                <input type="submit" class="btn btn-outline-info px-4" value="注册"> </form>
+            </div>
+          </div>
+        </li>
+        <!-- User dropdown-->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" id="navUser"></a>
+          <div class="dropdown-menu dropdown-menu-right" style="padding:17px;">
+            <a href="javascript:void(0)" id="buttonMyPage" class="dropdown-item btn btn-primary school" onclick="Func_gotoMyPage()">我的主页</a>
+            <a href="javascript:void(0)" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Headers -->
+  <div class="container mb-4">
+    <div class="row my-1">
+      <div class="col-md-12 text-white">
+        <h1 class="display-5 mb-4 text-dark" id="courseName">{{course.name}}</h1>
+        <nav role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">{{course.school}}</li>
+            <li class="breadcrumb-item active">{{course.department}}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <hr />
+  </div>
+  <!-- Contents -->
+  <div class="container">
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">开课学期</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <p class="my-2">{{course.term}}</p>
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">授课教师</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <p class="my-2">
+          {{course.teacher}}
+        </p>
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">原评价</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <p class="w-75 my-2">
+          {{originalRate}}
+        </p>
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-2">
+        <p class="lead my-2 text-dark text-right">追加评价</p>
+      </div>
+      <div class="col-md-10 px-5">
+        <textarea class="w-100 my-2"  id="additionalRate" rows="15"></textarea>
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10 px-5">
+        <a class="btn btn-outline-success px-3" href="javascript:void(0)" onclick="return Func_submit()">提交</a>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <p class="text-center text-dark my-5">© Copyright 2017 Flamenco - All rights reserved. </p>
+      </div>
+    </div>
+  </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../static/ratemycourse/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>
+    <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
+    <script src="../../static/ratemycourse/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+    <script src="../../static/ratemycourse/javascript/login.js"></script>
+    <script src="../../static/ratemycourse/javascript/animations.js"></script>
+    <script src="../../static/ratemycourse/javascript/addRatePage.js"></script>
+</body>
+
+</html>

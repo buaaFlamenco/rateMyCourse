@@ -5,29 +5,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/new-age.css">
   <link rel="stylesheet" href="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/new-age.css">
   <link rel="stylesheet" href="../../static/ratemycourse/css/allPages.css" type="text/css">
+  <link rel="stylesheet" href="../../static/ratemycourse/css/searchResult.css" type="text/css">
+  {% csrf_token %}
+  <title>课程 - 公客</title>
+  <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <link rel="bookmark" href="../../static/favicon.ico"/>
 </head>
 
 <body>
   <div style="padding-top:70px">
   <!-- Space used to modify navbar with fixed-top style-->
 </div>
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-md navbar-light fixed-top" id="commonNav">
   <div class="container">
     <a class="navbar-brand" href="/">公客</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent"> <span class="navbar-toggler-icon"></span> </button>
     <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
       <ul class="navbar-nav">
         <li>
           <form class="form-inline m-0" action="/search">
-            <input class="form-control input-lg" type="text" placeholder="搜索学校/专业/课程" style="float:right" name="keywords"> </form>
+            <input class="form-control input-lg search" type="text" placeholder="搜索学校/专业/课程" style="float:right" name="keywords"> </form>
         </li>
       </ul>
       <ul class="navbar-nav">
-        <div class="dropdown open" id="menuLogin">
-          <a class="btn text-white btn-primary" href="javascript:void(0)"
-          data-toggle="dropdown" id="navLogin"><i class="fa d-inline fa-lg fa-user-circle-o mr-1"></i> 登录/注册</a>
+        <!-- Login dropdown-->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" id="navLogin">
+          <i class="fa d-inline fa-lg fa-user-circle-o mr-1"></i>
+          登录/注册</a>
           <div class="dropdown-menu dropdown-menu-right">
             <div class="container px-3 py-2" style="width:260px;">
               <form id="formLogin" novalidate method="POST" action="/signIn/">
@@ -43,7 +52,7 @@
                     密码不能为空
                   </small>
                 </div>
-                <input type="submit" id="btnLogin" class="btn btn-primary" value="登录">
+                <input type="submit" id="btnLogin" class="btn btn-outline-info px-4" value="登录">
                </form>
               <div class="dropdown-divider"></div>
               <form class="mt-2" action="signUpTrigger" method="post">
@@ -63,16 +72,18 @@
                 <div class="form-group">
                   <input id="inputVerify" name="inputVerify" type="password" placeholder="确认密码" class="form-control" required>
                 </div>
-                <input type="submit" class="btn btn-primary" value="注册"> </form>
+                <input type="submit" class="btn btn-outline-info px-4" value="注册"> </form>
             </div>
           </div>
-        </div>
-        <div class="dropdown" id="menuUser">
-          <a class="btn text-white btn-primary" href="javascript:void(0)" data-toggle="dropdown" id="navUser"></a>
-          <div class="dropdown-menu" style="padding:17px;">
+        </li>
+        <!-- User dropdown-->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" id="navUser"></a>
+          <div class="dropdown-menu dropdown-menu-right" style="padding:17px;">
+            <a href="javascript:void(0)" id="buttonMyPage" class="dropdown-item btn btn-primary school" onclick="Func_gotoMyPage()">我的主页</a>
             <a href="javascript:void(0)" id="buttonLogOut" class="dropdown-item btn btn-primary school" onclick="Func_signOut()">注销</a>
           </div>
-        </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -80,31 +91,40 @@
 
   <div class="container">
     <p id="count">搜索到{{count}}门课程</p> {% for course in courses %}
-    <div class="container" id="course{{forloop.counter}}">
-      <div class="row" style="background:#eeeeee">
-        <a href="/course/{{course.ID}}" style="text-decoration:none;font-size:50px;color:#000000; width:62%;">{{course.name}}</a>
+    <!-- Course Item -->
+    <div class="course-item container my-3" id="course{{forloop.counter}}" style="background-color:#f2f2f2">
+      <div class="row p-4">
+        <a href="/course/{{course.ID}}" class="btn no-outline"><h2>{{course.name}}</h2></a>
       </div>
-      <div class="row" style="background:#eeeeee">
-        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学校
+      <div class="row px-4">
+        <div class="col-md-3 text-md-left"> 学校
           <p>{{course.school}}</p>
         </div>
-        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 专业
+        <div class="col-md-3 text-md-left"> 专业
           <p>{{course.department}}</p>
         </div>
-        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 类型
+        <div class="col-md-3 text-md-left"> 类型
           <p>{{course.type}}</p>
         </div>
-        <div class="col-md-3 text-md-left text-center align-self-center my-4"> 学分
+        <div class="col-md-3 text-md-left"> 学分
           <p>{{course.credit}}</p>
         </div>
       </div>
-      <div class="row" style="background:#eeeeee">
-        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}1" aria-hidden="true" style="font-size:32px;"></ic>
-        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}2" aria-hidden="true" style="font-size:32px;"></ic>
-        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}3" aria-hidden="true" style="font-size:32px;"></ic>
-        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}4" aria-hidden="true" style="font-size:32px;"></ic>
-        <ic class="fa fa-star-o text-dark" id="ic{{forloop.counter}}5" aria-hidden="true" style="font-size:32px;"></ic>
-        <div class="mx-3" style="font-size:15px;color:#CCBBCC"> 评价数：{{course.ratenumber}} </div>
+      <div class="row pt-4 px-4">
+        <div class="col-md-auto">
+          <i class="fa fa-star-o text-dark" id="ic{{forloop.counter}}1" aria-hidden="true" style="font-size:32px;"></i>
+          <i class="fa fa-star-o text-dark" id="ic{{forloop.counter}}2" aria-hidden="true" style="font-size:32px;"></i>
+          <i class="fa fa-star-o text-dark" id="ic{{forloop.counter}}3" aria-hidden="true" style="font-size:32px;"></i>
+          <i class="fa fa-star-o text-dark" id="ic{{forloop.counter}}4" aria-hidden="true" style="font-size:32px;"></i>
+          <i class="fa fa-star-o text-dark" id="ic{{forloop.counter}}5" aria-hidden="true" style="font-size:32px;"></i>
+        </div>
+        <div class="col-md-auto">
+          <p>
+            <small class="text-secondary">
+              评价数：{{course.ratenumber}}
+            </small>
+          </p>
+        </div>
       </div>
       <br> </div> {% endfor %}
     <ul id="c_pagination" class="pagination"> {% for page in pages %}
@@ -112,9 +132,12 @@
         <a class="page-link " id="p{{page.number}}" onclick="toPage({{page.number}})" href="javascript:void(0)">{{page.number}}</a>
       </li> {% endfor %} </ul>
   </div>
-  <div class="row">
-    <div class="col-md-12 mt-3">
-      <p class="text-center text-dark my-5">© Copyright 2017 Flamenco - All rights reserved. </p>
+  <!-- Footer -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <p class="text-center text-dark my-5">© Copyright 2017 Flamenco - All rights reserved. </p>
+      </div>
     </div>
   </div>
   <script>
@@ -122,21 +145,22 @@
        for(i=1;i<=parseInt({{count}});i++){
            var s="#course".concat(i.toString());
            if(i>(parseInt(p)-1)*10&&i<=parseInt(p)*10){
-               $(s).show()
+               $(s).show();
            }else{
-               $(s).hide()
+               $(s).hide();
            }
        }
        for(i=1;i<=parseInt({{count}})/10+1;i++){
            var s="#p".concat(i.toString());
            if(i==parseInt(p)){
                $(s).removeClass("page-link ");
-               $(s).addClass("page-link bg-info text-dark");
+               $(s).addClass("page-link bg-info text-light");
            }else{
-               $(s).removeClass("page-link bg-info text-dark");
+               $(s).removeClass("page-link bg-info text-light");
                $(s).addClass("page-link");
            }
        }
+       $("html, body").stop().animate({scrollTop:0}, 500, "swing");
     }
 
     window.onload = function() {
@@ -157,18 +181,21 @@
             var s="#ic".concat("{{forloop.counter}}".concat(i.toString()));
             $(s).removeClass("fa fa-star text-warning");
             $(s).addClass("fa fa-star-o text-dark");
-
           }
       {% endfor %}
       toPage("1");
     }
   </script>
   <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
   <script src="../../static/ratemycourse/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.bundle.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
   <script src="../../static/ratemycourse/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
   <script src="../../static/ratemycourse/jquery-validation-1.17.0/dist/jquery.validate.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
+  <script src="../../static/ratemycourse/javascript/login.js"></script>
+  <script src="../../static/ratemycourse/javascript/animations.js"></script>
   <script src="../../static/ratemycourse/javascript/searchResult.js"></script>
 </body>
 
