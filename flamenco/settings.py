@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*', ]
 
 INSTALLED_APPS = [
     'rateMyCourse',
+    'webhook',
     'corsheaders',
     'django_extensions',
     'django.contrib.admin',
