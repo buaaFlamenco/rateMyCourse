@@ -17,7 +17,14 @@ class BackBasicTestCase(TestCase):
     fixtures = ["fixture.json"]
 
 
-    # Support Functions
+class BackPostCheckDBTC(BackBasicTestCase):
+    def setUp(self):
+        self.checker = DBChecker(
+            django.db.connection,
+            "rateMyCourse",
+            self
+        )
+
     def postContainTest(self, url, form, text=""):
         # Send Request
         #   Specify the interface to test by assigning the url.
@@ -35,27 +42,6 @@ class BackBasicTestCase(TestCase):
             print("Body is:", body)
             raise e
 
-    def getJsonBody(self, url, form=None):
-        response = self.client.get(url, form)
-        self.assertEqual(response.status_code, 200)
-        body = json.loads(response.content)
-        self.assertEqual(body["status"], 1)
-        retlist = body["body"]
-        return (body, retlist)
-
-    def assertDictEntry(self, dicta, dictb):
-        for key, value in dictb.items():
-            self.assertTrue(key in dicta.keys())
-            self.assertEquals(dicta[key], dictb[key])
-
-class BackPostCheckTC(BackBasicTestCase):
-    def setUp(self):
-        self.checker = DBChecker(
-            django.db.connection,
-            "rateMyCourse",
-            self
-        )
-
     def postAndCheck(self, url, model_name, prop_dict, text=""):
         # Send Request & Response Check
         self.postContainTest(url, prop_dict, text=text)
@@ -65,7 +51,7 @@ class BackPostCheckTC(BackBasicTestCase):
 
 # Test Cases
 @tag("back")
-class BackCreateTC(BackPostCheckTC):
+class BackCreateTC(BackPostCheckDBTC):
     def test_sign_up(self):
         self.postAndCheck(
             "/signUp/",
@@ -164,7 +150,7 @@ class BackCreateTC(BackPostCheckTC):
 
 
 @tag("back")
-class BackUpdateTC(BackBasicTestCase):
+class BackUpdateTC(BackPostCheckDBTC):
     @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
     def test_update_user(self):
         self.postContainTest(
@@ -202,8 +188,38 @@ class BackUpdateTC(BackBasicTestCase):
             ).exists()
         )
 
+class BackGetCheckBodyTC(BackBasicTestCase):
+    def getJsonBody(self, url, form=None):
+        response = self.client.get(url, form)
+        self.assertEqual(response.status_code, 200)
+        body = json.loads(response.content)
+        self.assertEqual(body["status"], 1)
+        retlist = body["body"]
+        return (body, retlist)
+
+    def assertDictEntry(self, dicta, dictb):
+        for key, value in dictb.items():
+            self.assertTrue(key in dicta.keys())
+            self.assertEquals(dicta[key], dictb[key])
+
+    def getAndCheck(self, url, prop_dict, length, exp_list=[]):
+        body, retlist = self.getJsonBody(url, prop_dict)
+        self.assertDictEntry(
+            body,
+            {
+                "length": length
+            }
+        )
+        assert(length <= len(exp_list)) # Here we use assert, because this is not testing backend, but testing the testcase itself.
+        self.assertLessEqual(len(exp_list), len(retlist))
+        for i in range(len(exp_list)):
+            self.assertDictEntry(
+                retlist[i],
+                exp_list[i]
+            )
+
 @tag("back")
-class BackSearchTC(BackBasicTestCase):
+class BackSearchTC(BackGetCheckBodyTC):
     @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
     def test_search_teacher_assign(self):
         body, retlist = self.getJsonBody(
