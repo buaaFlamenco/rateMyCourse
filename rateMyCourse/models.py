@@ -106,9 +106,13 @@ class Course(models.Model):
     course_ID: char, length = 50, unique ID of the class, primary key \n
     description: char, length = 512, the description of the class, including time, place and so on \n
     # average_rank: float, the average rank of the class \n
+<<<<<<< HEAD
 
     course_type: the type of the course \n
 
+=======
+    course_type: the type of the course \n
+>>>>>>> d123996... Merge branch 'backend_refactoring' of https://github.com/supplient/rateMyCourse into backend_refactoring
     credit: float, the credit of a course
     """
     '''# todo mo detailed course type

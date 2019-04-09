@@ -90,19 +90,27 @@ def update_user(request):
 
 
 def sign_in(request):
+    '''
+    用户登录：提供username或mail信息，password信息
+    :param request:
+    :return: 'status','length','body','errMsg'
+    '''
     try:
         username = request.POST['username']
         password = request.POST['password']
     except Exception:
-        return HttpResponse(json.dumps({
-            'status': -1,
-            'errMsg': '未能获取到用户名，邮箱或密码',
-        }), content_type="application/json")
+        try:
+            mail = request.POST['mail']
+        except Exception:
+            return HttpResponse(json.dumps({
+                'status': -1,
+                'errMsg': '未能获取到用户名，邮箱或密码',
+            }), content_type="application/json")
     try:
         u = User.objects.get(username=username)
     except Exception:
         try:
-            u = User.objects.get(mail=username)
+            u = User.objects.get(mail=mail)
         except Exception:
             return HttpResponse(json.dumps({
                 'status': -2,
@@ -115,10 +123,10 @@ def sign_in(request):
         }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({
-            'status': 0,
+            'status': 1,
             'length': 1,
-            'body':{
-                'username':username
+            'body': {
+                'username': username
             }
         }), content_type="application/json")
 

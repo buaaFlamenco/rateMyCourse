@@ -21,7 +21,7 @@ def addTeacher(request):
             website = request.POST['website']
         except:
             website = "null"
-        Teacher(name=name,title=title,website=website).save()
+        Teacher(name=name, title=title, website=website).save()
     except Exception as err:
         if "unique" in str(err):
             return HttpResponse(json.dumps({
@@ -52,11 +52,12 @@ def addCourse(request):
     try:
         name = request.POST['name']
         website = request.Post['website']
-        course_ID=request.POST['courseID']
+        course_ID = request.POST['courseID']
         description = request.POST['description']
         course_type = request.POST['courseType']
         credit = request.POST['credit']
-        Course(name=name,website=website,course_type=course_type,course_ID=course_ID,description=description,credit=credit).save()
+        Course(name=name, website=website, course_type=course_type,
+               course_ID=course_ID, description=description, credit=credit).save()
     except Exception:
         return HttpResponse(json.dumps({
             'status': -1,
@@ -79,17 +80,18 @@ def addTeachCourse(request):
     增加课授课信息，需求教师列表，课程，部门
     """
     try:
-        department=Department.objects.get(name=request.Post['department'])
-        course=Course.objects.get(name=request.Post['course'])
-        c=TeachCourse(department=department,course=course)
+        department = Department.objects.get(name=request.POST['department'])
+        course = Course.objects.get(name=request.POST['course'])
+        c = TeachCourse(department=department, course=course)
         c.save()
-        for i in request.Post['teacherList']:
+        tmp=request.POST.getlist('teacherList')
+        for i in tmp:
             c.teachers.add(Teacher.objects.get(name=i))
         c.save()
-    except Exception:
+    except Exception as err:
         return HttpResponse(json.dumps({
             'status': -1,
-            'errMsg': 'Operation Error',
+            'errMsg': str(err),
         }), content_type="application/json")
     else:
         return HttpResponse(json.dumps({

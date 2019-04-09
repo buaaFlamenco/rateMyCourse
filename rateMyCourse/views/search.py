@@ -18,8 +18,8 @@ def searchTeacher(request):
     """
     retlist = []
     try:
-        username = request.POST['username']
-        teacher_list = Teacher.objects.filter(name=username)
+        name = request.GET['name']
+        teacher_list = Teacher.objects.filter(name__icontains=name)
         for teacher in teacher_list:
             retlist.append(teacher.ret())
     except Exception:
@@ -27,7 +27,10 @@ def searchTeacher(request):
             'status': -1,
             'errMsg': 'teacher name Error',
         }), content_type="application/json")
+<<<<<<< HEAD
 
+=======
+>>>>>>> d123996... Merge branch 'backend_refactoring' of https://github.com/supplient/rateMyCourse into backend_refactoring
     return HttpResponse(json.dumps({
         'status': 1,
         'length': len(teacher_list),
@@ -43,8 +46,8 @@ def searchCourse(request):
     """
     retlist = []
     try:
-        courseName = request.POST['Course']
-        course_list = Course.objects.filter(name=courseName)
+        courseName = request.GET['Course']
+        course_list = Course.objects.filter(name__icontains=courseName)
         for course in course_list:
             retlist.append(course.ret())
     except Exception:
@@ -57,6 +60,10 @@ def searchCourse(request):
         'length': len(course_list),
         'body': retlist,
     }), content_type="application/json")
+<<<<<<< HEAD
+=======
+
+>>>>>>> d123996... Merge branch 'backend_refactoring' of https://github.com/supplient/rateMyCourse into backend_refactoring
 
 def searchUser(request):
     """
@@ -66,8 +73,8 @@ def searchUser(request):
     """
     retlist = []
     try:
-        username = request.POST['username']
-        user_list = User.objects.filter(name=username)
+        username = request.GET['username']
+        user_list = User.objects.filter(name__icontains=username)
         for user in user_list:
             retlist.append(user.ret())
     except Exception:
