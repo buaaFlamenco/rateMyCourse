@@ -1,8 +1,12 @@
 from unittest import skipIf
-from django.test import TestCase, Client, tag
 import json
 
+from django.test import TestCase, Client, tag
+import django.db
+
 from rateMyCourse.models import User, Teacher, Course, Comment, MakeComment
+
+from db_checker import DBChecker
 
 TEST_DEBUG_SWITCH = True
 SEARCH_FAIL = "Search views not work well."
@@ -12,8 +16,9 @@ class BackBasicTestCase(TestCase):
     # Prepare the database by using fixture.
     fixtures = ["fixture.json"]
 
+
     # Support Functions
-    def postContainTest(self, url, form, text):
+    def postContainTest(self, url, form, text=""):
         # Send Request
         #   Specify the interface to test by assigning the url.
         #   With the form attached.
@@ -30,8 +35,8 @@ class BackBasicTestCase(TestCase):
             print("Body is:", body)
             raise e
 
-    def getJsonBody(self, url):
-        response = self.client.get(url)
+    def getJsonBody(self, url, form=None):
+        response = self.client.get(url, form)
         self.assertEqual(response.status_code, 200)
         body = json.loads(response.content)
         self.assertEqual(body["status"], 1)
@@ -43,29 +48,33 @@ class BackBasicTestCase(TestCase):
             self.assertTrue(key in dicta.keys())
             self.assertEquals(dicta[key], dictb[key])
 
+class BackPostCheckTC(BackBasicTestCase):
+    def setUp(self):
+        self.checker = DBChecker(
+            django.db.connection,
+            "rateMyCourse",
+            self
+        )
+
+    def postAndCheck(self, url, model_name, prop_dict, text=""):
+        # Send Request & Response Check
+        self.postContainTest(url, prop_dict, text=text)
+        # Side Effect Check
+        #   Check whether the side effects take place.
+        self.checker.check(model_name, prop_dict)
 
 # Test Cases
 @tag("back")
-class BackCreateTC(BackBasicTestCase):
+class BackCreateTC(BackPostCheckTC):
     def test_sign_up(self):
-        # Send Request & Response Check
-        self.postContainTest(
+        self.postAndCheck(
             "/signUp/",
+            "User",
             {
                 "username": "test",
                 "password": "123",
                 "mail": "test@test.com"
             },
-            "test"
-        )
-        # Side Effect Check
-        #   Check whether the side effects take place.
-        self.assertTrue(
-            User.objects.filter(
-                username="test", 
-                password="123",
-                mail="test@test.com"
-            ).exists()
         )
 
     def test_add_teacher_no_website(self):
