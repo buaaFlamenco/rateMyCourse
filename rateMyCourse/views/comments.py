@@ -82,7 +82,7 @@ def edit_comment(request):
     编辑评论，需求评论ID,新的content
     """
     try:
-        c = MakeComment.objects.get(id=request.POST['ID'])
+        c = MakeComment.objects.get(id=request.POST['comment_ID'])
         c.comment.content = request.POST['content']
         c.comment.edit_time = datetime.datetime.now()
         c.comment.save()

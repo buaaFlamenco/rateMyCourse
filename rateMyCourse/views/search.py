@@ -10,7 +10,7 @@ from rateMyCourse.models import *
 detail_names = ['有趣程度', '充实程度', '课程难度', '课程收获']
 
 
-def searchTeacher(request):
+def search_teacher(request):
     """
     搜索教师.
     教师姓名，空为任意教师
@@ -18,8 +18,8 @@ def searchTeacher(request):
     """
     retlist = []
     try:
-        name = request.GET['name']
-        teacher_list = Teacher.objects.filter(name__icontains=name)
+        teacher_name = request.GET['teacher_name']
+        teacher_list = Teacher.objects.filter(name__icontains=teacher_name)
         for teacher in teacher_list:
             retlist.append(teacher.ret())
     except Exception:
@@ -34,7 +34,7 @@ def searchTeacher(request):
     }), content_type="application/json")
 
 
-def searchCourse(request):
+def search_course(request):
     """
     搜索课程.
     课程姓名，空为任意课程
@@ -42,8 +42,8 @@ def searchCourse(request):
     """
     retlist = []
     try:
-        courseName = request.GET['Course']
-        course_list = Course.objects.filter(name__icontains=courseName)
+        course_name = request.GET['course_name']
+        course_list = Course.objects.filter(name__icontains=course_name)
         for course in course_list:
             retlist.append(course.ret())
     except Exception:
@@ -57,7 +57,7 @@ def searchCourse(request):
         'body': retlist,
     }), content_type="application/json")
 
-def searchUser(request):
+def search_user(request):
     """
     搜索用户.
     用户姓名，空为任意用户
