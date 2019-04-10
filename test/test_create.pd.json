@@ -1,0 +1,47 @@
+[
+    [
+        "sign_up",
+        "/signUp/",
+        "User",
+        {
+            "username": "test",
+            "password": "123",
+            "mail": "test@test.com"
+        }
+    ],
+    [
+        "add_teacher_no_website",
+        "/addTeacher/",
+        "Teacher",
+        {
+            "name": "test_teacher_no_website",
+            "title": "Only For Test"
+        },
+        "test_teacher_no_website"
+    ],
+    [
+        "add_teacher_has_website",
+        "/addTeacher/",
+        "Teacher",
+        {
+            "name": "test_teacher_has_website",
+            "title": "Only For Test",
+            "website": "www.test.com"
+        },
+        "test_teacher_has_website"
+    ],
+    [
+        "add_course",
+        "/addCourse/",
+        "Course",
+        {
+            "name": "test_course",
+            "website": "www.test.com",
+            "course_ID": "999",
+            "description": "only for test",
+            "course_type": "TESTER",
+            "credit": 5
+        },
+        "test_course"
+    ]
+]

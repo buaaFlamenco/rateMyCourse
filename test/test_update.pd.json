@@ -1,0 +1,13 @@
+[
+    [
+        "update_user",
+        "/updateUser/",
+        "User",
+        {
+            "username": "rbq",
+            "role": "Teacher",
+            "gender": "Male",
+            "selfintroduction": "hhh"
+        }
+    ]
+]

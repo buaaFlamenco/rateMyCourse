@@ -1,4 +1,4 @@
-from unittest import skipIf
+from unittest import skipIf, skip
 import json
 
 from django.test import TestCase, Client, tag
@@ -8,9 +8,6 @@ from rateMyCourse.models import User, Teacher, Course, Comment, MakeComment
 
 from db_checker import DBChecker
 
-TEST_DEBUG_SWITCH = True
-SEARCH_FAIL = "Search views not work well."
-DOC_INCOMPLETE = "Interface Information incomplete."
 
 class BackBasicTestCase(TestCase):
     # Prepare the database by using fixture.
@@ -49,91 +46,115 @@ class BackPostCheckDBTC(BackBasicTestCase):
         #   Check whether the side effects take place.
         self.checker.check(model_name, prop_dict)
 
+    def autoTest(self, testcase_file):
+        # Read Testcases from json
+        testcases = None
+        with open(testcase_file, "r", encoding="utf-8") as fd:
+            testcases = json.load(fd)
+
+        for case in testcases:
+            # Load json data
+            case_name = case[0]
+            url = case[1]
+            model_name = case[2]
+            prop_dict = case[3]
+            text = ""
+            if len(case) > 4:
+                text = case[4]
+
+            # Do Test
+            with self.subTest(case_name=case_name):
+                self.postAndCheck(
+                    url,
+                    model_name,
+                    prop_dict,
+                    text
+                )
+
+
+class BackGetCheckBodyTC(BackBasicTestCase):
+    def getJsonBody(self, url, form=None):
+        response = self.client.get(url, form)
+        self.assertEqual(response.status_code, 200)
+        body = json.loads(response.content)
+        self.assertEqual(body["status"], 1)
+        retlist = body["body"]
+        return (body, retlist)
+
+    def checkDictEntry(self, dicta, dictb):
+        for key, value in dictb.items():
+            if not key in dicta.keys():
+                return False
+            if dicta[key] != dictb[key]:
+                return False
+        return True
+
+    def assertDictEntry(self, dicta, dictb):
+        for key, value in dictb.items():
+            self.assertTrue(key in dicta.keys())
+            self.assertEquals(dicta[key], dictb[key])
+
+    def getAndCheck(self, url, prop_dict, length, exp_list=[]):
+        body, retlist = self.getJsonBody(url, prop_dict)
+        self.assertDictEntry(
+            body,
+            {
+                "length": length
+            }
+        )
+        for i in range(len(exp_list)):
+            exist = False
+            for j in range(len(retlist)):
+                if self.checkDictEntry(retlist[j], exp_list[i]):
+                    exist = True
+                    break
+            self.assertTrue(exist)
+
+
+    def autoTest(self, testcase_file):
+        # Read Testcases from json
+        testcases = None
+        with open(testcase_file, "r", encoding="utf-8") as fd:
+            testcases = json.load(fd)
+
+        for case in testcases:
+            # Load json data
+            case_name = case[0]
+            url = case[1]
+            prop_dict = case[2]
+            length = case[3]
+            exp_list = []
+            if len(case) > 4:
+                exp_list = case[4]
+
+            # Do Test
+            with self.subTest(case_name=case_name):
+                self.getAndCheck(
+                    url,
+                    prop_dict,
+                    length,
+                    exp_list
+                )
+
 # Test Cases
 @tag("back")
 class BackCreateTC(BackPostCheckDBTC):
-    def test_sign_up(self):
-        self.postAndCheck(
-            "/signUp/",
-            "User",
-            {
-                "username": "test",
-                "password": "123",
-                "mail": "test@test.com"
-            },
-        )
+    @tag("auto")
+    def test_auto(self):
+        self.autoTest("test/test_create.pd.json")
 
-    def test_add_teacher_no_website(self):
-        self.postContainTest(
-            "/addTeacher/",
-            {
-                "name": "test_teacher_no_website",
-                "title": "Only For Test",
-            },
-            "test_teacher_no_website"
-        )
-        self.assertTrue(
-            Teacher.objects.filter(
-                name="test_teacher_no_website",
-                title="Only For Test"
-            ).exists()
-        )
-
-    def test_add_teacher_has_website(self):
-        self.postContainTest(
-            "/addTeacher/",
-            {
-                "name": "test_teacher_has_website",
-                "title": "Only For Test",
-                "website": "www.test.com"
-            },
-            "test_teacher_has_website"
-        )
-        self.assertTrue(
-            Teacher.objects.filter(
-                name="test_teacher_has_website",
-                title="Only For Test",
-                website="www.test.com"
-            ).exists()
-        )
-
-    def test_add_course(self):
-        self.postContainTest(
-            "/addCourse/",
-            {
-                "name": "test_course",
-                "website": "www.test.com",
-                "courseID": "999",
-                "description": "only for test",
-                "courseType": "TESTER",
-                "credit": 5
-            },
-            "test_course"
-        )
-        self.assertTrue(
-            Course.objects.filter(
-                name="test_course",
-                website="www.test.com",
-                course_ID="999",
-                description="only for test",
-                course_type="TESTER",
-                credit=5
-            )
-        )
-
-    @skipIf(TEST_DEBUG_SWITCH, DOC_INCOMPLETE)
     def test_add_teachCourse(self):
         pass
-    
+
+    @tag("foreign")
     def test_make_comment(self):
         self.postContainTest(
-            "/makeComments/",
+            "/makeComment/",
             {
                 "username": "hong",
                 "course_ID": "0",
                 "content": "hong test comment"
-            },
-            "成功"
+            }
         )
         self.assertTrue(
             Comment.objects.filter(
@@ -151,36 +172,19 @@ class BackCreateTC(BackPostCheckDBTC):
 
 @tag("back")
 class BackUpdateTC(BackPostCheckDBTC):
-    @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
-    def test_update_user(self):
-        self.postContainTest(
-            "/updateUser/",
-            {
-                "username": "rbq",
-                "role": "Teacher",
-                "gender": "Male",
-                "selfintroduction": "hhh"
-            },
-            "rbq"
-        )
-        self.assertTrue(
-            User.objects.filter(
-                username="rbq",
-                role="Teacher",
-                gender="Male",
-                selfinstroduction="hhh"
-            ).exists()
-        )
+    @tag("auto")
+    def test_auto(self):
+        self.autoTest("test/test_update.pd.json")
 
+    @tag("foreign")
     def test_edit_comment(self):
         comment_ID = Comment.objects.get(content="rbq").id
         self.postContainTest(
-            "/editComments/",
+            "/editComment/",
             {
                 "comment_ID": comment_ID,
                 "content": "changed"
-            },
-            "成功"
+            }
         )
         self.assertTrue(
             MakeComment.objects.filter(
@@ -188,148 +192,32 @@ class BackUpdateTC(BackPostCheckDBTC):
             ).exists()
         )
 
-class BackGetCheckBodyTC(BackBasicTestCase):
-    def getJsonBody(self, url, form=None):
-        response = self.client.get(url, form)
-        self.assertEqual(response.status_code, 200)
-        body = json.loads(response.content)
-        self.assertEqual(body["status"], 1)
-        retlist = body["body"]
-        return (body, retlist)
-
-    def assertDictEntry(self, dicta, dictb):
-        for key, value in dictb.items():
-            self.assertTrue(key in dicta.keys())
-            self.assertEquals(dicta[key], dictb[key])
-
-    def getAndCheck(self, url, prop_dict, length, exp_list=[]):
-        body, retlist = self.getJsonBody(url, prop_dict)
-        self.assertDictEntry(
-            body,
-            {
-                "length": length
-            }
-        )
-        assert(length <= len(exp_list)) # Here we use assert, because this is not testing backend, but testing the testcase itself.
-        self.assertLessEqual(len(exp_list), len(retlist))
-        for i in range(len(exp_list)):
-            self.assertDictEntry(
-                retlist[i],
-                exp_list[i]
-            )
 
 @tag("back")
 class BackSearchTC(BackGetCheckBodyTC):
-    @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
-    def test_search_teacher_assign(self):
-        body, retlist = self.getJsonBody(
-            "/searchTeacher/" + "qiang"
-        )
-        self.assertDictEntry(
-            body,
-            {
-                "length": 1
-            }
-        )
-        self.assertDictEntry(
-            retlist[0],
-            {
-                "name": "qiang",
-                "website": "www.qiang.com",
-                "title": "First Qiang"
-            }
-        )
+    @tag("auto")
+    def test_auto(self):
+        self.autoTest("test/test_search.gb.json")
 
-    @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
+    # These need further content check
     def test_search_teacher_any(self):
-        body, retlist = self.getJsonBody(
-            "/searchTeacher/"
-        )
-        self.assertDictEntry(
-            body,
-            {
-                "length": 2
-            }
-        )
+        # TODO
+        pass
 
-    @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
-    def test_search_course_assign(self):
-        body, retlist = self.getJsonBody(
-            "/searchCourse/" + "如何进牢子"
-        )
-        self.assertDictEntry(
-            body,
-            {
-                "length": 1
-            }
-        )
-        self.assertDictEntry(
-            retlist[0],
-            {
-                "name": "如何进牢子",
-                "website": "www.jubao.com",
-                "course_id": 110,
-                "description": "很简单",
-                "course_type": "必修",
-                "credit": 3
-            }
-        )
-
-    @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
     def test_search_course_any(self):
-        body, retlist = self.getJsonBody(
-            "/searchCourse/"
-        )
-        self.assertDictEntry(
-            body,
-            {
-                "length": 3
-            }
-        )
+        # TODO
+        pass
 
-    @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
-    def test_search_user_assign(self):
-        body, retlist = self.getJsonBody(
-            "/searchUser/" + "ming"
-        )
-        self.assertDictEntry(
-            body,
-            {
-                "length": 1
-            }
-        )
-        self.assertDictEntry(
-            retlist[0],
-            {
-                "username": "ming",
-                "mail": "ming@test.com",
-                "role": "Student",
-                "gender": "Male",
-                "self_introduction": "mingming"
-            }
-        )
-
-    @skipIf(TEST_DEBUG_SWITCH, SEARCH_FAIL)
     def test_search_user_any(self):
-        body, retlist = self.getJsonBody(
-            "/searchUser/"
-        )
-        self.assertDictEntry(
-            body,
-            {
-                "length": 6
-            }
-        )
+        # TODO
+        pass
 
     def test_get_comment(self):
-        body, retlist = self.getJsonBody(
-            "/getCommentsByCourse/110"
-        )
-        self.assertEquals(len(retlist), 2)
-        # TODO Further Content Check
+        # TODO
+        pass
+
 
 @tag("back")
 class BackAuthTC(BackBasicTestCase):
-    @skipIf(TEST_DEBUG_SWITCH, DOC_INCOMPLETE)
     def test_sign_in(self):
         pass
