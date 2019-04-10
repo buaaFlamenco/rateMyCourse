@@ -79,3 +79,26 @@ def search_user(request):
         'length': len(user_list),
         'body': retlist,
     }), content_type="application/json")
+
+
+def search_course_by_department(request):
+    '''
+    按所属部门搜索课程
+    要求准确的部门名称，返回该部门的课程
+    '''
+    retlist=[]
+    try:
+        department=request.GET['department']
+        course_list=TeachCourse.objects.filter(department=Department.objects.get(name=department).id)
+        for course in course_list:
+            retlist.append(Course.objects.get(id=course.course_id).ret())
+    except:
+        return HttpResponse(json.dumps({
+            'status': -1,
+            'errMsg': '获取课程列表失败',
+        }), content_type="application/json")
+    return HttpResponse(json.dumps({
+        'status': 1,
+        'length': len(department),
+        'body': retlist,
+    }), content_type="application/json")
