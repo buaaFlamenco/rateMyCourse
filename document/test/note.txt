@@ -1,0 +1,15 @@
+Selenium:
+	* Page Object
+	* User Interface Mapping
+	* Safe Operation: Check presence of elements
+	* Using XPath
+	* Verify: Not Terminate when fail
+
+Django:
+	* 测试时会自动将DEBUG设为False。
+	* 可以用assertRaise等上下文方法来检测是否有抛出。
+	* 可以测重定向
+	* 可以使用dumpdata导出当前数据库的数据，然后在测试时作为fixture导入
+	* 可以用@override_settings来在测试时覆写setting
+	* 可以给testcase打上tag，然后在执行测试时选择某一部分（挑出跑得慢的，一般测试的时候不跑它）
+	* 可以用coverage测代码覆盖率

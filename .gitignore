@@ -16,3 +16,6 @@ rateMyCourse/migrations/*
 
 # vs code
 .vscode
+
+# document
+*.pdf
