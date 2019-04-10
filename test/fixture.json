@@ -16,6 +16,14 @@
   }
 },
 {
+  "model": "rateMyCourse.department",
+  "pk": 3,
+  "fields": {
+    "name": "rbq",
+    "website": ""
+  }
+},
+{
   "model": "rateMyCourse.teacher",
   "pk": 1,
   "fields": {
@@ -31,6 +39,15 @@
     "name": "police",
     "website": "http://www.110.com",
     "title": "Dear Police"
+  }
+},
+{
+  "model": "rateMyCourse.teacher",
+  "pk": 3,
+  "fields": {
+    "name": "rbq",
+    "website": "",
+    "title": ""
   }
 },
 {

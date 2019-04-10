@@ -4,7 +4,7 @@ import json
 from django.test import TestCase, Client, tag
 import django.db
 
-from rateMyCourse.models import User, Teacher, Course, Comment, MakeComment
+from rateMyCourse.models import User, Teacher, Course, Comment, MakeComment, TeachCourse
 
 from db_checker import DBChecker
 
@@ -143,8 +143,23 @@ class BackCreateTC(BackPostCheckDBTC):
     def test_auto(self):
         self.autoTest("test/test_create.pd.json")
 
-    def test_add_teachCourse(self):
-        pass
+    @tag("foreign")
+    def test_add_teach_course(self):
+        self.postContainTest(
+            "/addTeachCourse/",
+            {
+                "teacher_list": ["rbq"],
+                "course": "rbq",
+                "department": "rbq"
+            }
+        )
+        self.assertTrue(
+            TeachCourse.objects.filter(
+                teachers__name="rbq",
+                course__name="rbq",
+                department__name="rbq"
+            ).exists()
+        )
 
     @tag("foreign")
     def test_make_comment(self):
@@ -159,7 +174,7 @@ class BackCreateTC(BackPostCheckDBTC):
         self.assertTrue(
             Comment.objects.filter(
                 content="hong test comment",
-            )
+            ).exists()
         )
         self.assertTrue(
             MakeComment.objects.filter(

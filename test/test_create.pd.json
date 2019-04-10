@@ -37,9 +37,9 @@
         {
             "name": "test_course",
             "website": "www.test.com",
-            "course_ID": "999",
+            "courseID": "999",
             "description": "only for test",
-            "course_type": "TESTER",
+            "courseType": "TESTER",
             "credit": 5
         },
         "test_course"

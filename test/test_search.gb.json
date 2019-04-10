@@ -20,20 +20,20 @@
         {
             "name": ""
         },
-        2
+        3
     ],
     [
         "search_course_assign",
         "/searchCourse/",
         {
-            "course": "如何进牢子"
+            "Course": "如何进牢子"
         },
         1,
         [
             {
                 "name": "如何进牢子",
-                "website": "www.jubao.com",
-                "course_id": 110,
+                "website": "http://www.jubao.com",
+                "course_ID": 110,
                 "description": "很简单",
                 "course_type": "必修",
                 "credit": 3
@@ -44,9 +44,9 @@
         "search_course_any",
         "/searchCourse/",
         {
-            "course": ""
+            "Course": ""
         },
-        3
+        4
     ],
     [
         "search_user_assign",
