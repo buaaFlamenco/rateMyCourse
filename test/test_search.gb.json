@@ -1,6 +1,6 @@
 [
     [
-        "search_teacher_assign",
+        "search_teacher",
         "/searchTeacher/",
         {
             "name": "qiang"
@@ -15,15 +15,7 @@
         ]
     ],
     [
-        "search_teacher_any",
-        "/searchTeacher/",
-        {
-            "name": ""
-        },
-        3
-    ],
-    [
-        "search_course_assign",
+        "search_course",
         "/searchCourse/",
         {
             "Course": "如何进牢子"
@@ -41,15 +33,7 @@
         ]
     ],
     [
-        "search_course_any",
-        "/searchCourse/",
-        {
-            "Course": ""
-        },
-        4
-    ],
-    [
-        "search_user_assign",
+        "search_user",
         "/searchUser/",
         {
             "username": "ming"
@@ -66,20 +50,22 @@
         ]
     ],
     [
-        "search_user_any",
-        "/searchUser/",
-        {
-            "username": ""
-        },
-        6
-    ],
-    [
         "get_comment",
         "/getCommentsByCourse/",
         {
             "course_ID": 110
         },
-        2
+        2,
+        [
+            {
+                "username": "slave",
+                "content": "我成功进去啦！"
+            },
+            {
+                "username": "police",
+                "content": "那你很棒棒哦"
+            }
+        ]
     ]
 
 

@@ -214,23 +214,6 @@ class BackSearchTC(BackGetCheckBodyTC):
     def test_auto(self):
         self.autoTest("test/test_search.gb.json")
 
-    # These need further content check
-    def test_search_teacher_any(self):
-        # TODO
-        pass
-
-    def test_search_course_any(self):
-        # TODO
-        pass
-
-    def test_search_user_any(self):
-        # TODO
-        pass
-
-    def test_get_comment(self):
-        # TODO
-        pass
-
 
 @tag("back")
 class BackAuthTC(BackBasicTestCase):
