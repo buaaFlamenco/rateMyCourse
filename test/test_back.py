@@ -7,6 +7,7 @@ import django.db
 from rateMyCourse.models import User, Teacher, Course, Comment, MakeComment, TeachCourse
 
 from db_checker import DBChecker
+from test_logger import log
 
 
 class BackBasicTestCase(TestCase):
@@ -36,7 +37,7 @@ class BackPostCheckDBTC(BackBasicTestCase):
             self.assertEqual(body["status"], 1)
             self.assertContains(response, text)
         except Exception as e:
-            print("Body is:", body)
+            log.error("Error when checking response. The response is %s", response.content)
             raise e
 
     def postAndCheck(self, url, model_name, prop_dict, text=""):
@@ -64,21 +65,29 @@ class BackPostCheckDBTC(BackBasicTestCase):
 
             # Do Test
             with self.subTest(case_name=case_name):
-                self.postAndCheck(
-                    url,
-                    model_name,
-                    prop_dict,
-                    text
-                )
+                try:
+                    self.postAndCheck(
+                        url,
+                        model_name,
+                        prop_dict,
+                        text
+                    )
+                except Exception as e:
+                    log.error("(%s) Test Fail.", case_name)
+                    raise e
 
 
 class BackGetCheckBodyTC(BackBasicTestCase):
     def getJsonBody(self, url, form=None):
         response = self.client.get(url, form)
-        self.assertEqual(response.status_code, 200)
-        body = json.loads(response.content)
-        self.assertEqual(body["status"], 1)
-        retlist = body["body"]
+        try:
+            self.assertEqual(response.status_code, 200)
+            body = json.loads(response.content)
+            self.assertEqual(body["status"], 1)
+            retlist = body["body"]
+        except Exception as e:
+            log.error("Error when checking response. The response is %s", response.content)
+            raise e
         return (body, retlist)
 
     def checkDictEntry(self, dicta, dictb):
@@ -129,12 +138,16 @@ class BackGetCheckBodyTC(BackBasicTestCase):
 
             # Do Test
             with self.subTest(case_name=case_name):
-                self.getAndCheck(
-                    url,
-                    prop_dict,
-                    length,
-                    exp_list
-                )
+                try:
+                    self.getAndCheck(
+                        url,
+                        prop_dict,
+                        length,
+                        exp_list
+                    )
+                except Exception as e:
+                    log.error("(%s) Test Fail. [%s]", case_name, str(e))
+                    raise e
 
 # Test Cases
 @tag("back")

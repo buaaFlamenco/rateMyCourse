@@ -1,0 +1,3 @@
+[ERROR] (search_course) Test Fail. [False is not true]
+[ERROR] Error when checking response. The response is b'{"status": -1, "errMsg": "user name Error"}'
+[ERROR] (search_user) Test Fail. [-1 != 1]
